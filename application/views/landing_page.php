@@ -10,12 +10,12 @@
       <a class="navbar-brand" href="#">
         <span><img id="logo"  src="<?= base_url("images/unidissLogo.png")?>" height="28">
         UniDiss</span></a>
-        <li class="visible-xs pull-right">
+        <div class="visible-xs pull-right">
           <button data-toggle="modal"
           data-target="#signUpModal" id="newButton"
           class="btn btn-success navbar-btn">
           Sign Up</button>
-        </li>
+        </div>
     </div>
 <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav">
@@ -33,10 +33,18 @@
 </div>
 </nav>
 <?php
-$query = $this->db->query('SELECT * FROM Student');
-
+$query = $this->db->query('SELECT * FROM fyp_UserType');
 echo $query->num_rows();
-?>
+foreach ($query->result() as $row)
+{
+    ?>
+    
+    <p><?=$row->userType_ID;?>). 
+    <?=$row->userType;?></p>
+
+<?php        
+}
+?> 
 
 <div class="container">
   <h1 class="text-center" >Welcome to UniDiss!</h1>
