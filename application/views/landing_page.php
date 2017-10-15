@@ -1,7 +1,4 @@
-
-  <title>Welcome to UniDiss</title>
-</head>
-
+<body style="padding-top: 70px;">
 <nav class="navbar navbar-inner navbar-fixed-top navbar-inverse">
 <div class="container">
     <div class="navbar-header">
@@ -12,7 +9,7 @@
       </button>
       <a class="navbar-brand" href="#">
         <span><img id="logo"  src="<?= base_url("images/unidissLogo.png")?>" height="28">
-        UniDiss</a></span>
+        UniDiss</span></a>
         <li class="visible-xs pull-right">
           <button data-toggle="modal"
           data-target="#signUpModal" id="newButton"
@@ -35,7 +32,12 @@
   </div>
 </div>
 </nav>
-<body style="padding-top: 70px;">
+<?php
+$query = $this->db->query('SELECT * FROM Student');
+
+echo $query->num_rows();
+?>
+
 <div class="container">
   <h1 class="text-center" >Welcome to UniDiss!</h1>
 <div class="col-md-4 col-md-offset-4">
