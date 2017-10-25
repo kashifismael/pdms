@@ -54,6 +54,7 @@ class Staff extends CI_Controller {
                 } else {
                     $this->load->view('staffViews/viewDeliverableGrid');                   
                 }
+            $this->load->view('staffViews/viewDeliverableFooter');
         }
 
 
