@@ -55,6 +55,7 @@ $route['evidence/(:num)'] = 'student/viewEvidence/$1';
 
 $route['staff-home'] = 'staff';
 $route['view-student/(:num)'] = 'staff/viewStudent/$1';
+$route['view-deliverable/(:num)'] = 'staff/viewDeliverable/$1';
 $route['view-evidence/(:num)'] = 'staff/viewEvidence/$1';
 $route['manage-requests'] = 'staff/ManageRequests';
 

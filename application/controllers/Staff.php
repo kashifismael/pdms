@@ -45,6 +45,18 @@ class Staff extends CI_Controller {
             $this->load->view('staffViews/viewEvidence');
         }
         
+        public function viewDeliverable($delId){
+            $data['title'] = "View Deliverable";
+            $this->load->view('header', $data);
+            $this->load->view('staffViews/navbar');
+                if (isset($_GET['flow']) && $_GET['flow'] == "list"){
+                    $this->load->view('staffViews/viewDeliverableList');
+                } else {
+                    $this->load->view('staffViews/viewDeliverableGrid');                   
+                }
+        }
+
+
         public function allocateStudents(){
             $data['title'] = "Student Allocation";
             $this->load->view('header', $data);
