@@ -32,19 +32,6 @@
   </div>
 </div>
 </nav>
-<?php
-$query = $this->db->query('SELECT * FROM fyp_UserType');
-echo $query->num_rows();
-foreach ($query->result() as $row)
-{
-    ?>
-    
-    <p><?=$row->userType_ID;?>). 
-    <?=$row->userType;?></p>
-
-<?php        
-}
-?> 
 
 <div class="container">
   <h1 class="text-center" >Welcome to UniDiss!</h1>
@@ -143,6 +130,25 @@ foreach ($query->result() as $row)
   </div>
 </div>
 
-
+    <div class="container">
+        <p>This table has <?=$query->num_rows(); ?> rows </p>
+    <table class="table">
+        <tr>
+        <th>User Type ID</th>
+        <th>User Type </th>
+        </tr>
+    <?php
+foreach ($query->result() as $row)
+{
+    ?>
+        <tr>
+        <td>  <?=$row->userType_ID;?> </td> 
+        <td>      <?=$row->userType;?> </td>
+        </tr>
+<?php        
+}
+?> 
+    </table>
+    </div>
 </body>
 </html>

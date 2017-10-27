@@ -21,7 +21,9 @@ class Landing extends CI_Controller {
 	public function index()
 	{
             $data['title'] = "Welcome"; 
+            $query = $this->db->query('SELECT * FROM fyp_UserType');
+            $data['query'] = $query;
             $this->load->view('header',$data);	
-            $this->load->view('landing_page');
+            $this->load->view('landing_page', $data);
 	}
 }
