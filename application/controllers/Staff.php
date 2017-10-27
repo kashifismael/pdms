@@ -40,6 +40,7 @@ class Staff extends CI_Controller {
         
         public function viewEvidence($evidID) {
             $data['title'] = "View Evidence";
+            $data['evidenceID'] = $evidID;
             $this->load->view('header', $data);
             $this->load->view('staffViews/navbar');
             $this->load->view('staffViews/viewEvidence');

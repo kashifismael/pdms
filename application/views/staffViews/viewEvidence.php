@@ -29,6 +29,8 @@
   <a href="#" class="btn btn-primary btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt"></span> Download Evidence</a>
       <a href="#" data-toggle="modal" data-target="#newUpModal" class="btn btn-primary btn-success btn-block hidden-xs hidden-sm"> + New Feedback</a>
   
+      <h4 class="text-center"><?=$evidenceID ?></h4>
+      
       </div>
 
 <div class="col-md-7 " >
