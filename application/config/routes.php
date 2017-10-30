@@ -63,6 +63,8 @@ $route['student-allocation'] = 'staff/allocateStudents';
 
 
 $route['default_controller'] = 'landing';
+$route['studentRegister'] = 'landing/registerStudent';
+$route['staffRegister'] = 'landing/registerStaff';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
