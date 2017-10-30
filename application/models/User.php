@@ -7,7 +7,21 @@ class User extends CI_Model {
 //        parent::__construct();
 //    }
 
-    
+    public function authenticateUser($username, $password) {
+        $encrPassword = self::encrypt("theSecretKeyInit", $password);
+        $query = $this->db->query("SELECT * FROM fyp_User WHERE username='$username' AND password='$encrPassword'");
+        if ($query->num_rows() === 1) {
+            $newQuery = $this->db->query("UPDATE fyp_User SET last_login = NOW() WHERE username='$username';");
+            if ($newQuery === true){
+            echo "Record updated, Successfully logged in";
+            } else {
+                echo "Error updating record";
+            }
+        } else {
+            echo "Incorrect Username or Password, Try again";
+        }
+    }
+
     public function isUserUnique($user) {
         $query = $this->db->query("SELECT * FROM fyp_User WHERE username='$user'");
         if ($query->num_rows() > 0) {

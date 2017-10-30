@@ -36,7 +36,7 @@
     <div class="container">
         <h1 class="text-center" >Welcome to UniDiss!</h1>
         <div class="col-md-4 col-md-offset-4">
-            <form class="form form-login" name="login" id="login-form">
+            <form class="form form-login" name="login" id="login-form" method="POST" action="loginPortal">
                 <div class="form-group">
                     <div class ="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
