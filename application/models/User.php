@@ -12,17 +12,17 @@ class User extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-
     
-//    function __construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username) {
-//        parent::__construct();
-//        $this->user_ID = $user_ID;
-//        $this->userTypeID = $userTypeID;
-//        $this->firstName = $firstName;
-//        $this->lastName = $lastName;
-//        $this->email = $email;
-//        $this->username = $username;
-//    }
+    public function userConstructor($user_ID, $userTypeID, $firstName, $lastName, $email, $username){
+                $newUser = new User();
+                $newUser->setUser_ID($user_ID);
+                $newUser->setUserTypeID($userTypeID);
+                $newUser->setFirstName($firstName);
+                $newUser->setLastName($lastName);
+                $newUser->setEmail($email);
+                $newUser->setUsername($username);
+                return $newUser;
+    }
     
     public function authenticateUser($username, $password) {
         $encrPassword = self::encrypt("theSecretKeyInit", $password);
@@ -32,22 +32,10 @@ class User extends CI_Model {
             $newQuery = $this->db->query("UPDATE fyp_User SET last_login = NOW() WHERE username='$username';");
             if ($newQuery === true) {
                 echo "Record updated, Successfully logged in<br>";
-                $newUser = new User();
-                $newUser->setUser_ID($oneAccount->user_ID);
-                $newUser->setUserTypeID($oneAccount->userType_ID);
-                $newUser->setFirstName($oneAccount->firstName);
-                $newUser->setLastName($oneAccount->lastName);
-                $newUser->setEmail($oneAccount->emailAddress);
-                $newUser->setUsername($oneAccount->username);
-//                $newUser = new User(
-//                        $oneAccount->user_ID,
-//                        $oneAccount->userType_ID,
-//                        $oneAccount->firstName,
-//                        $oneAccount->lastName,
-//                        $oneAccount->emailAddress,
-//                        $oneAccount->username);
+                $newUser = self::userConstructor($oneAccount->user_ID,$oneAccount->userType_ID, $oneAccount->firstName,
+                        $oneAccount->lastName,$oneAccount->emailAddress,$oneAccount->username);
                 echo $newUser->getFirstName()." ".$newUser->getLastName()." ".$newUser->getUsername();
-                //self::sendToDashboard($oneAccount->userType_ID);
+                self::sendToDashboard($newUser->getUserTypeID());
             } else {
                 echo "Error updating record";
             }
