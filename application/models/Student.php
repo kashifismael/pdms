@@ -4,10 +4,14 @@ class Student extends User {
 
     private $supervisor_ID;
     
-    public function __construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username, $supervisorID) {
-        parent::__construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username);
-        $this->supervisor_ID = $supervisorID;
+    public function __construct(){
+        parent::__construct();
     }
+
+//        public function __construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username, $supervisorID) {
+//        parent::__construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username);
+//        $this->supervisor_ID = $supervisorID;
+//    }
     
     function getSupervisor_ID() {
         return $this->supervisor_ID;
