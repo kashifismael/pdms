@@ -34,7 +34,11 @@ class User extends CI_Model {
                 echo "Record updated, Successfully logged in<br>";
                 $newUser = self::userConstructor($oneAccount->user_ID,$oneAccount->userType_ID, $oneAccount->firstName,
                         $oneAccount->lastName,$oneAccount->emailAddress,$oneAccount->username);
-                echo $newUser->getFirstName()." ".$newUser->getLastName()." ".$newUser->getUsername();
+                //echo $newUser->getFirstName()." ".$newUser->getLastName()." ".$newUser->getUsername();
+                $this->session->set_userdata('userFirstName', $newUser->getFirstName());
+                $this->session->set_userdata('userLastName', $newUser->getLastName());
+                $this->session->set_userdata('userName', $newUser->getUsername());
+                $this->session->set_userdata('userTypeID', $newUser->getUserTypeID());
                 self::sendToDashboard($newUser->getUserTypeID());
             } else {
                 echo "Error updating record";
@@ -45,9 +49,7 @@ class User extends CI_Model {
     }
 
     public static function sendToDashboard($userType) {
-        if ($userType == 1) {
-            redirect("staff-home?type=ml");
-        } else if ($userType == 2) {
+        if ($userType == 1 || $userType == 2) {
             redirect("staff-home");
         } else if ($userType == 3) {
             redirect("student-home");

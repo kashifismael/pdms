@@ -1,6 +1,7 @@
 
 <div class="container-fluid">
   <h1 class="text-center">Staff Dashboard</h1>
+        <?= $this->session->userFirstName." ".$this->session->userLastName." ".$this->session->userName." ".$this->session->userTypeID?>
 <div class="row">
 <div class="col-md-7 col-md-offset-1" >
 <div class="panel panel-default" style="height : 700px;">

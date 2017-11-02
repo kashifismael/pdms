@@ -38,7 +38,7 @@
         <ul class="dropdown-menu">
           <li><a href="#">Account settings</a></li>
           <li><a href="#">Help</a></li>
-          <li><a href="#">Logout</a></li>
+          <li><a href="<?= base_url("logout"); ?>">Logout</a></li>
         </ul>
       </li>
     </ul>

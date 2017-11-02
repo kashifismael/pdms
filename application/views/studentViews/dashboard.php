@@ -1,6 +1,8 @@
 
 <!--  <div class="container-fluid" style="padding-left: 10%; padding-right:10%;">-->
 <div class="container-fluid">
+
+    <?= $this->session->userFirstName." ".$this->session->userLastName." ".$this->session->userName." ".$this->session->userTypeID?>
     <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
           <ul class="nav nav-tabs">

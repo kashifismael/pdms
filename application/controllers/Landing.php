@@ -72,4 +72,10 @@ class Landing extends CI_Controller {
         }
     }
     
+    public function logOut(){
+        echo "Logging out";
+        session_destroy();
+        redirect("/");
+    }
+    
 }
