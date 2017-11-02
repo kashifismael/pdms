@@ -25,7 +25,7 @@ class Staff extends CI_Controller {
         } else if($_SESSION['userTypeID'] == 2) {
             $this->load->view('staffViews/supDashboard');
         } else {
-            echo "user type is ".$userTypeID.", which is unexpected";
+            echo "user type is ".$_SESSION['userTypeID'].", which is unexpected";
         }
     }
 
