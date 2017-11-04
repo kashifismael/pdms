@@ -47,7 +47,7 @@ class Student extends CI_Controller {
 
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 3) {
-            echo "<p>User is authorised</p>";
+            //echo "<p>User is authorised</p>";
         } else {
             echo "user is not authorised, redirect user away";
             //force redirect
