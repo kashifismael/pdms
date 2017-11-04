@@ -76,7 +76,7 @@ class Staff extends CI_Controller {
 
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
-            echo "User is authorised";
+            echo "<p>User is authorised</p>";
         } else {
             echo "user is not authorised, redirect user away";
             //force redirect
