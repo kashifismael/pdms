@@ -46,7 +46,7 @@ class Landing extends CI_Controller {
     public function registerStaff(){
         $this->load->model('user');
         $this->load->model('supervisor');
-        echo "This is the supervisor register page";
+        echo "<p>This is the supervisor register page</p>";
         echo "<br>";
         $userType = 2;
         if (isset($_POST['kuUsername'])) {
