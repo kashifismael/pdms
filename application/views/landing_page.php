@@ -50,6 +50,12 @@
                     </div>
                 </div>
 
+                <?php if (isset($_GET['details'])) { ?>
+                    <div class="alert alert-danger">
+                        <strong>Incorrect details!</strong> Please enter your username/password again
+                    </div>
+                <?php } ?> 
+
                 <div class="pull-right">
                     <div class="input-group">
                         <button type="submit" class="btn btn-success btn-md">Log In</button>

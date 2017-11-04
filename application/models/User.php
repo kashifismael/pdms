@@ -51,7 +51,8 @@ class User extends CI_Model {
                 echo "Error updating record";
             }
         } else {
-            echo "Incorrect Username or Password, Try again";
+            //echo "Incorrect Username or Password, Try again";
+            redirect("/?details=incorrect");
         }
     }
 
