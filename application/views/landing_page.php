@@ -146,15 +146,21 @@
         <p>This table has <?= $query->num_rows(); ?> rows </p>
         <table class="table">
             <tr>
-                <th>User Type ID</th>
-                <th>User Type </th>
+                <th>User Type</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email address</th>
             </tr>
             <?php
             foreach ($query->result() as $row) {
                 ?>
                 <tr>
-                    <td>  <?= $row->userType_ID; ?> </td> 
-                    <td>      <?= $row->userType; ?> </td>
+                    <td> <?= $row->userType; ?> </td>
+                    <td> <?= $row->firstName ?> </td>
+                    <td> <?= $row->lastName ?> </td>
+                    <td> <?= $row->username ?> </td>
+                    <td> <?= $row->emailAddress ?> </td>
                 </tr>
                 <?php
             }

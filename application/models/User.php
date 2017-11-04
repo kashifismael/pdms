@@ -24,6 +24,13 @@ class User extends CI_Model {
                 return $newUser;
     }
     
+    public function displayAllUsers(){
+        $query = 'SELECT * FROM `fyp_User` '
+                . 'INNER JOIN fyp_UserType '
+                . 'ON fyp_User.userType_ID = fyp_UserType.userType_ID';
+        return $query;
+    }
+    
     public function authenticateUser($username, $password) {
         $encrPassword = self::encrypt("theSecretKeyInit", $password);
         $query = $this->db->query("SELECT * FROM fyp_User WHERE username='$username' AND password='$encrPassword'");

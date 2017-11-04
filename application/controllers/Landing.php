@@ -20,9 +20,9 @@ class Landing extends CI_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
+        $this->load->model('user');
         $data['title'] = "Welcome";
-        $query = $this->db->query('SELECT * FROM fyp_UserType');
-        $data['query'] = $query;
+        $data['query'] = $this->db->query($this->user->displayAllUsers());
         $this->load->view('header', $data);
         $this->load->view('landing_page', $data);
     }
