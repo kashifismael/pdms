@@ -28,7 +28,7 @@ class User extends CI_Model {
         $query = 'SELECT * FROM `fyp_User` '
                 . 'INNER JOIN fyp_UserType '
                 . 'ON fyp_User.userType_ID = fyp_UserType.userType_ID';
-        return $query;
+        return $this->db->query($query);
     }
     
     public function authenticateUser($username, $password) {

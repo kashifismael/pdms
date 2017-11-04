@@ -22,7 +22,7 @@ class Landing extends CI_Controller {
     public function index() {
         $this->load->model('user');
         $data['title'] = "Welcome";
-        $data['query'] = $this->db->query($this->user->displayAllUsers());
+        $data['query'] = $this->user->displayAllUsers();
         $this->load->view('header', $data);
         $this->load->view('landing_page', $data);
     }
