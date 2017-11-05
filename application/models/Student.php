@@ -28,6 +28,11 @@ class Student extends User {
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
             echo "Creating account...";
             self::createAccount($username, $userType);
+            $this->session->set_userdata('userFirstName', $this->input->post('stFirstName'));
+            $this->session->set_userdata('userLastName', $this->input->post('stLastName'));
+            $this->session->set_userdata('userName', $username);
+            $this->session->set_userdata('userTypeID', 3);
+            redirect("student-home/?account=new");
         }
     }
 

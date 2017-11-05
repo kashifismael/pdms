@@ -1,7 +1,16 @@
 
 <!--  <div class="container-fluid" style="padding-left: 10%; padding-right:10%;">-->
 <div class="container-fluid">
-
+<?php if (isset($_GET['account'])) { ?>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="alert alert-success alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Welcome to UniDiss, <?= $this->session->userFirstName . " " . $this->session->userLastName ?></strong>! Get started on creating deliverables and submitting evidence.
+            </div>
+        </div>  
+    </div>
+<?php } ?>
     <p>  <?= $this->session->userFirstName." ".$this->session->userLastName." ".$this->session->userName." ".$this->session->userTypeID?> </p>
     <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
