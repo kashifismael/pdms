@@ -42,8 +42,8 @@ class Landing extends CI_Controller {
             echo "You're not meant to be here";
         }
     }
-    
-    public function registerStaff(){
+
+    public function registerStaff() {
         $this->load->model('user');
         $this->load->model('supervisor');
         echo "<p>This is the supervisor register page</p>";
@@ -59,11 +59,11 @@ class Landing extends CI_Controller {
         }
     }
 
-    public function processLogin(){
+    public function processLogin() {
         $this->load->model('user');
         echo "This is the login portal";
         echo "<br>";
-        if (isset($_POST['username'])){
+        if (isset($_POST['username'])) {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $this->user->authenticateUser($username, $password);
@@ -71,11 +71,11 @@ class Landing extends CI_Controller {
             echo "You're not meant to be here";
         }
     }
-    
-    public function logOut(){
+
+    public function logOut() {
         echo "Logging out";
         session_destroy();
         redirect("/");
     }
-    
+
 }

@@ -8,29 +8,29 @@ class User extends CI_Model {
     private $lastName;
     private $email;
     private $username;
-    
+
     function __construct() {
         parent::__construct();
     }
-    
-    public function userConstructor($user_ID, $userTypeID, $firstName, $lastName, $email, $username){
-                $newUser = new User();
-                $newUser->setUser_ID($user_ID);
-                $newUser->setUserTypeID($userTypeID);
-                $newUser->setFirstName($firstName);
-                $newUser->setLastName($lastName);
-                $newUser->setEmail($email);
-                $newUser->setUsername($username);
-                return $newUser;
+
+    public function userConstructor($user_ID, $userTypeID, $firstName, $lastName, $email, $username) {
+        $newUser = new User();
+        $newUser->setUser_ID($user_ID);
+        $newUser->setUserTypeID($userTypeID);
+        $newUser->setFirstName($firstName);
+        $newUser->setLastName($lastName);
+        $newUser->setEmail($email);
+        $newUser->setUsername($username);
+        return $newUser;
     }
-    
-    public function displayAllUsers(){
+
+    public function displayAllUsers() {
         $query = 'SELECT * FROM `fyp_User` '
                 . 'INNER JOIN fyp_UserType '
                 . 'ON fyp_User.userType_ID = fyp_UserType.userType_ID';
         return $this->db->query($query);
     }
-    
+
     public function authenticateUser($username, $password) {
         $encrPassword = self::encrypt("theSecretKeyInit", $password);
         $query = $this->db->query("SELECT * FROM fyp_User WHERE username='$username' AND password='$encrPassword'");
@@ -39,14 +39,20 @@ class User extends CI_Model {
             $newQuery = $this->db->query("UPDATE fyp_User SET last_login = NOW() WHERE username='$username';");
             if ($newQuery === true) {
                 echo "Record updated, Successfully logged in<br>";
-                $newUser = self::userConstructor($oneAccount->user_ID,$oneAccount->userType_ID, $oneAccount->firstName,
-                        $oneAccount->lastName,$oneAccount->emailAddress,$oneAccount->username);
-                //echo $newUser->getFirstName()." ".$newUser->getLastName()." ".$newUser->getUsername();
-                $this->session->set_userdata('userFirstName', $newUser->getFirstName());
-                $this->session->set_userdata('userLastName', $newUser->getLastName());
-                $this->session->set_userdata('userName', $newUser->getUsername());
-                $this->session->set_userdata('userTypeID', $newUser->getUserTypeID());
-                self::sendToDashboard($newUser->getUserTypeID());
+                $this->session->set_userdata('userFirstName', $oneAccount->firstName);
+                $this->session->set_userdata('userLastName', $oneAccount->lastName);
+                $this->session->set_userdata('userName', $oneAccount->username);
+                $this->session->set_userdata('userTypeID', $oneAccount->userType_ID);
+                //                $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID='$oneAccount->user_ID'");
+                //                if ($firstquery == true) {
+                //                    $firstRow = $firstquery->row();
+                //                    echo "the student id of first row is " . $firstRow->student_ID;
+                //                    $this->session->set_userdata('secondaryID', $firstRow->student_ID);
+                //                } else {
+                //                    echo "query doesnt work";
+                //                }
+                self::getSecondID($oneAccount->user_ID, $oneAccount->userType_ID);
+                self::sendToDashboard($oneAccount->userType_ID);
             } else {
                 echo "Error updating record";
             }
@@ -56,13 +62,35 @@ class User extends CI_Model {
         }
     }
 
+    public function getSecondID($userID, $userType) {
+        if ($userType == 1 || $userType == 2) {
+            $firstquery = $this->db->query("SELECT * FROM fyp_Staff WHERE user_ID='$userID'");
+            if ($firstquery == true) {
+                $firstRow = $firstquery->row();
+                $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
+            } else {
+                echo "query doesnt work";
+            }
+        } else if ($userType == 3) {
+            $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID='$userID'");
+            if ($firstquery == true) {
+                $firstRow = $firstquery->row();
+                $this->session->set_userdata('secondaryID', $firstRow->student_ID);
+            } else {
+                echo "query doesnt work";
+            }
+        } else {
+            echo "userType is " . $userType . ", which is unexpected";
+        }
+    }
+
     public static function sendToDashboard($userType) {
         if ($userType == 1 || $userType == 2) {
             redirect("staff-home");
         } else if ($userType == 3) {
             redirect("student-home");
         } else {
-            echo "userType is ".$userType.", which is unexpected";
+            echo "userType is " . $userType . ", which is unexpected";
         }
     }
 
@@ -91,7 +119,7 @@ class User extends CI_Model {
         $plain = base64_encode($plain);
         return substr($plain, 0, 44);
     }
-    
+
     function getUser_ID() {
         return $this->user_ID;
     }
@@ -139,4 +167,5 @@ class User extends CI_Model {
     function setUsername($username) {
         $this->username = $username;
     }
+
 }

@@ -1,17 +1,18 @@
 
 <div class="container-fluid">
-<?php if (isset($_GET['account'])) { ?>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="alert alert-success alert-dismissable fade in">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Welcome to UniDiss, <?= $this->session->userFirstName . " " . $this->session->userLastName ?></strong>! Get started on marking work and giving feedback.
-            </div>
-        </div>  
-    </div>
-<?php } ?>
+    <?php if (isset($_GET['account'])) { ?>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Welcome to UniDiss, <?= $this->session->userFirstName . " " . $this->session->userLastName ?></strong>! Get started on marking work and giving feedback.
+                </div>
+            </div>  
+        </div>
+    <?php } ?>
     <h1 class="text-center">Staff Dashboard</h1>
-    <p>   <?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?> </p>
+    <p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?></p>
+    <p>staff ID of <?= $this->session->secondaryID ?></p>
     <div class="row">
         <div class="col-md-7 col-md-offset-1" >
             <div class="panel panel-default" style="height : 700px;">

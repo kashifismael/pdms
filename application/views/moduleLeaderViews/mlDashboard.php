@@ -1,7 +1,8 @@
 
 <div class="container-fluid">
   <h1 class="text-center">Module Leader Dashboard</h1>
-  <p>    <?= $this->session->userFirstName." ".$this->session->userLastName." ".$this->session->userName." ".$this->session->userTypeID?> </p>
+  <p><?= $this->session->userFirstName." ".$this->session->userLastName." ".$this->session->userName." ".$this->session->userTypeID?> </p>
+  <p>staff ID of <?= $this->session->secondaryID ?></p>
 <div class="row">
 <div class="col-md-7 col-md-offset-1" >
 <div class="panel panel-default" style="height : 700px;">
