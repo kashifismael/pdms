@@ -57,12 +57,12 @@ class User extends CI_Model {
     public function getSecondID($userID, $userType) {
         if ($userType == 1 || $userType == 2) {
             $firstquery = $this->db->query("SELECT * FROM fyp_Staff WHERE user_ID='$userID'");
-                $firstRow = $firstquery->row();
-                $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
+            $firstRow = $firstquery->row();
+            $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
         } else if ($userType == 3) {
             $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID='$userID'");
-                $firstRow = $firstquery->row();
-                $this->session->set_userdata('secondaryID', $firstRow->student_ID);
+            $firstRow = $firstquery->row();
+            $this->session->set_userdata('secondaryID', $firstRow->student_ID);
         } else {
             echo "userType is " . $userType . ", which is unexpected";
         }

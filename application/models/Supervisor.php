@@ -5,14 +5,11 @@ class Supervisor extends User {
     //put your code here
 
     public function insertStaff($username, $pass1, $pass2, $userType) {
-        print_r($_POST);
+        //print_r($_POST);
         echo"<br>";
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
             echo "Creating account...";
             self::createAccount($username, $userType);
-            //$encrPassword = self::encrypt("theSecretKeyInit", $pass1);
-            //$query = $this->db->query("SELECT * FROM fyp_User WHERE username='$username' AND password='$encrPassword'");
-            //$oneAccount = $query->row();
             $this->session->set_userdata('userFirstName', $this->input->post('kuFirstName'));
             $this->session->set_userdata('userLastName', $this->input->post('kuLastName'));
             $this->session->set_userdata('userName', $username);
@@ -38,6 +35,13 @@ class Supervisor extends User {
             'user_ID' => $userID->user_ID
         );
         $this->db->insert('fyp_Staff', $data2);
+        self::putStaffIdIntoSession($userID->user_ID);
+    }
+
+    public function putStaffIdIntoSession($userID) {
+        $firstquery = $this->db->query("SELECT * FROM fyp_Staff WHERE user_ID='$userID'");
+        $firstRow = $firstquery->row();
+        $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
     }
 
 }
