@@ -3,16 +3,11 @@
 class Student extends User {
 
     private $supervisor_ID;
-    
-    public function __construct(){
+
+    public function __construct() {
         parent::__construct();
     }
 
-//        public function __construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username, $supervisorID) {
-//        parent::__construct($user_ID, $userTypeID, $firstName, $lastName, $email, $username);
-//        $this->supervisor_ID = $supervisorID;
-//    }
-    
     function getSupervisor_ID() {
         return $this->supervisor_ID;
     }
@@ -21,9 +16,8 @@ class Student extends User {
         $this->supervisor_ID = $supervisor_ID;
     }
 
-        
     public function insertStudent($username, $pass1, $pass2, $userType) {
-        print_r($_POST);
+        //print_r($_POST);
         echo"<br>";
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
             echo "Creating account...";
@@ -53,6 +47,13 @@ class Student extends User {
             'User_ID' => $userID->user_ID
         );
         $this->db->insert('fyp_Student', $data2);
+        self::putStudentIdIntoSession($userID->user_ID);      
+    }
+
+    public function putStudentIdIntoSession($userID) {
+        $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID='$userID'");
+        $firstRow = $firstquery->row();
+        $this->session->set_userdata('secondaryID', $firstRow->student_ID);
     }
 
 }
