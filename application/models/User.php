@@ -43,14 +43,6 @@ class User extends CI_Model {
                 $this->session->set_userdata('userLastName', $oneAccount->lastName);
                 $this->session->set_userdata('userName', $oneAccount->username);
                 $this->session->set_userdata('userTypeID', $oneAccount->userType_ID);
-                //                $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID='$oneAccount->user_ID'");
-                //                if ($firstquery == true) {
-                //                    $firstRow = $firstquery->row();
-                //                    echo "the student id of first row is " . $firstRow->student_ID;
-                //                    $this->session->set_userdata('secondaryID', $firstRow->student_ID);
-                //                } else {
-                //                    echo "query doesnt work";
-                //                }
                 self::getSecondID($oneAccount->user_ID, $oneAccount->userType_ID);
                 self::sendToDashboard($oneAccount->userType_ID);
             } else {
