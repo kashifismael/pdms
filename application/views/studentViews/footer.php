@@ -13,14 +13,14 @@
           <h4 class="modal-title">Create New Deliverable</h4>
         </div>
         <div class="modal-body">
-          <form>
+            <form method="POST" action="createDeliverable">
                 <div class="form-group">
                   <label for="usr">Deliverable Name:</label>
-                  <input type="text" class="form-control" id="usr">
+                  <input type="text" class="form-control" id="delName" name="delName">
                 </div>
               <div class="form-group">
                 <label for="date">Set Deadline Date</label>
-                <input type="date" class="form-control" id="pwd">
+                <input type="date" class="form-control" id="deadlineDate" name="deadlineDate">
               </div>
               <button type="submit" class="btn btn-success">Create Deliverable</button>
   </form>

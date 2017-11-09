@@ -53,6 +53,8 @@ $route['student-home'] = 'student';
 $route['deliverable/(:num)'] = 'student/viewDeliverable/$1';
 $route['evidence/(:num)'] = 'student/viewEvidence/$1';
 
+$route['createDeliverable'] = 'Deliverable/create';
+
 $route['staff-home'] = 'staff';
 $route['view-student/(:num)'] = 'staff/viewStudent/$1';
 $route['view-deliverable/(:num)'] = 'staff/viewDeliverable/$1';
