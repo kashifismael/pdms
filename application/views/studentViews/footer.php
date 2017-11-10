@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label for="date">Set Deadline Date</label>
                         <!--input type="datetime-local" class="form-control" id="deadlineDate" name="deadlineDate"-->
-                        <input type="date" class="form-control" id="deadlineDate" name="deadlineDate">
+                        <input type="date" class="form-control" id="deadlineDate" name="deadlineDate" min="<?=$date->format('Y-m-d')?>">
                     </div>
                     <div class="form-group">
                         <label for="date">Set Deadline Time</label>
