@@ -20,7 +20,7 @@
                 </div>
               <div class="form-group">
                 <label for="date">Set Deadline Date</label>
-                <input type="date" class="form-control" id="deadlineDate" name="deadlineDate">
+                <input type="datetime-local" class="form-control" id="deadlineDate" name="deadlineDate">
               </div>
               <button type="submit" class="btn btn-success">Create Deliverable</button>
   </form>
