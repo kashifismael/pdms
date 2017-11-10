@@ -15,7 +15,14 @@ class Deliverable extends CI_Controller {
             echo "deliverable name is " . $this->input->post('delName');
             echo "<br>";
             $postDate = new DateTime($_POST['deadlineDate']);
-            echo "Chosen date is ".$postDate->format('Y-m-d H:i');
+            if (isset($_POST['deadlineTime'])) {
+                $postTime = new DateTime($_POST['deadlineTime']);
+            } else {
+                $postTime = new DateTime('23:59:00');
+            }
+            echo "<br>";
+            $postDateTime = new DateTime($postDate->format('Y-m-d') . ' ' . $postTime->format('H:i'));
+            echo "Chosen date time is " . $postDateTime->format('Y-m-d H:i'); // Outputs '2017-03-14 13:37:42'
             echo "<br>";
             echo "<a href=\"" . base_url('student-home') . "\"> Go Back </a>";
         } else {
