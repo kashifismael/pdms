@@ -16,12 +16,12 @@
                 <form method="POST" action="createDeliverable">
                     <div class="form-group">
                         <label for="usr">Deliverable Name:</label>
-                        <input type="text" class="form-control" id="delName" name="delName">
+                        <input type="text" class="form-control" id="delName" name="delName" required>
                     </div>
                     <div class="form-group">
                         <label for="date">Set Deadline Date</label>
                         <!--input type="datetime-local" class="form-control" id="deadlineDate" name="deadlineDate"-->
-                        <input type="date" class="form-control" id="deadlineDate" name="deadlineDate" min="<?=$date->format('Y-m-d')?>">
+                        <input type="date" class="form-control" id="deadlineDate" name="deadlineDate" min="<?=$date->format('Y-m-d')?>" >
                     </div>
                     <div class="form-group">
                         <label for="date">Set Deadline Time</label>
