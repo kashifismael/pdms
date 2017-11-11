@@ -1,4 +1,6 @@
-    <?php if (isset($_GET['account'])) { ?>
+    <?php 
+       if (isset($_SESSION['account']))  
+        { ?>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-success alert-dismissable fade in">
@@ -9,7 +11,6 @@
         </div>
     <?php } ?>
         <?php 
-        //if (isset($_GET['deliverableCreation'])) { 
          if (isset($_SESSION['deliverableCreation'])) {   
             ?>
         <div class="row">

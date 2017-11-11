@@ -15,15 +15,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Student extends CI_Controller {
 
     public function index() {
-        $this->load->model('user');      
+        $this->load->model('user');
         self::checkIfAuthorised();
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
         $this->load->view('studentViews/dashboard');
         $this->load->view('studentViews/footer');
-        if (isset($_SESSION['deliverableCreation'])){
+        if (isset($_SESSION['deliverableCreation'])) {
             unset($_SESSION['deliverableCreation']);
+        }
+        if (isset($_SESSION['account'])) {
+            unset($_SESSION['account']);
         }
     }
 

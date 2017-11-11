@@ -14,7 +14,8 @@ class Supervisor extends User {
             $this->session->set_userdata('userLastName', $this->input->post('kuLastName'));
             $this->session->set_userdata('userName', $username);
             $this->session->set_userdata('userTypeID', 2);
-            redirect("staff-home/?account=new");
+            $this->session->set_userdata('account', 'new');
+            redirect('staff-home');
         }
     }
 

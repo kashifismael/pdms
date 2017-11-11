@@ -26,7 +26,8 @@ class Student extends User {
             $this->session->set_userdata('userLastName', $this->input->post('stLastName'));
             $this->session->set_userdata('userName', $username);
             $this->session->set_userdata('userTypeID', 3);
-            redirect("student-home/?account=new");
+            $this->session->set_userdata('account', 'new');
+            redirect('student-home');
         }
     }
 
