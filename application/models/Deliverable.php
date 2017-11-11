@@ -18,6 +18,7 @@ class Deliverable extends CI_Model {
             'deliverableName' => $this->input->post('delName'),
             'deadlineDate' => $deadlineDate,
         );
+        $this->session->set_userdata('deliverableCreation', 'success');
         return $this->db->insert('fyp_Deliverable', $delData);
     }
     

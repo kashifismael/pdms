@@ -17,13 +17,14 @@ class Student extends CI_Controller {
     public function index() {
         $this->load->model('user');      
         self::checkIfAuthorised();
-        $todayDate = new DateTime('now');
-        $data['date'] = $todayDate;
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
         $this->load->view('studentViews/dashboard');
         $this->load->view('studentViews/footer');
+        if (isset($_SESSION['deliverableCreation'])){
+            unset($_SESSION['deliverableCreation']);
+        }
     }
 
     public function viewDeliverable($delID) {

@@ -12,13 +12,15 @@ class DeliverableController extends CI_Controller {
             $postDateTime = new DateTime($postDate->format('Y-m-d') . ' ' . $postTime->format('H:i'));
             $insert = $this->deliverable->insertDeliverable($postDateTime->format('Y-m-d H:i'));
             if ($insert === true) {
-                redirect('student-home?deliverableCreation=success');
+                //redirect('student-home?deliverableCreation=success');
+                redirect('student-home');
             } else {
                 echo "<p>Insert went wrong</p>";         
                 echo "<a href=\"" . base_url('student-home') . "\"> Go Back </a>";
             }
         } else {
             echo "post wasnt sent";
+            redirect('student-home');
         }
     }
 

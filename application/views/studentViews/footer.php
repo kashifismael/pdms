@@ -1,4 +1,4 @@
-
+<?php $todayDate = new DateTime('now'); ?>
 <div id="popover-content" class="hide">
     <p><a data-toggle="modal" data-target="#newDelModal"><span class="glyphicon glyphicon-plus"></span> New deliverable</a></p>
     <p><a data-toggle="modal" data-target="#newUpModal"><span class="glyphicon glyphicon-open"></span> Upload evidence</a></p>
@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label for="date">Set Deadline Date</label>
                         <!--input type="datetime-local" class="form-control" id="deadlineDate" name="deadlineDate"-->
-                        <input type="date" class="form-control" id="deadlineDate" name="deadlineDate" min="<?=$date->format('Y-m-d')?>" >
+                        <input type="date" class="form-control" id="deadlineDate" name="deadlineDate" min="<?=$todayDate->format('Y-m-d')?>" value="<?=$todayDate->format('Y-m-d')?>">
                     </div>
                     <div class="form-group">
                         <label for="date">Set Deadline Time</label>
