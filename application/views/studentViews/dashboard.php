@@ -4,8 +4,6 @@
 
     <?php $this->load->view('studentViews/notifications') ?>
 
-    <p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?></p>
-    <p>student ID of <?= $this->session->secondaryID ?></p>
     <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1">
             <ul class="nav nav-tabs">
@@ -43,6 +41,22 @@
                     </div>
                     <div class="flex-row row">
                         <!-- <div class="card-deck"> -->
+                        <?php foreach ($myDeliverables as $deliverable) { ?>
+                            <div class="card text-center col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <img class="card-img-top center-block" src="..." alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title"><?= $deliverable->getDeliverableName() ?></h4>
+                                    <div class="card-text">
+                                        <p><label>Deadline date:</label> <?= date_format($deliverable->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></p>
+                                        <p><label>Status:</label> <?= $deliverable->getDelstatusDesc() ?></p>
+                                    </div>
+                                <a href="<?= base_url("deliverable/".$deliverable->getDeliverableNo()."") ?>" class="card-text">Click to view</a>
+                                </div>                                
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <div class="card text-center col-lg-3 col-md-4 col-sm-6 col-xs-12" >
                           <!-- <img class="card-img-top" src="./book-icon-149.png" alt="Card image cap" width="180" height="180"> -->
                             <img class="card-img-top center-block" src="<?= base_url("images/book-icon-149.png") ?>" alt="Card image cap" width="100">
@@ -81,16 +95,7 @@
                             </div>
                         </div>
 
-                        <div class="card text-center col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <img class="card-img-top center-block" src="..." alt="Card image cap">
-                            <div class="card-block">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
+
                         <!--/div-->
                     </div>
                     <div class="text-center">
@@ -199,5 +204,8 @@
 
         </div>
     </div>  
+
+    <p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?></p>
+    <p>student ID of <?= $this->session->secondaryID ?></p>
 </div>
 

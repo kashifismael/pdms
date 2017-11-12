@@ -16,9 +16,20 @@ class Student extends CI_Controller {
 
     public function index() {
         $this->load->model('user');
+        $this->load->model('deliverable');
         self::checkIfAuthorised();
         $data['title'] = "Dashboard";
+        $data['myDeliverables'] = $this->deliverable->getAllStudentDeilverables($this->session->secondaryID);
         $this->load->view('header', $data);
+        //$myDeliverables = $this->deliverable->getAllStudentDeilverables($this->session->secondaryID);     
+//        foreach ($myDeliverables as $deliverable) { 
+//        echo "<p>";
+//        echo $deliverable->getDeliverableNo()." ";
+//        echo $deliverable->getDeliverableName()." ";
+//        echo $deliverable->getDeadlineDate()." ";
+//        echo $deliverable->getDelstatusDesc();
+//        echo "</p>";
+//        }
         $this->load->view('studentViews/navbar');
         $this->load->view('studentViews/dashboard');
         $this->load->view('studentViews/footer');
