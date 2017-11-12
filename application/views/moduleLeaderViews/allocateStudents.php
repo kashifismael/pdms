@@ -58,7 +58,7 @@
                 <?php foreach ($supervisorList as $supervisor){ ?>
                 <option value="<?=$supervisor->getUsername()?>"><?= $supervisor->getFirstName()." ".$supervisor->getLastName() ?></option>
                 <?php } ?>
-                <option value="Yoda" >Yoda</option>
+                <option value="Yoda">Yoda</option>
                 <option value="Supervisor 2" >Supervisor 2</option>
                 <option value="Supervisor 3" >Supervisor 3</option>               
             </select>

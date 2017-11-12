@@ -85,7 +85,13 @@ class Staff extends CI_Controller {
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
-            
+            $studentsArray = $_POST['students'];
+            $supervisor = $_POST['supervisor'];
+            foreach ($studentsArray as $student){
+                echo "<p> The student ".$student." will be allocated to ".$supervisor."</p>";
+            }
+            echo "<br>";
+            echo "well... they will be but cba innit";
         }
     }
     
