@@ -61,8 +61,21 @@ class Staff extends CI_Controller {
     }
 
     public function allocateStudents() {
+        $this->load->model('user');
+        $this->load->model('student');
+        $this->load->model('supervisor');
+        $this->load->model('moduleLeader');
         $data['title'] = "Student Allocation";
+        $data['studentList'] = $this->moduleLeader->getAllUnallocatedStudents();
+        //$studentList = $this->moduleLeader->getAllUnallocatedStudents();
         $this->load->view('header', $data);
+//        foreach ($studentList as $student){
+//            echo "<p>";
+//            echo $student->getUsername()." ";
+//            echo $student->getFirstName()." ";
+//            echo $student->getLastName()." ";
+//            echo "</p>";
+//        }
         $this->load->view('moduleLeaderViews/navbar');
         $this->load->view('moduleLeaderViews/allocateStudents');
     }

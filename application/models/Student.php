@@ -2,20 +2,22 @@
 
 class Student extends User {
 
+    private $studentID;
     private $supervisor_ID;
 
     public function __construct() {
         parent::__construct();
     }
-
-    function getSupervisor_ID() {
-        return $this->supervisor_ID;
+    
+    public static function studentConstructor($studentID, $firstName, $lastName, $username){
+        $student = new Student();
+        $student->setStudentID($studentID);
+        $student->setFirstName($firstName);
+        $student->setLastName($lastName);
+        $student->setUsername($username);
+        return $student;
     }
-
-    function setSupervisor_ID($supervisor_ID) {
-        $this->supervisor_ID = $supervisor_ID;
-    }
-
+    
     public function insertStudent($username, $pass1, $pass2, $userType) {
         //print_r($_POST);
         echo"<br>";
@@ -56,5 +58,22 @@ class Student extends User {
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->student_ID);
     }
+    
+    function getSupervisor_ID() {
+        return $this->supervisor_ID;
+    }
+
+    function setSupervisor_ID($supervisor_ID) {
+        $this->supervisor_ID = $supervisor_ID;
+    }
+
+    function getStudentID() {
+        return $this->studentID;
+    }
+
+    function setStudentID($studentID) {
+        $this->studentID = $studentID;
+    }
+
 
 }
