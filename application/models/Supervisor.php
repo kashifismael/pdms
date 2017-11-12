@@ -2,8 +2,26 @@
 
 class Supervisor extends User {
 
-    //put your code here
+    //private $userID;
+    //private $firstName;
+    //private $lastName;
+    //private $emailAddress;
+    //private $username;
+    private $staffID;
 
+    function __construct() {
+        parent::__construct();
+    }
+
+    public static function supervisorConstructor($firstName, $lastName, $username, $staffID){
+        $supervisor = new Supervisor();
+        $supervisor->setFirstName($firstName);
+        $supervisor->setLastName($lastName);
+        $supervisor->setUsername($username);
+        $supervisor->setStaffID($staffID);
+        return $supervisor;
+    }
+    
     public function insertStaff($username, $pass1, $pass2, $userType) {
         //print_r($_POST);
         echo"<br>";
@@ -44,5 +62,14 @@ class Supervisor extends User {
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
     }
+
+    function getStaffID() {
+        return $this->staffID;
+    }
+
+    function setStaffID($staffID) {
+        $this->staffID = $staffID;
+    }
+
 
 }

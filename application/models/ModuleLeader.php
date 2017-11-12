@@ -17,4 +17,18 @@ class ModuleLeader extends Supervisor {
         return $unallocatedStudents;  
     }  
     
+    public function getAllSupervisors(){
+        $supervisors = array();
+        $query = "SELECT * 
+                FROM `fyp_User` 
+                INNER JOIN fyp_Staff 
+                ON fyp_User.user_ID = fyp_Staff.user_ID";
+        $result = $this->db->query($query);
+        foreach ($result->result() as $row){
+            $supervisor = Supervisor::supervisorConstructor($row->firstName, $row->lastName, $row->username, $row->staff_ID);
+            $supervisors[] = $supervisor;
+        }
+        return $supervisors;
+    }
+    
 }

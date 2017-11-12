@@ -18,7 +18,7 @@
             <?php foreach ($studentList as $student){ ?>
             <div class="well well-sm col-sm-4 col-md-3">
                 <div class="checkbox">
-                    <label><input type="checkbox" name="students[]" value="<?=$student->getStudentID() ?>"><?=$student->getFirstName()." ".$student->getLastName()." - ".$student->getUsername() ?></label>
+                    <label><input type="checkbox" name="students[]" value="<?=$student->getUsername()?>"><?=$student->getFirstName()." ".$student->getLastName()." - ".$student->getUsername() ?></label>
                 </div>
             </div>
             <?php } ?>
@@ -55,10 +55,12 @@
         <div class="form-group col-md-3">
             <label for="sel1">Allocate to:</label>
             <select name="supervisor" class="form-control" id="sel1">
+                <?php foreach ($supervisorList as $supervisor){ ?>
+                <option value="<?=$supervisor->getUsername()?>"><?= $supervisor->getFirstName()." ".$supervisor->getLastName() ?></option>
+                <?php } ?>
                 <option value="Yoda" >Yoda</option>
                 <option value="Supervisor 2" >Supervisor 2</option>
-                <option value="Supervisor 3" >Supervisor 3</option>
-                <option value="Supervisor 4" >Supervisor 4</option>
+                <option value="Supervisor 3" >Supervisor 3</option>               
             </select>
         </div>
     </div>
