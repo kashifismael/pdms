@@ -19,7 +19,8 @@ class Student extends CI_Controller {
         $this->load->model('deliverable');
         self::checkIfAuthorised();
         $data['title'] = "Dashboard";
-        $data['myDeliverables'] = $this->deliverable->getAllStudentDeilverables($this->session->secondaryID);
+        //$data['myDeliverables'] = $this->deliverable->getAllStudentDeilverables($this->session->secondaryID);
+        $data['myDeliverables'] = $this->deliverable->getAllStudentDeilverables($this->session->userName);
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
         $this->load->view('studentViews/dashboard');

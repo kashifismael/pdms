@@ -22,14 +22,14 @@ class Deliverable extends CI_Model {
         return $deliverable;
     }
 
-    public function getAllStudentDeilverables($studentID) {
+    public function getAllStudentDeilverables($username) {
         $deliverableList = array();
         $query = "SELECT deliverable_ID , deliverableName, deadlineDate, delStatusDesc
                     FROM (((`fyp_Deliverable` 
                     INNER JOIN fyp_DeliverableStatus ON fyp_DeliverableStatus.delStatus_ID = fyp_Deliverable.delStatus_ID) 
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID) 
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID) 
-                    WHERE fyp_Deliverable.student_ID = '$studentID'"
+                    WHERE fyp_User.username = '$username'"
                 . "ORDER BY `fyp_Deliverable`.`deadlineDate` ASC";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
