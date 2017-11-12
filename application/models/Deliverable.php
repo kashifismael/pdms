@@ -29,7 +29,8 @@ class Deliverable extends CI_Model {
                     INNER JOIN fyp_DeliverableStatus ON fyp_DeliverableStatus.delStatus_ID = fyp_Deliverable.delStatus_ID) 
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID) 
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID) 
-                    WHERE fyp_Deliverable.student_ID = '$studentID'";
+                    WHERE fyp_Deliverable.student_ID = '$studentID'"
+                . "ORDER BY `fyp_Deliverable`.`deadlineDate` ASC";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
             $newDel = self::deliverableConstructor($row->deliverable_ID, $row->delStatusDesc, $row->deliverableName,
