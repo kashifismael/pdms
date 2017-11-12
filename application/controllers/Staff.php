@@ -67,15 +67,7 @@ class Staff extends CI_Controller {
         $this->load->model('moduleLeader');
         $data['title'] = "Student Allocation";
         $data['studentList'] = $this->moduleLeader->getAllUnallocatedStudents();
-        //$studentList = $this->moduleLeader->getAllUnallocatedStudents();
         $this->load->view('header', $data);
-//        foreach ($studentList as $student){
-//            echo "<p>";
-//            echo $student->getUsername()." ";
-//            echo $student->getFirstName()." ";
-//            echo $student->getLastName()." ";
-//            echo "</p>";
-//        }
         $this->load->view('moduleLeaderViews/navbar');
         $this->load->view('moduleLeaderViews/allocateStudents');
     }
@@ -87,6 +79,15 @@ class Staff extends CI_Controller {
         $this->load->view('staffViews/manageRequests');
     }
 
+    public function processAllocation(){
+        if(isset($_POST['students'])){
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+            
+        }
+    }
+    
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
             //echo "<p>User is authorised</p>";

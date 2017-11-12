@@ -12,7 +12,6 @@ class ModuleLeader extends Supervisor {
         $result = $this->db->query($query);
         foreach ($result->result() as $row){
             $student = Student::studentConstructor($row->student_ID, $row->firstName, $row->lastName, $row->username);
-            //$student = studentConstructor($row->student_ID, $row->firstName, $row->lastName, $row->username);
             $unallocatedStudents[] = $student;
         }
         return $unallocatedStudents;  

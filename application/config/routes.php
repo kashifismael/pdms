@@ -62,7 +62,7 @@ $route['view-evidence/(:num)'] = 'staff/viewEvidence/$1';
 $route['manage-requests'] = 'staff/ManageRequests';
 
 $route['student-allocation'] = 'staff/allocateStudents';
-
+$route['allocationPortal'] = 'staff/processAllocation';
 
 $route['default_controller'] = 'landing';
 $route['studentRegister'] = 'landing/registerStudent';
