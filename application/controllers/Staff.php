@@ -20,12 +20,12 @@ class Staff extends CI_Controller {
         $this->load->view('header', $data);
         $navFilePath = self::staffTypeCheck($_SESSION['userTypeID']);
         $this->load->view($navFilePath);
-        if ($_SESSION['userTypeID'] == 1){
+        if ($_SESSION['userTypeID'] == 1) {
             $this->load->view('moduleLeaderViews/mlDashboard');
-        } else if($_SESSION['userTypeID'] == 2) {
+        } else if ($_SESSION['userTypeID'] == 2) {
             $this->load->view('staffViews/supDashboard');
         } else {
-            echo "user type is ".$_SESSION['userTypeID'].", which is unexpected";
+            echo "user type is " . $_SESSION['userTypeID'] . ", which is unexpected";
         }
     }
 
@@ -71,6 +71,9 @@ class Staff extends CI_Controller {
         $this->load->view('header', $data);
         $this->load->view('moduleLeaderViews/navbar');
         $this->load->view('moduleLeaderViews/allocateStudents');
+        if (isset($_SESSION['allocation'])) {
+            unset($_SESSION['allocation']);
+        }
     }
 
     public function manageRequests() {
@@ -80,21 +83,22 @@ class Staff extends CI_Controller {
         $this->load->view('staffViews/manageRequests');
     }
 
-    public function processAllocation(){
-        if(isset($_POST['students'])){
+    public function processAllocation() {
+        if (isset($_POST['students'])) {
+            $this->load->model('user');
+            $this->load->model('student');
+            $this->load->model('supervisor');
+            $this->load->model('moduleLeader');
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
-            $studentsArray = $_POST['students'];
-            $supervisor = $_POST['supervisor'];
-            foreach ($studentsArray as $student){
-                echo "<p> The student ".$student." will be allocated to ".$supervisor."</p>";
-            }
-            echo "<br>";
-            echo "well... they will be but cba innit";
+            $this->moduleLeader->allocateStudentsToSupervisor();
+            redirect('student-allocation');
+        } else {
+            echo "nothing posted, so redirect away";
         }
     }
-    
+
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
             //echo "<p>User is authorised</p>";
@@ -103,17 +107,17 @@ class Staff extends CI_Controller {
             //force redirect
         }
     }
-    
-    private static function staffTypeCheck($userTypeID){
+
+    private static function staffTypeCheck($userTypeID) {
         $navFilePath = "";
-        if($userTypeID == 2){
+        if ($userTypeID == 2) {
             $navFilePath = 'staffViews/navbar';
             return $navFilePath;
-        } else if($userTypeID == 1){
+        } else if ($userTypeID == 1) {
             $navFilePath = 'moduleLeaderViews/navbar';
             return $navFilePath;
         } else {
-            echo "user type is ".$userTypeID.", which is unexpected";
+            echo "user type is " . $userTypeID . ", which is unexpected";
         }
     }
 

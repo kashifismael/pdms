@@ -1,5 +1,16 @@
 
 <div class="container-fluid" style="padding-left: 10%; padding-right:10%;">
+        <?php if (isset($_SESSION['allocation'])) { ?>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> Students have been allocated
+                </div>
+            </div>  
+        </div>
+    <?php } ?>
+    
     <div class="text-center">
         <h2>Allocate Students</h2>
     </div>
@@ -18,7 +29,7 @@
             <?php foreach ($studentList as $student){ ?>
             <div class="well well-sm col-sm-4 col-md-3">
                 <div class="checkbox">
-                    <label><input type="checkbox" name="students[]" value="<?=$student->getUsername()?>"><?=$student->getFirstName()." ".$student->getLastName()." - ".$student->getUsername() ?></label>
+                    <label><input type="checkbox" name="students[]" value="<?=$student->getStudentID()?>"><?=$student->getFirstName()." ".$student->getLastName()." - ".$student->getUsername() ?></label>
                 </div>
             </div>
             <?php } ?>
@@ -56,7 +67,7 @@
             <label for="sel1">Allocate to:</label>
             <select name="supervisor" class="form-control" id="sel1">
                 <?php foreach ($supervisorList as $supervisor){ ?>
-                <option value="<?=$supervisor->getUsername()?>"><?= $supervisor->getFirstName()." ".$supervisor->getLastName() ?></option>
+                <option value="<?=$supervisor->getStaffID()?>"><?= $supervisor->getFirstName()." ".$supervisor->getLastName() ?></option>
                 <?php } ?>
                 <option value="Yoda">Yoda</option>
                 <option value="Supervisor 2" >Supervisor 2</option>
