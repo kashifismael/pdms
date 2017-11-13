@@ -89,9 +89,6 @@ class Staff extends CI_Controller {
             $this->load->model('student');
             $this->load->model('supervisor');
             $this->load->model('moduleLeader');
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
             $this->moduleLeader->allocateStudentsToSupervisor();
             redirect('student-allocation');
         } else {
