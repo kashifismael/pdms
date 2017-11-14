@@ -13,7 +13,7 @@
     </div>
 <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav">
-      <li<?= activeCheck("staff-home") ?>><a href="<?= base_url("staff-home?type=ml")?>">Dashboard</a></li>
+      <li<?= activeCheck("staff-home") ?>><a href="<?= base_url("staff-home")?>">Dashboard</a></li>
       <li<?= activeCheck("student-allocation") ?>><a href="<?= base_url("student-allocation")?>">Student Allocation</a></li>
       <li><a href="#">View Supervisor group</a></li>
       <li><a href="#">Latest submissions</a></li>

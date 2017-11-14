@@ -62,6 +62,21 @@ class Supervisor extends User {
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
     }
+    
+    public function getAllSupervisorStudents($staffID){
+        $supervisorGroup = array();
+        $query = "SELECT * 
+                    FROM `fyp_User` 
+                    INNER JOIN fyp_Student 
+                    ON fyp_Student.user_ID = fyp_User.user_ID 
+                    where fyp_Student.staff_ID = '$staffID'";
+                $result = $this->db->query($query);
+        foreach ($result->result() as $row) {
+            $student = Student::studentConstructor($row->student_ID, $row->firstName, $row->lastName, $row->username);
+            $supervisorGroup[] = $student;
+        }
+        return $supervisorGroup;
+    }
 
     function getStaffID() {
         return $this->staffID;

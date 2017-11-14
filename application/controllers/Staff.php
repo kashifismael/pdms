@@ -16,12 +16,18 @@ class Staff extends CI_Controller {
 
     public function index() {
         self::checkIfAuthorised();
+        $this->load->model('user');
+        $this->load->model('student');
+        $this->load->model('supervisor');
+        $this->load->model('moduleLeader');
+        $data['supervisorGroup'] = $this->supervisor->getAllSupervisorStudents($this->session->secondaryID);
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
         $navFilePath = self::staffTypeCheck($_SESSION['userTypeID']);
         $this->load->view($navFilePath);
         if ($_SESSION['userTypeID'] == 1) {
-            $this->load->view('moduleLeaderViews/mlDashboard');
+            $data['unAllocatedStudentsNumber'] = $this->moduleLeader->unallocatedStudentsQuery();
+            $this->load->view('moduleLeaderViews/mlDashboard',$data);
         } else if ($_SESSION['userTypeID'] == 2) {
             $this->load->view('staffViews/supDashboard');
         } else {
@@ -30,6 +36,11 @@ class Staff extends CI_Controller {
     }
 
     public function viewStudent($studentID) {
+        $this->load->model('user');
+        $this->load->model('student');
+        //$this->load->model('supervisor');
+        $this->load->model('deliverable');
+        $data['studentID'] = $studentID;
         $data['title'] = "View Student";
         $this->load->view('header', $data);
         $this->load->view('staffViews/navbar');

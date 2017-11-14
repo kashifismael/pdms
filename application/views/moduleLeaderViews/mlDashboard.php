@@ -149,14 +149,16 @@
 
 <div class="col-md-3" >
   <div class="panel panel-default">
-    <div class="panel-heading"><strong>54</strong> students awaiting allocation</div>
-    <div class="panel-body"><a href="#">Click to view</a></div>
+    <div class="panel-heading"><strong><?=$unAllocatedStudentsNumber->num_rows() ?></strong> students awaiting allocation</div>
+    <div class="panel-body"><a href="<?= base_url('student-allocation') ?>">Click to view</a></div>
   </div>
 
   <div class="panel panel-default">
   <div class="panel-heading">Supervisor group</div>
   <div class="panel-body">
-      <p>Student 1</p>
+      <?php foreach ($supervisorGroup as $student){ ?>
+      <p><a href="<?= base_url("view-student/".$student->getUsername()."") ?>"><?=$student->getFirstName()." ".$student->getLastName() ?> </a></p>
+      <?php } ?>
       <p>Student 2</p>
       <p>Student 3</p>
       <p>Student 4</p>

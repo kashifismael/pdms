@@ -16,6 +16,7 @@
       <p><label>Course:</label> Computer Science</p>
     </div>
   </div>
+      <p>Display deliverables of <?=$studentID ?> </p>
       </div>
 
 <div class="col-md-8" >
@@ -28,7 +29,7 @@
     <!--div class="well well-sm"-->
       <strong>View</strong>
       <div class="btn-group">
-          <a href="<?= base_url("view-student/123?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
+          <a href="<?= base_url("view-student/".$studentID."?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
           <a href="#" id="grid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span>Grid</a>
       </div>
   <!--/div-->

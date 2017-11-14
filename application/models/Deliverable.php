@@ -22,7 +22,7 @@ class Deliverable extends CI_Model {
         return $deliverable;
     }
 
-    public function getAllStudentDeilverables($username) {
+    public function getAllStudentDeliverables($username) {
         $deliverableList = array();
         $query = "SELECT deliverable_ID , deliverableName, deadlineDate, delStatusDesc
                     FROM (((`fyp_Deliverable` 

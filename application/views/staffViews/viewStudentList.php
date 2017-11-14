@@ -16,6 +16,7 @@
       <p><label>Course:</label> Computer Science</p>
     </div>
   </div>
+      <p>Display deliverables of <?=$studentID ?> </p>
       </div>
 
 <div class="col-md-8" >
@@ -29,7 +30,7 @@
       <strong>View</strong>
       <div class="btn-group">
           <a href="#" id="list" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th-list"></span>List</a>
-          <a href="<?= base_url("view-student/123"); ?>" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
+          <a href="<?= base_url("view-student/".$studentID.""); ?>" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
       </div>
   <!--/div-->
     </div>
