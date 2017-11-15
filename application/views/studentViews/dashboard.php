@@ -67,7 +67,7 @@
                           <!-- <img class="card-img-top" src="./book-icon-149.png" alt="Card image cap" width="180" height="180"> -->
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
                                 <div class="card text-center" style="margin-top: 5%;">                  <!-- new, with added style -->
-                            <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/26ba482-kingston-university-ce1a1a6-international-scholarships.jpg" alt="Card image cap">
+                            <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail7')?>" alt="Card image cap">
                             <div class="card-block">
                                 <h4 class="card-title">Proposal</h4>
                                 <div class="card-text">
@@ -85,7 +85,7 @@
                           <!-- <img class="card-img-top" src="./book-icon-149.png" alt="Card image cap" width="180" height="180"> -->
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
                                 <div class="card text-center" style="margin-top: 5%;">                  <!-- new, with added style -->
-                            <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/9c65a6c-kingston-university-69c2e74-research-degrees.jpg" alt="Card image cap">
+                            <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail4')?>" alt="Card image cap">
                             <div class="card-block">
                                 <h4 class="card-title">Prototype</h4>
                                 <p class="card-text">This Deliverable has two items.</p>
@@ -99,7 +99,7 @@
                         <!--div class="card text-center col-lg-3 col-md-4 col-sm-6 col-xs-12"-->
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
                                 <div class="card text-center" style="margin-top: 5%;">   
-                            <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/cd29f98-kingston-university-fc0978d-postgraduate-prospectus.jpg" alt="Card image cap">
+                                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail1')?>" alt="Card image cap">
                             <div class="card-block">
                                 <h4 class="card-title">Card title</h4>
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
