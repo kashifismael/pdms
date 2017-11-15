@@ -43,21 +43,23 @@
                         <!-- <div class="card-deck"> -->
                         <?php foreach ($myDeliverables as $deliverable) { ?>
                             <!--div class="card text-center col-lg-3 col-md-4 col-sm-6 col-xs-12"--> <!-- original -->
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->                               
                                 <div class="card text-center" style="margin-top: 5%;">                  <!-- new, with added style -->
-                                <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/cd29f98-kingston-university-fc0978d-postgraduate-prospectus.jpg" alt="Card image cap">
+                                    <a href="<?= base_url("deliverable/".$deliverable->getDeliverableNo()."") ?>" style="color: black;">
+                                    <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/cd29f98-kingston-university-fc0978d-postgraduate-prospectus.jpg" alt="Card image cap">
                                 <div class="card-block">
                                     <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>
                                     <div class="card-text">
-                                        <p><!--label-->Deadline date:<!--/label--> <?= date_format($deliverable->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></p>
-                                        <p><!--label-->Status:<!--/label--> <?= $deliverable->getDelstatusDesc() ?></p>
+                                        <p><strong>Deadline date:</strong> <?= date_format($deliverable->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></p>
+                                        <p><strong>Status:</strong> <?= $deliverable->getDelstatusDesc() ?></p>
                                     </div>
-                                <a href="<?= base_url("deliverable/".$deliverable->getDeliverableNo()."") ?>" class="card-text">Click to view</a>
+                                <!--a href="<!--?= base_url("deliverable/".$deliverable->getDeliverableNo()."") ?>" class="card-text">Click to view</a-->
                                 </div>                                
                                 <div class="card-footer">
                                     <small class="text-muted">Last updated 3 mins ago</small>
                                 </div>
-                                </div>  <!-- new -->
+                                    </a>
+                                </div>  <!-- new -->                                
                             </div>      <!-- new -->
                             <!-- </div> -->  <!-- original -->
                         <?php } ?>
@@ -69,8 +71,8 @@
                             <div class="card-block">
                                 <h4 class="card-title">Proposal</h4>
                                 <div class="card-text">
-                                    <p><label>Deadline date:</label> 27/1/18</p>
-                                    <p><label>Status:</label> Incomplete</p>
+                                    <p><strong>Deadline date:</strong> 27/1/18</p>
+                                    <p><strong>Status:</strong> Incomplete</p>
                                 </div>
                                 <a href="#" class="card-text">Click to view</a>
                             </div>
