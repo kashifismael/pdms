@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row row-mobile" > <!-- doesnt show well on mobile -->
   <div class="text-center">
-      <h1>Kashif Ismael</h1>
+      <h1><?=$student->getFirstName()." ".$student->getLastName() ?></h1>
   </div>
 </div>
 <div class="row">
@@ -11,9 +11,9 @@
     <div class="panel panel-default">
     <div class="panel-heading"><h4 class="text-center"> Student Info</h3></div>
     <div class="panel-body">
-      <p><label>Name:</label> Kashif Ismael</p>
-      <p><label>K Number:</label> k1552723</p>
-      <p><label>Course:</label> Computer Science</p>
+      <p><label>Name:</label> <?=$student->getFirstName()." ".$student->getLastName() ?></p>
+      <p><label>K Number:</label> <?=$student->getUsername() ?></p>
+      <p><label>Email Address:</label> <?=$student->getEmail() ?></p>
     </div>
   </div>
       <p>Display deliverables of <?=$studentID ?> </p>
@@ -47,15 +47,23 @@
 <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
 
       <table class="table">
-    <thead>
+    <thead>   
       <tr>
-        <th>Deliverable Type</th>
-        <th>Last Updated</th>
-        <th>No. of items</th>
+        <th>Deliverable Name</th>
+        <th>Deadline Date</th>
+        <th>Status</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
+        <?php foreach ($theirDeliverables as $deliverable) { ?>
+      <tr>
+        <td><?= $deliverable->getDeliverableName() ?></td>
+        <td><?= date_format($deliverable->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></td>
+        <td><?= $deliverable->getDelstatusDesc() ?></td>
+        <td><a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" class="card-text">Click to view</a></td>
+      </tr>
+        <?php } ?>
       <tr>
         <td>Proposal</td>
         <td>3 days ago</td>

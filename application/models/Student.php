@@ -18,6 +18,15 @@ class Student extends User {
         return $student;
     }
     
+        public static function studentConstructorTwo($firstName, $lastName, $username, $email){
+        $student = new Student();
+        $student->setEmail($email);
+        $student->setFirstName($firstName);
+        $student->setLastName($lastName);
+        $student->setUsername($username);
+        return $student;
+    }
+    
     public function insertStudent($username, $pass1, $pass2, $userType) {
         //print_r($_POST);
         echo"<br>";

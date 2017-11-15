@@ -38,9 +38,11 @@ class Staff extends CI_Controller {
     public function viewStudent($studentID) {
         $this->load->model('user');
         $this->load->model('student');
-        //$this->load->model('supervisor');
+        $this->load->model('supervisor');
         $this->load->model('deliverable');
         $data['studentID'] = $studentID;
+        $data['student'] = $this->supervisor->getStudentInfo($studentID);
+        $data['theirDeliverables'] = $this->deliverable->getAllStudentDeliverables($studentID);
         $data['title'] = "View Student";
         $this->load->view('header', $data);
         $this->load->view('staffViews/navbar');

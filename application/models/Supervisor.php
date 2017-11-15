@@ -77,6 +77,17 @@ class Supervisor extends User {
         }
         return $supervisorGroup;
     }
+    
+    public function getStudentInfo($username){
+        $query ="SELECT * FROM `fyp_Student` "
+                . "INNER JOIN fyp_User "
+                . "ON fyp_Student.user_ID = fyp_User.user_ID "
+                . "WHERE fyp_User.username = '$username'";
+        $result = $this->db->query($query);
+        $studentRow = $result->row();
+        $student = Student::studentConstructorTwo($studentRow->firstName, $studentRow->lastName, $studentRow->username, $studentRow->emailAddress);
+        return $student;
+    }
 
     function getStaffID() {
         return $this->staffID;
