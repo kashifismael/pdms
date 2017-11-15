@@ -62,7 +62,10 @@ class Staff extends CI_Controller {
     }
 
     public function viewDeliverable($delId) {
+        $this->load->model('deliverable');
         $data['title'] = "View Deliverable";
+        $data['deliverableID'] = $delId;
+        $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $this->load->view('header', $data);
         $this->load->view('staffViews/navbar');
         if (isset($_GET['flow']) && $_GET['flow'] == "list") {

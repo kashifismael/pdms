@@ -49,6 +49,11 @@ class Deliverable extends CI_Model {
         $this->session->set_userdata('deliverableCreation', 'success');
         return $this->db->insert('fyp_Deliverable', $delData);
     }
+    
+    public function listStatusOptions(){
+        $query = "SELECT delStatus_ID, delStatusDesc FROM `fyp_DeliverableStatus`";
+        return $this->db->query($query);
+    }
 
     function getDeliverableNo() {
         return $this->deliverableNo;

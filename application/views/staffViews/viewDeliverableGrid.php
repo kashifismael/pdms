@@ -32,6 +32,8 @@
     class="btn btn-primary navbar-btn btn-block btn-text-wrap hidden-xs hidden-sm">
     <span class="glyphicon glyphicon-pencil"></span> Update Status</button>
   </div>
+      
+      <p>Display deliverable <?=$deliverableID ?></p>
       </div> 
 
 <div class="col-md-8" >
@@ -44,7 +46,7 @@
     <!--div class="well well-sm"-->
       <strong>View</strong>
       <div class="btn-group">
-          <a href="<?= base_url("view-deliverable/123?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
+          <a href="<?= base_url("view-deliverable/".$deliverableID."?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
           <a href="#" id="grid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span>Grid</a>
       </div>
   <!--/div-->

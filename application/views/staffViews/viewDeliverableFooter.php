@@ -10,9 +10,10 @@
         <form>
             <div class="form-group">
               <label for="text">Choose Status</label>
-              <select class="form-control" id="sel1" >
-            <option selected>Incomplete</option>
-            <option>Complete</option>
+              <select class="form-control" id="sel1">
+            <?php foreach($statusOptions->result() as $row){ ?>
+            <option value="<?=$row->delStatus_ID ?>" ><?=$row->delStatusDesc ?></option>
+            <?php } ?>
           </select>
             </div>
             <button type="submit" class="btn btn-success">Update Status</button>

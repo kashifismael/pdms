@@ -30,7 +30,8 @@
     <button data-toggle="modal" data-target="#statusModal"
     class="btn btn-primary navbar-btn btn-block btn-text-wrap hidden-xs hidden-sm">
     <span class="glyphicon glyphicon-pencil"></span> Update Status</button>
-  </div>
+  </div>          
+      <p>Display deliverable <?=$deliverableID ?></p>
       </div> 
 
 <div class="col-md-8" >
@@ -44,7 +45,7 @@
       <strong>View</strong>
       <div class="btn-group">
           <a href="#" id="list" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th-list"></span>List</a>
-          <a href="<?= base_url("view-deliverable/123"); ?>" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
+          <a href="<?= base_url("view-deliverable/".$deliverableID); ?>" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
       </div>
   <!--/div-->
     </div>
