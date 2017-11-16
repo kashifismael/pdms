@@ -11,15 +11,11 @@
                     <div class="form-group">
                         <label for="date">Enter Name of Evidence</label>
                         <input type="text" class="form-control" id="evidenceName" name="evidenceName" required>
+                        <input type="hidden" value="<?=$delID ?>" name="deliverableID">
                     </div>
                     <div class="form-group">
                         <label for="text">Choose Deliverable</label>
-                        <select class="form-control" id="sel1" disabled>
-                            <option selected>Proposal</option>
-                            <option>Prototype</option>
-                            <option>Report</option>
-                            <option>Software application</option>
-                        </select>
+                        <input type="text" class="form-control" value="<?=$deliverableInfo->getDeliverableName() ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Select File</label>

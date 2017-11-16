@@ -29,9 +29,9 @@
     <div class="panel panel-default">
     <div class="panel-heading"><h4 class="text-center"> Deliverable Info</h3></div>
     <div class="panel-body">
-      <p><label>Type:</label> Proposal</p>
-      <p><label>Deadline date:</label> 27/1/18</p>
-      <p><label>Status:</label> Incomplete</p>
+      <p><label>Name:</label> <?=$deliverableInfo->getDeliverableName() ?></p>
+      <p><label>Deadline date:</label> <?= date_format($deliverableInfo->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></p>
+      <p><label>Status:</label> <?= $deliverableInfo->getDelstatusDesc() ?></p>
     </div>
   </div>
 
@@ -42,6 +42,8 @@
   <a data-toggle="modal" data-target="#deadlineChange" class="btn btn-warning btn-block btn-text-wrap hidden-xs hidden-sm"><span class="glyphicon glyphicon-time"></span> Request Deadline Change</a>
   <a data-toggle="modal" data-target="#delDeletion" class="btn btn-danger btn-block btn-text-wrap hidden-xs hidden-sm"><span class="glyphicon glyphicon-remove-sign"></span> Request Deliverable Delete</a>
   </div>
+      
+      <p>Display deliverable <?= $delID ?></p>
       </div>
 
 <div class="col-md-8" >
@@ -54,7 +56,7 @@
     <!--div class="well well-sm"-->
       <strong>View</strong>
       <div class="btn-group">
-          <a href="<?= base_url("deliverable/123?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
+          <a href="<?= base_url("deliverable/".$delID."?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
           <a href="#" id="grid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span>Grid</a>
       </div>
   <!--/div-->

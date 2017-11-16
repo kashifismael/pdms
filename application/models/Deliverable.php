@@ -40,6 +40,19 @@ class Deliverable extends CI_Model {
         return $deliverableList;
     }
 
+    public function getOneDeliverable($deliverableID){
+        $query = "SELECT * "
+                . "FROM `fyp_Deliverable` "
+                . "INNER JOIN fyp_DeliverableStatus "
+                . "ON fyp_Deliverable.delStatus_ID = fyp_DeliverableStatus.delStatus_ID "
+                . "WHERE deliverable_ID = '$deliverableID'";
+        $result = $this->db->query($query);
+        $deliverableRow = $result->row();
+        $deliverable = self::deliverableConstructor($deliverableRow->deliverable_ID, $deliverableRow->delStatusDesc, $deliverableRow->deliverableName,
+                    new DateTime($deliverableRow->deadlineDate));
+        return $deliverable;
+    }
+    
     public function insertDeliverable($deadlineDate) {
         $delData = array(
             'student_ID' => $this->session->secondaryID,

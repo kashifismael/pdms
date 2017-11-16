@@ -34,7 +34,10 @@ class Student extends CI_Controller {
     }
 
     public function viewDeliverable($delID) {
+        $this->load->model('deliverable');
+        $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['title'] = "View Deliverable";
+        $data['delID'] = $delID;
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
         if (isset($_GET['flow']) && $_GET['flow'] == "list") {
