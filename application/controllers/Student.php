@@ -47,6 +47,9 @@ class Student extends CI_Controller {
         }
         $this->load->view('studentViews/viewDeliverableModals');
         $this->load->view('studentViews/footer');
+        if (isset($_SESSION['evidenceCreation'])) {
+            unset($_SESSION['evidenceCreation']);
+        }
     }
 
     public function viewEvidence($evidID) {

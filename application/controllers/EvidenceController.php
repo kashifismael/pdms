@@ -3,23 +3,22 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class EvidenceController extends CI_Controller {
-    
-    public function uploadFile(){
-        if (isset($_FILES['evidence'])){
-            $file = $_FILES['evidence'];
-            print_r($_POST);
-            echo "<br>";
-            //print_r($file);
-            $fileName = $file['name'];
-            $file_tmp = $file['tmp_name'];
-            $fileSize = $file['size'];
-            $fileError = $file['error'];
-            echo "<p>file name is ".$fileName."</p>";
-            echo "<p>file tmp name is ".$file_tmp."</p>";
-            echo "<p>file size is ".$fileSize."</p>";
-            echo "<p>file error is ".$fileError."</p>";
+
+    public function uploadFile() {
+        $this->load->model('evidence');
+        if (isset($_FILES['evidence']) && isset($_POST['evidenceName']) 
+                && $_FILES['evidence']['error'] === 0 && $_FILES['evidence']['size'] <= 2097152) {
+            $upload = $this->evidence->uploadEvidenceFile($_FILES['evidence']['name'],$_FILES['evidence']['tmp_name']);
+            if ($upload === true){
+                //echo "<p>everything was successful</p>";
+                $this->session->set_userdata('evidenceCreation', 'success');
+                
+                redirect('deliverable/'.$this->input->post('deliverableID'));
+            }
+        } else {
+            echo "something went wrong, redirect away";
+            redirect('student-home');
         }
     }
-    
-    
+
 }
