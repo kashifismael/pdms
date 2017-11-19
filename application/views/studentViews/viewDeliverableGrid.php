@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row row-mobile" > <!-- doesnt show well on mobile -->
   <div class="text-center">
-      <h1>Proposal</h1>
+      <h1><?=$deliverableInfo->getDeliverableName() ?></h1>
   </div>
 </div>
 <div class="row row-mobile" > <!-- doesnt show well on mobile -->
@@ -88,7 +88,7 @@
                   <p class="text-muted">Last updated 3 mins ago</p>
                 </div>
                 <div class="card-footer">
-                  <a href="#" class="card-text">Click to view</a>
+                  <a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/view-evidence/123" class="card-text">Click to view</a>
                   <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
                 </div>
               </div>
