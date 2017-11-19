@@ -46,7 +46,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->                               
                                 <div class="card text-center" style="margin-top: 5%;">                  <!-- new, with added style -->
                                     <a href="<?= base_url("deliverable/".$deliverable->getDeliverableNo()."") ?>" style="color: black;">
-                                    <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/cd29f98-kingston-university-fc0978d-postgraduate-prospectus.jpg" alt="Card image cap">
+                                        <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail'.rand(1, 13))?>" alt="Card image cap">
                                 <div class="card-block">
                                     <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>
                                     <div class="card-text">
@@ -99,7 +99,7 @@
                         <!--div class="card text-center col-lg-3 col-md-4 col-sm-6 col-xs-12"-->
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
                                 <div class="card text-center" style="margin-top: 5%;">   
-                                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail1')?>" alt="Card image cap">
+                                    <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/cd29f98-kingston-university-fc0978d-postgraduate-prospectus.jpg" alt="Card image cap">
                             <div class="card-block">
                                 <h4 class="card-title">Card title</h4>
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
