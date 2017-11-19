@@ -74,7 +74,7 @@
         <td>ProposalDraft</td>
         <td>Completed</td>
         <td>3 mins ago</td>
-        <td><a href="#" class="card-text">Click to view</a></td>
+        <td><a href="<?= base_url("view-evidence/123"); ?>" class="card-text">Click to view</a></td>
       </tr>
       <tr>
         <tr>

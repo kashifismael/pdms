@@ -101,7 +101,7 @@
                                 <p class="text-muted">Last updated 3 mins ago</p>
                             </div>
                             <div class="card-footer">
-                                <a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/view-evidence/123" class="card-text">Click to view</a>
+                                <a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/evidence/123" class="card-text">Click to view</a>
                                 <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
                             </div>
                         </div>

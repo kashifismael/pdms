@@ -9,7 +9,7 @@
   <div class="col-xs-12 text-center">
     <button data-toggle="modal" data-target="#newEvidUpModal"
     class="btn btn-success navbar-btn btn-block btn-text-wrap visible-xs visible-sm">
-        <span class="glyphicon glyphicon-open"></span> Upload Evidence to Proposal</button>
+        <span class="glyphicon glyphicon-open"></span> <?=$deliverableInfo->getDeliverableName() ?></button>
   </div>
 </div>
     
@@ -38,7 +38,7 @@
   <div class="text-center">
     <button data-toggle="modal" data-target="#newEvidUpModal"
     class="btn btn-success navbar-btn btn-block btn-text-wrap hidden-xs hidden-sm">
-    <span class="glyphicon glyphicon-open"></span> Upload Evidence to Proposal</button>
+    <span class="glyphicon glyphicon-open"></span> Upload Evidence to <?=$deliverableInfo->getDeliverableName() ?></button>
   <a data-toggle="modal" data-target="#deadlineChange" class="btn btn-warning btn-block btn-text-wrap hidden-xs hidden-sm"><span class="glyphicon glyphicon-time"></span> Request Deadline Change</a>
   <a data-toggle="modal" data-target="#delDeletion" class="btn btn-danger btn-block btn-text-wrap hidden-xs hidden-sm"><span class="glyphicon glyphicon-remove-sign"></span> Request Deliverable Delete</a>
   </div>     
@@ -86,7 +86,7 @@
         <td>ProposalDraft</td>
         <td>Completed</td>
         <td>3 mins ago</td>
-        <td><a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/view-evidence/123" class="card-text">Click to view</a></td>
+        <td><a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/evidence/123" class="card-text">Click to view</a></td>
       </tr>
       <tr>
         <tr>

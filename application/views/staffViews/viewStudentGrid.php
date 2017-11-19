@@ -53,7 +53,7 @@
                         <?php foreach ($theirDeliverables as $deliverable) { ?>
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">                             
                                 <div class="card text-center" style="margin-top: 5%;">                  
-                                    <a href="<?= base_url("deliverable/" . $deliverable->getDeliverableNo() . "") ?>" style="color: black;">
+                                    <a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" style="color: black;">
                                         <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail' . rand(1, 13)) ?>" alt="Card image cap">
                                         <div class="card-block">
                                             <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>

@@ -78,7 +78,7 @@
                   <p class="text-muted">Last updated 3 mins ago</p>
                 </div>
                 <div class="card-footer">
-                  <a href="#" class="card-text">Click to view</a>
+                  <a href="<?= base_url("view-evidence/123"); ?>" class="card-text">Click to view</a>
                   <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
                 </div>
               </div>
