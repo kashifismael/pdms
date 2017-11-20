@@ -34,17 +34,19 @@
                             <tr>
                                 <th>Evidence name</th>
                                 <th>Status</th>
-                                <th>Last updated</th>
+                                <th>Submitted</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($myEvidences as $evidence){ ?>
                             <tr>
-                                <td>ProposalDraft</td>
-                                <td>Completed</td>
-                                <td>3 mins ago</td>
-                                <td><a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/evidence/123" class="card-text">Click to view</a></td>
+                                <td><?= $evidence->getEvidenceName() ?></td>
+                                <td><?= $evidence->getEvidenceStatus() ?></td>
+                                <td><?= date_format($evidence->getSubmissionDate(), 'g:ia \o\n l jS F Y') ?></td>
+                                <td><a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/evidence/<?=$evidence->getEvidenceNo() ?>" class="card-text">Click to view</a></td>
                             </tr>
+                            <?php } ?>
                             <tr>
                             <tr>
                                 <td>Draft1</td>
