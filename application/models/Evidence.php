@@ -27,7 +27,8 @@ class Evidence extends CI_Model {
                     FROM `fyp_Evidence` 
                     INNER JOIN fyp_EvidenceStatus 
                     ON fyp_Evidence.evidStatus_ID = fyp_EvidenceStatus.evidStatus_ID 
-                    WHERE deliverable_ID = '$delNo'";
+                    WHERE deliverable_ID = '$delNo'"
+                . "ORDER BY `fyp_Evidence`.`submissionDate` DESC";
         $result = $this->db->query($query);
         foreach($result->result() as $row){
             $newEvid = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, 
