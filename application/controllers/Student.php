@@ -56,6 +56,7 @@ class Student extends CI_Controller {
 
     public function viewEvidence($evidID) {
         $data['title'] = "View Evidence";
+        $data['evidID'] = $evidID;
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
         $this->load->view('studentViews/viewEvidence');
