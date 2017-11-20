@@ -44,10 +44,10 @@
                                 <td><?= $evidence->getEvidenceName() ?></td>
                                 <td><?= $evidence->getEvidenceStatus() ?></td>
                                 <td><?= date_format($evidence->getSubmissionDate(), 'g:ia \o\n l jS F Y') ?></td>
-                                <td><a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/evidence/<?=$evidence->getEvidenceNo() ?>" class="card-text">Click to view</a></td>
+                                <td><a href="<?= base_url('evidence/'.$evidence->getEvidenceNo()) ?>" class="card-text">Click to view</a></td>
                             </tr>
                             <?php } ?>
-                            <tr>
+                           <!-- <tr> -->
                             <tr>
                                 <td>Draft1</td>
                                 <td>Not finished</td>

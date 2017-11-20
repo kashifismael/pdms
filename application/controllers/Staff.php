@@ -27,7 +27,7 @@ class Staff extends CI_Controller {
         $this->load->view($navFilePath);
         if ($_SESSION['userTypeID'] == 1) {
             $data['unAllocatedStudentsNumber'] = $this->moduleLeader->unallocatedStudentsQuery();
-            $this->load->view('moduleLeaderViews/mlDashboard',$data);
+            $this->load->view('moduleLeaderViews/mlDashboard', $data);
         } else if ($_SESSION['userTypeID'] == 2) {
             $this->load->view('staffViews/supDashboard');
         } else {
@@ -53,18 +53,13 @@ class Staff extends CI_Controller {
         }
     }
 
-    public function viewEvidence($evidID) {
-        $data['title'] = "View Evidence";
-        $data['evidenceID'] = $evidID;
-        $this->load->view('header', $data);
-        $this->load->view('staffViews/navbar');
-        $this->load->view('staffViews/viewEvidence');
-    }
-
-    public function viewDeliverable($delId) {
+    public function viewDeliverable($delID) {
         $this->load->model('deliverable');
+        $this->load->model('evidence');
+        $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
+        $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
         $data['title'] = "View Deliverable";
-        $data['deliverableID'] = $delId;
+        $data['deliverableID'] = $delID;
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $this->load->view('header', $data);
         $this->load->view('staffViews/navbar');
@@ -74,6 +69,14 @@ class Staff extends CI_Controller {
             $this->load->view('staffViews/viewDeliverableGrid');
         }
         $this->load->view('staffViews/viewDeliverableFooter');
+    }
+
+    public function viewEvidence($evidID) {
+        $data['title'] = "View Evidence";
+        $data['evidenceID'] = $evidID;
+        $this->load->view('header', $data);
+        $this->load->view('staffViews/navbar');
+        $this->load->view('staffViews/viewEvidence');
     }
 
     public function allocateStudents() {

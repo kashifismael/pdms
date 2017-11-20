@@ -49,7 +49,7 @@
                     <?php foreach ($myEvidences as $evidence){ ?>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                         <div class="card text-center" style="margin-top: 5%;">
-                             <a href="https://kunet.kingston.ac.uk/~k1552723/PhpProject4/evidence/<?=$evidence->getEvidenceNo() ?>" class="card-text" style="color: black;">
+                             <a href="<?= base_url('evidence/'.$evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
                                  <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail'.rand(1, 13))?>" alt="Card image cap">
                             <div class="card-block">
                                 <h4 class="card-title"><?= $evidence->getEvidenceName() ?></h4>
