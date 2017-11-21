@@ -20,7 +20,9 @@ class Staff extends CI_Controller {
         $this->load->model('student');
         $this->load->model('supervisor');
         $this->load->model('moduleLeader');
+        $this->load->model('evidence');
         $data['supervisorGroup'] = $this->supervisor->getAllSupervisorStudents($this->session->secondaryID);
+        $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
         $navFilePath = self::staffTypeCheck($_SESSION['userTypeID']);
