@@ -55,6 +55,7 @@ $route['evidence/(:num)'] = 'student/viewEvidence/$1';
 
 $route['createDeliverable'] = 'DeliverableController/create';
 $route['uploadEvidence'] = 'EvidenceController/uploadFile';
+$route['downloadEvidence'] = 'EvidenceController/downloadFile';
 
 $route['staff-home'] = 'staff';
 $route['view-student/(:any)'] = 'staff/viewStudent/$1';

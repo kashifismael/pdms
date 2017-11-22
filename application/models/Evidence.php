@@ -9,12 +9,12 @@ class Evidence extends CI_Model {
     private $evidenceName;
     private $deliverableName;
     private $studentName;
-    
+
     function __construct() {
         parent::__construct();
     }
 
-    public function evidenceConstructor($evidNo, $evidStatus, $subDate, $evidName){
+    public function evidenceConstructor($evidNo, $evidStatus, $subDate, $evidName) {
         $evidence = new Evidence();
         $evidence->setEvidenceNo($evidNo);
         $evidence->setEvidenceStatus($evidStatus);
@@ -22,8 +22,8 @@ class Evidence extends CI_Model {
         $evidence->setEvidenceName($evidName);
         return $evidence;
     }
-    
-    public function evidenceContructorTwo($evidNo, $subDate, $evidName, $delName, $studentName){
+
+    public function evidenceContructorTwo($evidNo, $subDate, $evidName, $delName, $studentName) {
         $evidence = new Evidence();
         $evidence->setEvidenceNo($evidNo);
         $evidence->setSubmissionDate($subDate);
@@ -32,8 +32,8 @@ class Evidence extends CI_Model {
         $evidence->setStudentName($studentName);
         return $evidence;
     }
-    
-    public function getAllEvidencesOfDeliverable($delNo){
+
+    public function getAllEvidencesOfDeliverable($delNo) {
         $evidenceList = array();
         $query = "SELECT * 
                     FROM `fyp_Evidence` 
@@ -42,15 +42,14 @@ class Evidence extends CI_Model {
                     WHERE deliverable_ID = '$delNo'"
                 . "ORDER BY `fyp_Evidence`.`submissionDate` DESC";
         $result = $this->db->query($query);
-        foreach($result->result() as $row){
-            $newEvid = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, 
-                    new DateTime($row->submissionDate), $row->evidenceName);
+        foreach ($result->result() as $row) {
+            $newEvid = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
             $evidenceList[] = $newEvid;
         }
         return $evidenceList;
     }
-    
-    public function getAllEvidencesForSupervisor($staffID){
+
+    public function getAllEvidencesForSupervisor($staffID) {
         $evidenceList = array();
         $query = "SELECT *
                     FROM (((((`fyp_Evidence`
@@ -62,15 +61,13 @@ class Evidence extends CI_Model {
                     WHERE fyp_Staff.staff_ID = '$staffID' AND fyp_Evidence.evidStatus_ID = 1
                     ORDER BY `fyp_Evidence`.`submissionDate` DESC";
         $result = $this->db->query($query);
-        foreach($result->result() as $row){
-            $newEvid = self::evidenceContructorTwo($row->evidence_ID, 
-                    new DateTime($row->submissionDate), $row->evidenceName,
-                    $row->deliverableName, $row->firstName." ".$row->lastName);
+        foreach ($result->result() as $row) {
+            $newEvid = self::evidenceContructorTwo($row->evidence_ID, new DateTime($row->submissionDate), $row->evidenceName, $row->deliverableName, $row->firstName . " " . $row->lastName);
             $evidenceList[] = $newEvid;
         }
         return $evidenceList;
     }
-    
+
     public function uploadEvidenceFile($fileName, $file_tmp) {
         $newFileName = uniqid('', true) . $this->session->userName . $fileName;
         $fileDestination = "evidenceUploads/" . $newFileName;
@@ -80,7 +77,7 @@ class Evidence extends CI_Model {
         } else {
             echo "file upload didnt work";
         }
-        if($insert === true){
+        if ($insert === true) {
             //echo "<p>record insert successful </p>";
             return true;
         }
@@ -94,6 +91,23 @@ class Evidence extends CI_Model {
             'filePath' => $newFileName,
         );
         return $this->db->insert('fyp_Evidence', $data);
+    }
+
+    public function downloadEvidenceFile() {
+        $evidID = $this->input->post('evidID');
+        $query = "SELECT filePath 
+                    FROM `fyp_Evidence` 
+                    WHERE evidence_ID = '$evidID'";
+        $result = $this->db->query($query);
+        $evidenceRow = $result->row();
+        $filename = $evidenceRow->filePath;
+        $file = base_url('evidenceUploads/' . $filename);
+        $file = str_replace(' ', '%20', $file);
+        header("Content-Description: File Transfer"); 
+        header("Content-Type: application/octet-stream"); 
+        header("Content-Disposition: attachment; filename='" . basename($file) . "'"); 
+        readfile ($file);
+        exit();
     }
 
     function getDeliverableName() {
@@ -152,6 +166,4 @@ class Evidence extends CI_Model {
         $this->evidenceName = $evidenceName;
     }
 
-
-    
 }
