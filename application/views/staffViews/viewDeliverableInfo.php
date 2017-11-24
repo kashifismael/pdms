@@ -19,7 +19,7 @@
     <div class="panel-heading"><h4 class="text-center"> Deliverable Info</h3></div>
     <div class="panel-body">
       <p><label>Name:</label> <?= $deliverableInfo->getDeliverableName() ?></p>
-      <p><label>Deadline date:</label> <?= date_format($deliverableInfo->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></p>
+      <p><label>Deadline date:</label> <?= date_format($deliverableInfo->getDeadlineDate(), 'G:i - D j M') ?></p>
       <p><label>Status:</label> <?= $deliverableInfo->getDelstatusDesc() ?></p>
     </div>
   </div>

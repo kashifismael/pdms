@@ -42,7 +42,7 @@
                                         <div class="card-block">
                                             <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>
                                             <div class="card-text">
-                                                <p><strong>Deadline date:</strong> <?= date_format($deliverable->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></p>
+                                                <p><strong>Deadline date:</strong> <?= date_format($deliverable->getDeadlineDate(), 'G:i - D j M') ?></p>
                                                 <p><strong>Status:</strong> <?= $deliverable->getDelstatusDesc() ?></p>
                                             </div>
                                         </div>                                

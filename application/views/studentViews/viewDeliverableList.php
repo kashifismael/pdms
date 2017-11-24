@@ -43,7 +43,7 @@
                             <tr>
                                 <td><?= $evidence->getEvidenceName() ?></td>
                                 <td><?= $evidence->getEvidenceStatus() ?></td>
-                                <td><?= date_format($evidence->getSubmissionDate(), 'g:ia \o\n l jS F Y') ?></td>
+                                <td><?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></td>
                                 <td><a href="<?= base_url('evidence/'.$evidence->getEvidenceNo()) ?>" class="card-text">Click to view</a></td>
                             </tr>
                             <?php } ?>

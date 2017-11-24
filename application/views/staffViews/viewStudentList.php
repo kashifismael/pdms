@@ -43,7 +43,7 @@
                             <?php foreach ($theirDeliverables as $deliverable) { ?>
                                 <tr>
                                     <td><?= $deliverable->getDeliverableName() ?></td>
-                                    <td><?= date_format($deliverable->getDeadlineDate(), 'g:ia \o\n l jS F Y') ?></td>
+                                    <td><?= date_format($deliverable->getDeadlineDate(), 'G:i - D j M') ?></td>
                                     <td><?= $deliverable->getDelstatusDesc() ?></td>
                                     <td><a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" class="card-text">Click to view</a></td>
                                 </tr>

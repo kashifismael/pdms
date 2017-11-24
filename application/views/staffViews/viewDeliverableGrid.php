@@ -41,7 +41,7 @@
                             <div class="card-block">
                                 <h4 class="card-title"><?= $evidence->getEvidenceName() ?></h4>
                                 <p><strong>Status:</strong> <?= $evidence->getEvidenceStatus() ?></p>
-                                <p><strong>Submitted:</strong> <?= date_format($evidence->getSubmissionDate(), 'g:ia \o\n l jS F Y') ?></p>
+                                <p><strong>Submitted:</strong> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
                             </div>
                              </a>
                         </div>

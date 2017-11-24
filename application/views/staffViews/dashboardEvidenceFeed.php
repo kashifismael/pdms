@@ -19,7 +19,7 @@
                     <?php foreach($submittedEvidences as $evidence){ ?>
                     <tr>
                         <td><?=$evidence->getEvidenceName() ?></td>
-                        <td><?= date_format($evidence->getSubmissionDate(), 'H:i d/m/Y') ?></td>
+                        <td><?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></td>
                         <td><?= $evidence->getDeliverableName() ?></td>
                         <td><?= $evidence->getStudentName() ?></td>
                         <td><a href="#" class="card-text">View</a></td>
