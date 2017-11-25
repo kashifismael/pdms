@@ -40,9 +40,7 @@
         </div>
 
         <div class="col-md-7 " >
-
-
-                    <h3 class="text-center">Feedback List</h3>
+                <h3 class="text-center">Feedback List</h3>
                     <table class="table" >
                         <thead>
                             <tr>
@@ -69,8 +67,7 @@
                             </tr>
                         </tbody>
                     </table>
-
-
+                <p>select all from feedback where evidence no is = <?= $evidenceID ?></p>
         </div>
 
 

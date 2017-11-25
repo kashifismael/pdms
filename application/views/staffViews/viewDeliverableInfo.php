@@ -80,6 +80,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <p>select all from evidence, inner join deliverable, where deliverable no is = <?= $deliverableID ?></p>
                 </div>
 
             </div>
