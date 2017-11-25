@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
     <div class="row row-mobile" > <!-- doesnt show well on mobile -->
         <div class=" col-xs-12 text-center">
@@ -41,12 +40,9 @@
         </div>
 
         <div class="col-md-7 " >
-            <div class="panel panel-default" style="height : 700px;">
-                <div class="panel-heading">
+
+
                     <h3 class="text-center">Feedback List</h3>
-                </div>
-                <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
-                    <!-- <div class="table-feed"> -->
                     <table class="table" >
                         <thead>
                             <tr>
@@ -73,8 +69,8 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
+
+
         </div>
 
 

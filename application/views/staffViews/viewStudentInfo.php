@@ -1,3 +1,5 @@
+<div class="container-fluid">    
+
     <div class="row row-mobile" > <!-- doesnt show well on mobile -->
         <div class="text-center">
             <h1><?= $student->getFirstName() . " " . $student->getLastName() ?></h1>
@@ -16,3 +18,22 @@
             </div>
             <p>Display deliverables of <?= $studentID ?> </p>
         </div>
+        <div class="col-md-8" >
+
+            <?php
+            if (isset($_GET['flow']) && $_GET['flow'] == "list") {
+                $this->load->view('staffViews/viewStudentList');
+            } else {
+                $this->load->view('staffViews/viewStudentGrid');
+            }
+            ?>
+
+        </div>
+    </div>
+</div>
+<div style="padding-bottom: 30px;"></div>
+</body>
+
+
+
+</html>

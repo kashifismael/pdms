@@ -48,11 +48,7 @@ class Staff extends CI_Controller {
         $data['title'] = "View Student";
         $this->load->view('header', $data);
         $this->load->view('staffViews/navbar');
-        if (isset($_GET['flow']) && $_GET['flow'] == "list") {
-            $this->load->view('staffViews/viewStudentList');
-        } else {
-            $this->load->view('staffViews/viewStudentGrid');
-        }
+        $this->load->view('staffViews/viewStudentInfo');
     }
 
     public function viewDeliverable($delID) {
@@ -65,11 +61,7 @@ class Staff extends CI_Controller {
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $this->load->view('header', $data);
         $this->load->view('staffViews/navbar');
-        if (isset($_GET['flow']) && $_GET['flow'] == "list") {
-            $this->load->view('staffViews/viewDeliverableList');
-        } else {
-            $this->load->view('staffViews/viewDeliverableGrid');
-        }
+        $this->load->view('staffViews/viewDeliverableInfo');
         $this->load->view('staffViews/viewDeliverableFooter');
     }
 
