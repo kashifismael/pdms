@@ -90,7 +90,7 @@
                 <h4 class="modal-title">Provide Feedback</h4>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('uploadFeedback') ?>" method="POST">
+                <form action="<?= base_url('uploadFeedback') ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="text">Choose Status</label>
                         <select name="delStatus" class="form-control" id="sel1">
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <input type="hidden" name="evidID" value="<?= $evidenceID ?>">
                         <label class="control-label">Select File (if applicable)</label>
-                        <input id="input-1a" type="file" class="file" data-show-preview="true">
+                        <input id="feedback" name="feedback" type="file" class="file" data-show-preview="true">
                     </div>
                     <button type="submit" class="btn btn-success">Submit Feedback</button>
                 </form>
