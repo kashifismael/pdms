@@ -40,34 +40,34 @@
         </div>
 
         <div class="col-md-7 " >
-                <h3 class="text-center">Feedback List</h3>
-                    <table class="table" >
-                        <thead>
-                            <tr>
-                                <th>Feedback No.</th>
-                                <th>Submitted</th>
-                                <th>Click to download</th>
-                            </tr>
-                        </thead>
-                        <tbody style="overflow-y: scroll;">
-                            <tr>
-                                <td>Feedback 3</td>
-                                <td>2 mins ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                            </tr>
-                            <tr>
-                                <td>Feedback 2</td>
-                                <td>3 days ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                            </tr>
-                            <tr>
-                                <td>Feedback 1</td>
-                                <td>6 days ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <p>select all from feedback where evidence no is = <?= $evidenceID ?></p>
+            <h3 class="text-center">Feedback List</h3>
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th>Feedback No.</th>
+                        <th>Submitted</th>
+                        <th>Click to download</th>
+                    </tr>
+                </thead>
+                <tbody style="overflow-y: scroll;">
+                    <tr>
+                        <td>Feedback 3</td>
+                        <td>2 mins ago</td>
+                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
+                    </tr>
+                    <tr>
+                        <td>Feedback 2</td>
+                        <td>3 days ago</td>
+                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
+                    </tr>
+                    <tr>
+                        <td>Feedback 1</td>
+                        <td>6 days ago</td>
+                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>select all from feedback where evidence no is = <?= $evidenceID ?></p>
         </div>
 
 
@@ -90,15 +90,17 @@
                 <h4 class="modal-title">Provide Feedback</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="<?= base_url('uploadFeedback') ?>" method="POST">
                     <div class="form-group">
                         <label for="text">Choose Status</label>
-                        <select class="form-control" id="sel1">
-                            <option>Incomplete</option>
-                            <option>Complete</option>
+                        <select name="delStatus" class="form-control" id="sel1">
+                            <?php foreach ($statusOptions->result() as $row) { ?>
+                                <option value="<?= $row->delStatus_ID ?>" ><?= $row->delStatusDesc ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
+                        <input type="hidden" name="evidID" value="<?= $evidenceID ?>">
                         <label class="control-label">Select File (if applicable)</label>
                         <input id="input-1a" type="file" class="file" data-show-preview="true">
                     </div>

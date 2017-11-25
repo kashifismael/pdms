@@ -1,17 +1,7 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of Staff
- *
- * @author Kashif
- */
 class Staff extends CI_Controller {
 
     public function index() {
@@ -66,6 +56,8 @@ class Staff extends CI_Controller {
     }
 
     public function viewEvidence($evidID) {
+        $this->load->model('deliverable');
+        $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $data['title'] = "View Evidence";
         $data['evidenceID'] = $evidID;
         $this->load->view('header', $data);
