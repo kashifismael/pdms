@@ -33,11 +33,11 @@
       </div>
 
 <div class="col-md-7 " >
-<div class="panel panel-default" style="height : 700px;">
-<div class="panel-heading">
+<!--div class="panel panel-default" style="height : 700px;"-->
+<!--div class="panel-heading"-->
   <h3 class="text-center">Feedback List</h3>
-</div>
-<div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
+<!--/div-->
+<!--div class="panel-body" style="max-height: 600px; overflow-y: scroll;"-->
 <!-- <div class="table-feed"> -->
   <table class="table" >
 <thead>
@@ -65,8 +65,8 @@
   </tr>
 </tbody>
 </table>
-</div>
-</div>
+<!--/div-->
+<!--/div-->
   </div>
 
 
