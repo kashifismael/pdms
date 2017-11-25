@@ -21,8 +21,9 @@
 <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav">
       <li<?= activeCheck("student-home") ?>><a href="<?= base_url("student-home"); ?>">Dashboard</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
+      <li><a href="#">View Evidences</a></li>
+      <li><a href="#">View Feedbacks</a></li>
+      <li><a href="#">View Supervisor</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="hidden-xs">

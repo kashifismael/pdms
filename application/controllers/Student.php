@@ -19,11 +19,14 @@ class Student extends CI_Controller {
         $this->load->model('deliverable');
         self::checkIfAuthorised();
         $data['title'] = "Dashboard";
-        //$data['myDeliverables'] = $this->deliverable->getAllStudentDeilverables($this->session->secondaryID);
         $data['myDeliverables'] = $this->deliverable->getAllStudentDeliverables($this->session->userName);
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
-        $this->load->view('studentViews/dashboard');
+        if (isset($_GET['flow']) && $_GET['flow'] == "list") {
+            $this->load->view('studentViews/dashboardList');
+        } else {
+            $this->load->view('studentViews/dashboardGrid');
+        }
         $this->load->view('studentViews/footer');
         if (isset($_SESSION['deliverableCreation'])) {
             unset($_SESSION['deliverableCreation']);
