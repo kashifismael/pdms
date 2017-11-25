@@ -42,11 +42,7 @@ class Student extends CI_Controller {
         $data['delID'] = $delID;
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
-        if (isset($_GET['flow']) && $_GET['flow'] == "list") {
-            $this->load->view('studentViews/viewDeliverableList');
-        } else {
-            $this->load->view('studentViews/viewDeliverableGrid');
-        }
+        $this->load->view('studentViews/viewDeliverableInfo');
         $this->load->view('studentViews/viewDeliverableModals');
         $this->load->view('studentViews/footer');
         if (isset($_SESSION['evidenceCreation'])) {
