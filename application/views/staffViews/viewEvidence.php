@@ -53,17 +53,17 @@
                             <tr>
                                 <td>Feedback 3</td>
                                 <td>2 mins ago</td>
-                                <td><a href="#" class="card-text">Download Feedback</a></td>
+                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
                             </tr>
                             <tr>
                                 <td>Feedback 2</td>
                                 <td>3 days ago</td>
-                                <td><a href="#" class="card-text">Download Feedback</a></td>
+                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
                             </tr>
                             <tr>
                                 <td>Feedback 1</td>
                                 <td>6 days ago</td>
-                                <td><a href="#" class="card-text">Download Feedback</a></td>
+                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
                             </tr>
                         </tbody>
                     </table>

@@ -23,14 +23,18 @@
     <?php foreach ($myEvidences as $evidence) { ?>
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="card text-center" style="margin-top: 5%;">
-                <a href="<?= base_url('evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
-                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail' . rand(1, 13)) ?>" alt="Card image cap">
-                    <div class="card-block">
+                <a href="<?= base_url('evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">        
+                <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail' . rand(1, 13)) ?>" alt="Card image cap">
+                </a>
+                <div class="card-block">
+                    <a href="<?= base_url('evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
                         <h4 class="card-title"><?= $evidence->getEvidenceName() ?></h4>
                         <p><strong>Status:</strong> <?= $evidence->getEvidenceStatus() ?></p>
                         <p><strong>Submitted:</strong> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
-                    </div>
-                </a>
+                    </a>
+                    <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+                </div>
+
             </div>
         </div>
     <?php } ?>

@@ -93,19 +93,19 @@
                                 <td>Proposal</td>
                                 <td>3 days ago</td>
                                 <td>6</td>
-                                <td><a href="#" class="card-text">Click to view</a></td>
+                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
                             </tr>
                             <tr>
                                 <td>Prototype</td>
                                 <td>6 days ago</td>
                                 <td>6</td>
-                                <td><a href="#" class="card-text">Click to view</a></td>
+                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
                             </tr>
                             <tr>
                                 <td>July</td>
                                 <td>Dooley</td>
                                 <td>5</td>
-                                <td><a href="#" class="card-text">Click to view</a></td>
+                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
                             </tr>
                         </tbody>
                     </table>
