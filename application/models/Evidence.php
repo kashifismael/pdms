@@ -81,6 +81,7 @@ class Evidence extends CI_Model {
         $evidence = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, 
                 new DateTime($row->submissionDate), $row->evidenceName);
         $evidence->setDeliverableNo($row->deliverable_ID);
+        $evidence->setDeliverableName($row->deliverableName);
         return $evidence;
     }
     
@@ -88,13 +89,11 @@ class Evidence extends CI_Model {
         $newFileName = uniqid('', true) . $this->session->userName . $fileName;
         $fileDestination = "evidenceUploads/" . $newFileName;
         if (move_uploaded_file($file_tmp, $fileDestination)) {
-            //echo "<p>file upload successful </p>";
             $insert = self::insertFileRecord($newFileName);
         } else {
             echo "file upload didnt work";
         }
         if ($insert === true) {
-            //echo "<p>record insert successful </p>";
             return true;
         }
     }

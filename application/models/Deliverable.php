@@ -8,6 +8,7 @@ class Deliverable extends CI_Model {
     private $delstatusDesc;
     private $deliverableName;
     private $deadlineDate;
+    private $studentName;
 
     function __construct() {
         parent::__construct();
@@ -42,15 +43,17 @@ class Deliverable extends CI_Model {
 
     public function getOneDeliverable($deliverableID){
         $query = "SELECT * "
-                . "FROM `fyp_Deliverable` "
-                . "INNER JOIN fyp_DeliverableStatus "
-                . "ON fyp_Deliverable.delStatus_ID = fyp_DeliverableStatus.delStatus_ID "
+                . "FROM (((`fyp_Deliverable` "
+                . "INNER JOIN fyp_DeliverableStatus ON fyp_Deliverable.delStatus_ID = fyp_DeliverableStatus.delStatus_ID) "
+                . "INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID)
+                   INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID)"
                 . "WHERE deliverable_ID = '$deliverableID'";
         $result = $this->db->query($query);
         $deliverableRow = $result->row();
-        $deliverable = self::deliverableConstructor($deliverableRow->deliverable_ID, $deliverableRow->delStatusDesc, $deliverableRow->deliverableName,
+        $deliverableInfo = self::deliverableConstructor($deliverableRow->deliverable_ID, $deliverableRow->delStatusDesc, $deliverableRow->deliverableName,
                     new DateTime($deliverableRow->deadlineDate));
-        return $deliverable;
+        $deliverableInfo->setStudentName($deliverableRow->firstName." ".$deliverableRow->lastName);
+        return $deliverableInfo;
     }
     
     public function insertDeliverable($deadlineDate) {
@@ -68,6 +71,14 @@ class Deliverable extends CI_Model {
         return $this->db->query($query);
     }
 
+    function getStudentName() {
+        return $this->studentName;
+    }
+
+    function setStudentName($studentName) {
+        $this->studentName = $studentName;
+    }
+    
     function getDeliverableNo() {
         return $this->deliverableNo;
     }
