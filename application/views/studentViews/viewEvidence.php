@@ -22,6 +22,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h4 class="text-center">Info</h3></div>
                 <div class="panel-body">
+                    <p><label>Deliverable:</label> <?= $evidence->getDeliverableName() ?></p>
                     <p><label>Status:</label> <?= $evidence->getEvidenceStatus() ?></p>
                     <p><label>Submitted:</label> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
                 </div>
