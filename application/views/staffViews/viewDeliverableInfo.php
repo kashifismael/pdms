@@ -1,14 +1,8 @@
 <div class="container-fluid">
     <ol class="breadcrumb" style="padding-left: 10%;">
-        <li><a href="#">View Student</a></li>
+        <li><a href="<?= base_url('view-student/'.$deliverableInfo->getStudentID()) ?>">View Student</a></li>
         <li class="active">View Deliverable</li>
     </ol>
- <!--   <div class="row row-mobile" >
-        <div class="text-center">
-            <h1><!--?= $deliverableInfo->getDeliverableName() ?></h1>
-        </div>
-    </div> -->
-
     <div class="row row-mobile" > 
         <div class="col-xs-12 text-center">
             <button data-toggle="modal" data-target="#statusModal"

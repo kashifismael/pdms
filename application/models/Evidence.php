@@ -4,6 +4,7 @@ class Evidence extends CI_Model {
 
     private $evidenceNo;
     private $deliverableNo;
+    private $studentID;
     private $evidenceStatus;
     private $submissionDate;
     private $evidenceName;
@@ -75,6 +76,8 @@ class Evidence extends CI_Model {
                     FROM `fyp_Evidence` 
                     INNER JOIN fyp_Deliverable ON fyp_Deliverable.deliverable_ID = fyp_Evidence.deliverable_ID 
                     INNER JOIN fyp_EvidenceStatus ON fyp_EvidenceStatus.evidStatus_ID = fyp_Evidence.evidStatus_ID
+                    INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
+                    INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
                     WHERE evidence_ID = '$evidID'";
         $result = $this->db->query($query);
         $row = $result->row();
@@ -82,6 +85,7 @@ class Evidence extends CI_Model {
                 new DateTime($row->submissionDate), $row->evidenceName);
         $evidence->setDeliverableNo($row->deliverable_ID);
         $evidence->setDeliverableName($row->deliverableName);
+        $evidence->setStudentID($row->username);
         return $evidence;
     }
     
@@ -125,6 +129,14 @@ class Evidence extends CI_Model {
         exit();
     }
 
+    function getStudentID() {
+        return $this->studentID;
+    }
+
+    function setStudentID($studentID) {
+        $this->studentID = $studentID;
+    }
+       
     function getDeliverableName() {
         return $this->deliverableName;
     }

@@ -53,6 +53,7 @@ class Deliverable extends CI_Model {
         $deliverableInfo = self::deliverableConstructor($deliverableRow->deliverable_ID, $deliverableRow->delStatusDesc, $deliverableRow->deliverableName,
                     new DateTime($deliverableRow->deadlineDate));
         $deliverableInfo->setStudentName($deliverableRow->firstName." ".$deliverableRow->lastName);
+        $deliverableInfo->setStudentID($deliverableRow->username);
         return $deliverableInfo;
     }
     

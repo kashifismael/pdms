@@ -1,15 +1,10 @@
 <div class="container-fluid">
     <ol class="breadcrumb" style="padding-left: 10%;">
-        <li><a href="#">View Student</a></li>
-        <li><a href="#">View Deliverable</a></li>
+        <li><a href="<?= base_url('view-student/'.$evidence->getStudentID()) ?>">View Student</a></li>
+        <li><a href="<?= base_url('view-deliverable/'.$evidence->getDeliverableNo()) ?>">View Deliverable</a></li>
         <li class="active">View Evidence</li>
     </ol>
 
-  <!--  <div class="row row-mobile" >
-        <div class=" col-xs-12 text-center">
-            <h1><!--?= $evidence->getEvidenceName() ?></h1>
-        </div>
-    </div> -->
     <div class="row row-mobile" >
         <div class="col-xs-6 text-center">
             <form method="POST" action="<?= base_url('downloadEvidence') ?>">
