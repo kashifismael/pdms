@@ -22,7 +22,7 @@
                         <td><?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></td>
                         <td><?= $evidence->getDeliverableName() ?></td>
                         <td><?= $evidence->getStudentName() ?></td>
-                        <td><a href="#" class="card-text">View</a></td>
+                        <td><a href="<?= base_url('view-evidence/'.$evidence->getEvidenceNo()) ?>" class="card-text">View</a></td>
                     </tr>
                     <?php } ?>
                     <tr>
