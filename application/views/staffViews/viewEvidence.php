@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row row-mobile" > <!-- doesnt show well on mobile -->
         <div class=" col-xs-12 text-center">
-            <h1>Draft1</h1>
+            <h1><?= $evidence->getEvidenceName() ?></h1>
         </div>
     </div>
     <div class="row row-mobile" >
@@ -23,9 +23,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h4 class="text-center">Info</h3></div>
                 <div class="panel-body">
-                    <p><label>Status:</label> Needs improving</p>
-              <!--      <p><label>Type:</label> Draft</p>-->
-                    <p><label>Last Updated:</label> 3 days ago</p>
+                    <p><label>Status:</label> <?= $evidence->getEvidenceStatus() ?></p>
+                    <p><label>Submitted:</label> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
                 </div>
             </div>
             <form method="POST" action="<?= base_url('downloadEvidence') ?>">
@@ -92,14 +91,22 @@
             <div class="modal-body">
                 <form action="<?= base_url('uploadFeedback') ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="text">Choose Status</label>
-                        <select name="delStatus" class="form-control" id="sel1">
+                        <label for="text">Mark Evidence as:</label>
+                        <select name="evidStatus" class="form-control" id="evidStatus">
+                            <option value="2">Changes Required</option>
+                            <option value="3">Completed</option>   
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Mark overall Deliverable as:</label>
+                        <select name="delStatus" class="form-control" id="evidStatus">
                             <?php foreach ($statusOptions->result() as $row) { ?>
                                 <option value="<?= $row->delStatus_ID ?>" ><?= $row->delStatusDesc ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
+                        <input type="hidden" name="delID" value="<?= $evidence->getDeliverableNo() ?>">
                         <input type="hidden" name="evidID" value="<?= $evidenceID ?>">
                         <label class="control-label">Select File (if applicable)</label>
                         <input id="feedback" name="feedback" type="file" class="file" data-show-preview="true">

@@ -57,6 +57,8 @@ class Staff extends CI_Controller {
 
     public function viewEvidence($evidID) {
         $this->load->model('deliverable');
+        $this->load->model('evidence');
+        $data['evidence'] = $this->evidence->getOneEvidence($evidID);
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $data['title'] = "View Evidence";
         $data['evidenceID'] = $evidID;
