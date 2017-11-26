@@ -13,12 +13,13 @@
         </div>
     <?php } ?>
 
-    <div class="row row-mobile" > <!-- doesnt show well on mobile -->
+    <div class="row row-mobile" >
         <div class="text-center">
-            <h1><?= $deliverableInfo->getDeliverableName() ?></h1>
+            <h3 class="visible-xs"><?= $deliverableInfo->getDeliverableName() ?></h3>
+            <h1 class="hidden-xs"><?= $deliverableInfo->getDeliverableName() ?></h1>
         </div>
     </div>
-    <div class="row row-mobile" > <!-- doesnt show well on mobile -->
+    <div class="row row-mobile" > 
         <div class="col-xs-12 text-center">
             <button data-toggle="modal" data-target="#newEvidUpModal"
                     class="btn btn-success navbar-btn btn-block btn-text-wrap visible-xs visible-sm">
@@ -26,7 +27,7 @@
         </div>
     </div>
 
-    <div class="row row-mobile" > <!-- doesnt show well on mobile -->
+    <div class="row row-mobile" > 
         <div class="col-xs-6 text-center visible-xs visible-sm">
             <a data-toggle="modal" data-target="#deadlineChange" class="btn btn-warning btn-block btn-text-wrap"><span class="glyphicon glyphicon-time"></span> Request Deadline Change</a>
         </div>
@@ -54,8 +55,6 @@
                 <a data-toggle="modal" data-target="#deadlineChange" class="btn btn-warning btn-block btn-text-wrap hidden-xs hidden-sm"><span class="glyphicon glyphicon-time"></span> Request Deadline Change</a>
                 <a data-toggle="modal" data-target="#delDeletion" class="btn btn-danger btn-block btn-text-wrap hidden-xs hidden-sm"><span class="glyphicon glyphicon-remove-sign"></span> Request Deliverable Delete</a>
             </div>     
-
-            <p>Display deliverable <?= $delID ?></p>
         </div>
         <div class="col-md-8" >
             <ul class="nav nav-tabs">
@@ -78,13 +77,13 @@
                 </div>
                 <div id="Dash2" class="tab-pane fade">
 
-                    <h1>All Feedbacks</h1>
+                    <h3 class="hidden-xs pull-left" style="padding-left: 10%">All Feedbacks</h3>
+                    <h3 class="visible-xs text-center">All Feedbacks</h3>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Deliverable Type</th>
-                                <th>Last Updated</th>
-                                <th>No. of items</th>
+                                <th>No.</th>
+                                <th>Date</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -92,19 +91,16 @@
                             <tr>
                                 <td>Proposal</td>
                                 <td>3 days ago</td>
-                                <td>6</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
                             </tr>
                             <tr>
                                 <td>Prototype</td>
                                 <td>6 days ago</td>
-                                <td>6</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
                             </tr>
                             <tr>
                                 <td>July</td>
                                 <td>Dooley</td>
-                                <td>5</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
                             </tr>
                         </tbody>

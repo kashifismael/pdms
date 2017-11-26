@@ -2,7 +2,8 @@
 <div class="container-fluid">
     <div class="row row-mobile" > <!-- doesnt show well on mobile -->
         <div class=" col-xs-12 text-center">
-            <h1><?= $evidence->getEvidenceName() ?></h1>
+            <h3 class="visible-xs"><?= $evidence->getEvidenceName() ?></h3>
+            <h1 class="hidden-xs"><?= $evidence->getEvidenceName() ?></h1>
         </div>
     </div>
     <div class="row row-mobile" >
