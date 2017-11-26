@@ -54,6 +54,8 @@ class Student extends CI_Controller {
     }
 
     public function viewEvidence($evidID) {
+        $this->load->model('evidence');
+        $data['evidence'] = $this->evidence->getOneEvidence($evidID);
         $data['title'] = "View Evidence";
         $data['evidID'] = $evidID;
         $this->load->view('header', $data);

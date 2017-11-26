@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row row-mobile" > <!-- doesnt show well on mobile -->
         <div class=" col-xs-12 text-center">
-            <h1>Plan</h1>
+            <h1><?= $evidence->getEvidenceName() ?></h1>
         </div>
     </div>
     <div class="row row-mobile" >
@@ -22,9 +22,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h4 class="text-center">Info</h3></div>
                 <div class="panel-body">
-                    <p><label>Status:</label> Needs improving</p>
-              <!--      <p><label>Type:</label> Draft</p>-->
-                    <p><label>Last Updated:</label> 3 days ago</p>
+                    <p><label>Status:</label> <?= $evidence->getEvidenceStatus() ?></p>
+                    <p><label>Submitted:</label> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
                 </div>
             </div>
             <a href="#" class="btn btn-primary btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt"></span> Download Evidence</a>
