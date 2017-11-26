@@ -1,9 +1,13 @@
 <div class="container-fluid">
-    <div class="row row-mobile" >
+    <ol class="breadcrumb" style="padding-left: 10%;">
+        <li><a href="#">View Student</a></li>
+        <li class="active">View Deliverable</li>
+    </ol>
+ <!--   <div class="row row-mobile" >
         <div class="text-center">
-            <h1><?= $deliverableInfo->getDeliverableName() ?></h1>
+            <h1><!--?= $deliverableInfo->getDeliverableName() ?></h1>
         </div>
-    </div>
+    </div> -->
 
     <div class="row row-mobile" > 
         <div class="col-xs-12 text-center">
@@ -17,7 +21,7 @@
 
         <div class="col-md-2 col-md-offset-1" >
             <div class="panel panel-default">
-                <div class="panel-heading"><h4 class="text-center"> Deliverable Info</h3></div>
+                <div class="panel-heading"><h4 class="text-center"> Deliverable Info</h4></div>
                 <div class="panel-body">
                     <p><label>Student:</label> <?= $deliverableInfo->getStudentName() ?></p>
                     <p><label>Deliverable:</label> <?= $deliverableInfo->getDeliverableName() ?></p>
@@ -50,7 +54,7 @@
                     ?>
                 </div>
                 <div id="Dash2" class="tab-pane fade">
-                    <h1>All Feedbacks</h1>
+                    <h3 class="pull-left" style="padding-left: 10%">All Feedbacks</h3>
                     <table class="table">
                         <thead>
                             <tr>

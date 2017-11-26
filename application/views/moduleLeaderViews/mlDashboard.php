@@ -1,12 +1,10 @@
 
 <div class="container-fluid">
     <h1 class="text-center">Module Leader Dashboard</h1>
-    <p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?> </p>
-    <p>staff ID of <?= $this->session->secondaryID ?></p>
     <div class="row">
 
-<?php $this->load->view('staffViews/dashboardEvidenceFeed') ?>
-        
+        <?php $this->load->view('staffViews/dashboardEvidenceFeed') ?>
+
         <div class="col-md-3" >
             <div class="panel panel-default">
                 <div class="panel-heading"><strong><?= $unAllocatedStudentsNumber->num_rows() ?></strong> students awaiting allocation</div>
@@ -35,7 +33,8 @@
 
 </div>
 
-
+<p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?> </p>
+<p>staff ID of <?= $this->session->secondaryID ?></p>
 </body>
 
 </html>

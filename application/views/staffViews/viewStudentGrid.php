@@ -1,17 +1,14 @@
                  
-<div class="row row-mobile" > <!-- doesnt show well on mobile -->
-    <!-- <div class="row" style="display: flex; justify-content: center; align-items: center;"> -->
+<div class="row row-mobile" > 
     <div class="col-sm-6">
-        <h3 class="text-center">Deliverables</h3>
+        <h3 class="text-center"><?= $student->getFirstName()?>'s Deliverables</h3>
     </div>
     <div class="col-sm-3 col-xs-12 text-center" >
-        <!--div class="well well-sm"-->
         <strong>View</strong>
         <div class="btn-group">
             <a href="<?= base_url("view-student/" . $studentID . "?flow=list"); ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
             <a href="#" id="grid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span>Grid</a>
         </div>
-        <!--/div-->
     </div>
     <div class="col-sm-3 col-xs-12">
         <div class="input-group">

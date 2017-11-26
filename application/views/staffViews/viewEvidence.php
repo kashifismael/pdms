@@ -1,9 +1,15 @@
 <div class="container-fluid">
-    <div class="row row-mobile" > <!-- doesnt show well on mobile -->
+    <ol class="breadcrumb" style="padding-left: 10%;">
+        <li><a href="#">View Student</a></li>
+        <li><a href="#">View Deliverable</a></li>
+        <li class="active">View Evidence</li>
+    </ol>
+
+  <!--  <div class="row row-mobile" >
         <div class=" col-xs-12 text-center">
-            <h1><?= $evidence->getEvidenceName() ?></h1>
+            <h1><!--?= $evidence->getEvidenceName() ?></h1>
         </div>
-    </div>
+    </div> -->
     <div class="row row-mobile" >
         <div class="col-xs-6 text-center">
             <form method="POST" action="<?= base_url('downloadEvidence') ?>">
@@ -19,9 +25,9 @@
 
     <div class="row">
 
-        <div class="col-md-3 col-md-offset-1" >
+        <div class="col-md-2 col-md-offset-1" >
             <div class="panel panel-default">
-                <div class="panel-heading"><h4 class="text-center">Info</h3></div>
+                <div class="panel-heading"><h4 class="text-center">Evidence Info</h4></div>
                 <div class="panel-body">
                     <p><label>Deliverable:</label> <?= $evidence->getDeliverableName() ?></p>
                     <p><label>Status:</label> <?= $evidence->getEvidenceStatus() ?></p>
@@ -39,8 +45,8 @@
 
         </div>
 
-        <div class="col-md-7 " >
-            <h3 class="text-center">Feedback List</h3>
+        <div class="col-md-8 " >
+            <h3 class="text-center pull-left" style="padding-left: 10%"><?= $evidence->getEvidenceName() ?> - Feedback List</h3>
             <table class="table" >
                 <thead>
                     <tr>
