@@ -15,8 +15,7 @@ class Staff extends CI_Controller {
         $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
-        $navFilePath = self::staffTypeCheck($_SESSION['userTypeID']);
-        $this->load->view($navFilePath);
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         if ($_SESSION['userTypeID'] == 1) {
             $data['unAllocatedStudentsNumber'] = $this->moduleLeader->unallocatedStudentsQuery();
             $this->load->view('moduleLeaderViews/mlDashboard', $data);
@@ -37,7 +36,7 @@ class Staff extends CI_Controller {
         $data['theirDeliverables'] = $this->deliverable->getAllStudentDeliverables($studentID);
         $data['title'] = "View Student";
         $this->load->view('header', $data);
-        $this->load->view('staffViews/navbar');
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/viewStudentInfo');
     }
 
@@ -50,7 +49,7 @@ class Staff extends CI_Controller {
         $data['deliverableID'] = $delID;
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $this->load->view('header', $data);
-        $this->load->view('staffViews/navbar');
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/viewDeliverableInfo');
         $this->load->view('staffViews/viewDeliverableFooter');
     }
@@ -63,7 +62,7 @@ class Staff extends CI_Controller {
         $data['title'] = "View Evidence";
         $data['evidenceID'] = $evidID;
         $this->load->view('header', $data);
-        $this->load->view('staffViews/navbar');
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/viewEvidence');
     }
 
@@ -76,7 +75,7 @@ class Staff extends CI_Controller {
         $data['studentList'] = $this->moduleLeader->getAllUnallocatedStudents();
         $data['supervisorList'] = $this->moduleLeader->getAllSupervisors();
         $this->load->view('header', $data);
-        $this->load->view('moduleLeaderViews/navbar');
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('moduleLeaderViews/allocateStudents');
         if (isset($_SESSION['allocation'])) {
             unset($_SESSION['allocation']);
@@ -86,7 +85,8 @@ class Staff extends CI_Controller {
     public function manageRequests() {
         $data['title'] = "Manage Requests";
         $this->load->view('header', $data);
-        $this->load->view('staffViews/navbar');
+        //$this->load->view('staffViews/navbar');
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/manageRequests');
     }
 
@@ -112,7 +112,7 @@ class Staff extends CI_Controller {
         }
     }
 
-    private static function staffTypeCheck($userTypeID) {
+    private static function navbarLoader($userTypeID) {
         $navFilePath = "";
         if ($userTypeID == 2) {
             $navFilePath = 'staffViews/navbar';
