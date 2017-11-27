@@ -103,6 +103,18 @@ class Staff extends CI_Controller {
         }
     }
 
+    public function viewSubmittedEvidences(){
+        $this->load->model('user');
+        $this->load->model('student');
+        $this->load->model('supervisor');
+        $this->load->model('evidence');
+        $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
+        $data['title'] = "Latest Submissions";
+        $this->load->view('header', $data);
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        $this->load->view('staffViews/latestSubmissions');
+    }
+    
     public function viewAllSupervisors(){
         $this->load->model('user');
         $this->load->model('supervisor');
