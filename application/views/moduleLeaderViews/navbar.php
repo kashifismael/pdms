@@ -17,9 +17,14 @@
       <li<?= activeCheck("latest-submissions") ?>><a href="<?= base_url("latest-submissions")?>">Latest submissions</a></li>
       <li><a href="#">View Supervisor group</a></li>
       <li<?= activeCheck("manage-requests") ?>><a href="<?= base_url("manage-requests")?>">Manage requests</a></li>
-      <li<?= activeCheck("all-supervisors") ?>><a href="<?= base_url("all-supervisors")?>">View All Supervisors</a></li>
-      <li<?= activeCheck("student-allocation") ?>><a href="<?= base_url("student-allocation")?>">Student Allocation</a></li>
-      <li><a href="#">View All Students</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">More<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li<?= activeCheck("all-supervisors") ?>><a href="<?= base_url("all-supervisors")?>">View All Supervisors</a></li>
+          <li<?= activeCheck("student-allocation") ?>><a href="<?= base_url("student-allocation")?>">Student Allocation</a></li>
+          <li><a href="#">View All Students</a></li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
 
