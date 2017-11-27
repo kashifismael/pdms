@@ -13,17 +13,17 @@ class Supervisor extends User {
         parent::__construct();
     }
 
-    public static function supervisorConstructor($firstName, $lastName, $username, $staffID){
+    public static function supervisorConstructor($firstName, $lastName, $username, $staffID, $email){
         $supervisor = new Supervisor();
         $supervisor->setFirstName($firstName);
         $supervisor->setLastName($lastName);
         $supervisor->setUsername($username);
         $supervisor->setStaffID($staffID);
+        $supervisor->setEmail($email);
         return $supervisor;
     }
     
     public function insertStaff($username, $pass1, $pass2, $userType) {
-        //print_r($_POST);
         echo"<br>";
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
             echo "Creating account...";

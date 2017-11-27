@@ -63,6 +63,7 @@ $route['view-student/(:any)'] = 'staff/viewStudent/$1';
 $route['view-deliverable/(:num)'] = 'staff/viewDeliverable/$1';
 $route['view-evidence/(:num)'] = 'staff/viewEvidence/$1';
 $route['manage-requests'] = 'staff/ManageRequests';
+$route['all-supervisors'] = 'staff/viewAllSupervisors';
 
 $route['student-allocation'] = 'staff/allocateStudents';
 $route['allocationPortal'] = 'staff/processAllocation';

@@ -103,6 +103,17 @@ class Staff extends CI_Controller {
         }
     }
 
+    public function viewAllSupervisors(){
+        $this->load->model('user');
+        $this->load->model('supervisor');
+        $this->load->model('moduleLeader');
+        $data['supervisorList'] = $this->moduleLeader->getAllSupervisors();
+        $data['title'] = "View All Supervisors";
+        $this->load->view('header', $data);
+        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        $this->load->view('moduleLeaderViews/viewAllSupervisors');
+    }
+    
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
             //echo "<p>User is authorised</p>";
