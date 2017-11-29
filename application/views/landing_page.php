@@ -33,7 +33,9 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="hidden-xs hidden-sm" style="padding-bottom: 100px"></div>
+    
+    <div class="container-fluid">
         <h1 class="text-center" >Welcome to UniDiss!</h1>
         <div class="col-md-4 col-md-offset-4">
             <form class="form form-login" name="login" id="login-form" method="POST" action="loginPortal">
@@ -148,8 +150,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <p>This table has <?= $query->num_rows(); ?> rows </p>
+  <!--  <div class="container">
+        <p>This table has <!?= $query->num_rows(); ?> rows </p>
         <table class="table">
             <tr>
                 <th>User Type</th>
@@ -158,20 +160,20 @@
                 <th>Username</th>
                 <th>Email address</th>
             </tr>
-            <?php
+            <!?php
             foreach ($query->result() as $row) {
                 ?>
                 <tr>
-                    <td> <?= $row->userType; ?> </td>
-                    <td> <?= $row->firstName ?> </td>
-                    <td> <?= $row->lastName ?> </td>
-                    <td> <?= $row->username ?> </td>
-                    <td> <?= $row->emailAddress ?> </td>
+                    <td> <!?= $row->userType; ?> </td>
+                    <td> <!?= $row->firstName ?> </td>
+                    <td> <!?= $row->lastName ?> </td>
+                    <td> <!?= $row->username ?> </td>
+                    <td> <!?= $row->emailAddress ?> </td>
                 </tr>
-                <?php
+                <!?php
             }
             ?> 
         </table>
-    </div>
+    </div> -->
 </body>
 </html>
