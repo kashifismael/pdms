@@ -118,7 +118,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>select all from feedback, inner join deliverable and evidence, where deliverable no is = <?= $delID ?></p>
                 </div>
             </div>
 

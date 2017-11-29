@@ -64,34 +64,47 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Deliverable Type</th>
-                                <th>Last Updated</th>
-                                <th>No. of items</th>
+                                <th>No.</th>
+                                <th>Date</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            $count = 1;
+                            foreach ($myFeedbacks as $feedback) {
+                                ?>
+                                <tr>
+                                    <td><?= $count ?></td>
+                                    <td><?= date_format($feedback->getFeedbackDate(), 'G:i - D j M') ?></td>
+                                    <td>
+                                        <form method="POST" action="<?= base_url('downloadFeedback') ?>">
+                                            <input type="hidden" name="feedbackID" value="<?= $feedback->getFeedbackID() ?>">
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php
+                                $count++;
+                            }
+                            ?> 
                             <tr>
                                 <td>Proposal</td>
                                 <td>3 days ago</td>
-                                <td>6</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
                             </tr>
                             <tr>
                                 <td>Prototype</td>
                                 <td>6 days ago</td>
-                                <td>6</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
                             </tr>
                             <tr>
                                 <td>July</td>
                                 <td>Dooley</td>
-                                <td>5</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
                             </tr>
                         </tbody>
                     </table>
-                    <p>select all from evidence, inner join deliverable, where deliverable no is = <?= $deliverableID ?></p>
                 </div>
 
             </div>

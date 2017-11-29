@@ -84,13 +84,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p>select all from feedback where evidence no is = <?= $evidenceID ?></p>
         </div>
-
-
-        <!-- <div class="col-md-2" style="background-color:blue;">
-      <p> column 3 </p>
-            </div> -->
 
 
     </div>

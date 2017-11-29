@@ -25,16 +25,19 @@
             <div class="card text-center" style="margin-top: 5%;">
                 <a href="<?= base_url('view-evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
                     <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail' . rand(1, 13)) ?>" alt="Card image cap">
-                    </a>
-                    <div class="card-block">
-                        <a href="<?= base_url('view-evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
+                </a>
+                <div class="card-block">
+                    <a href="<?= base_url('view-evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
                         <h4 class="card-title"><?= $evidence->getEvidenceName() ?></h4>
                         <p><strong>Status:</strong> <?= $evidence->getEvidenceStatus() ?></p>
                         <p><strong>Submitted:</strong> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
-                        </a>
-                        <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
-                    </div>
-                
+                    </a>
+                    <form method="POST" action="<?= base_url('downloadEvidence') ?>">
+                        <input type="hidden" name="evidID" value="<?= $evidence->getEvidenceNo() ?>">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+                    </form>
+                </div>
+
             </div>
         </div>
     <?php } ?>

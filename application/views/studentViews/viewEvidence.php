@@ -8,7 +8,10 @@
     </div>
     <div class="row row-mobile" >
         <div class="col-xs-6 text-center">
-            <a href="#" class="btn btn-primary btn-block visible-xs visible-sm btn-text-wrap"><span class="glyphicon glyphicon-download-alt"></span> Download file</a>
+            <form method="POST" action="<?= base_url('downloadEvidence') ?>">
+                <input type="hidden" name="evidID" value="<?= $evidID ?>">
+                <button type="submit" class="btn btn-primary btn-block visible-xs visible-sm"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+            </form>
         </div>
         <div class="col-xs-6 text-center">
             <a href="#" data-toggle="modal" data-target="#editModal" class="btn btn-primary btn-warning btn-block visible-xs visible-sm btn-text-wrap"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -28,7 +31,11 @@
                     <p><label>Submitted:</label> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
                 </div>
             </div>
-            <a href="#" class="btn btn-primary btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt"></span> Download Evidence</a>
+            <form method="POST" action="<?= base_url('downloadEvidence') ?>">
+                <input type="hidden" name="evidID" value="<?= $evidID ?>">
+                <button type="submit" class="btn btn-primary btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-download-alt"></span> Download Evidence</button>
+            </form>
+            <div style="padding-top: 5px;"></div>
             <a href="#" data-toggle="modal" data-target="#editModal" class="btn btn-primary btn-warning btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
             <p> display evidence <?= $evidID ?></p>
         </div>
