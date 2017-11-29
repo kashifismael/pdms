@@ -33,7 +33,6 @@ class FeedbackController extends CI_Controller {
             if ($delUpdate === true) {
                 $this->session->set_userdata('statusUpdate', 'success');
                 redirect('view-deliverable/' . $this->input->post('delID'));
-                //echo "<br>deliverable status successfuly changed, redirect user back";
             }
         }
     }

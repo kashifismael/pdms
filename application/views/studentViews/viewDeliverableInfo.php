@@ -88,11 +88,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Proposal</td>
-                                <td>3 days ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
-                            </tr>
+                            <?php 
+                            $count = 1;
+                            foreach ($myFeedbacks as $feedback) { 
+                                ?>
+                                <tr>
+                                    <td><?= $count ?></td>
+                                    <td><?= date_format($feedback->getFeedbackDate(), 'G:i - D j M') ?></td>
+                                    <td>
+                                        <input type="hidden" value="<?= $feedback->getFeedbackID() ?>">
+                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+                                    </td>
+                                </tr>
+                            <?php 
+                            $count++;
+                            } 
+                            ?> 
                             <tr>
                                 <td>Prototype</td>
                                 <td>6 days ago</td>
@@ -105,7 +116,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>select all from evidence, inner join deliverable, where deliverable no is = <?= $delID ?></p>
+                    <p>select all from feedback, inner join deliverable and evidence, where deliverable no is = <?= $delID ?></p>
                 </div>
             </div>
 

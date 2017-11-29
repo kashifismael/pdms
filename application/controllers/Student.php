@@ -39,8 +39,10 @@ class Student extends CI_Controller {
     public function viewDeliverable($delID) {
         $this->load->model('deliverable');
         $this->load->model('evidence');
+        $this->load->model('feedback');
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
+        $data['myFeedbacks'] = $this->feedback->getAllFeedbacksofDeliverable($delID);
         $data['title'] = "View Deliverable";
         $data['delID'] = $delID;
         $this->load->view('header', $data);
