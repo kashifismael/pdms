@@ -37,4 +37,13 @@ class FeedbackController extends CI_Controller {
         }
     }
 
+    public function downloadFile() {
+        $this->load->model('feedback');
+        if (isset($_POST['feedbackID'])) {
+            $this->feedback->downloadFeedbackFile();
+        } else {
+            echo "nothing was posted, redirect user away";
+        }
+    }
+
 }

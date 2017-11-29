@@ -96,8 +96,10 @@
                                     <td><?= $count ?></td>
                                     <td><?= date_format($feedback->getFeedbackDate(), 'G:i - D j M') ?></td>
                                     <td>
-                                        <input type="hidden" value="<?= $feedback->getFeedbackID() ?>">
+                                        <form method="POST" action="<?= base_url('downloadFeedback') ?>">
+                                        <input type="hidden" name="feedbackID" value="<?= $feedback->getFeedbackID() ?>">
                                         <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php 

@@ -64,7 +64,20 @@ class Feedback extends CI_Model {
     }
 
     public function downloadFeedbackFile() {
-        //downloading of feedback file on server
+        $feedbackID = $this->input->post('feedbackID');
+        $query = "SELECT * "
+                . "FROM `fyp_Feedback` "
+                . "WHERE feedback_ID = '$feedbackID'";
+        $result = $this->db->query($query);
+        $feedbackRow = $result->row();
+        $filename = $feedbackRow->filePath;
+        $file = base_url('feedbackUploads/' . $filename);
+        $file = str_replace(' ', '%20', $file);
+        header("Content-Description: File Transfer"); 
+        header("Content-Type: application/octet-stream"); 
+        header("Content-Disposition: attachment; filename='" . basename($file) . "'"); 
+        readfile ($file);
+        exit();
     }
 
     function getFeedbackID() {

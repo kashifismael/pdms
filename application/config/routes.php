@@ -57,6 +57,7 @@ $route['createDeliverable'] = 'DeliverableController/create';
 $route['uploadEvidence'] = 'EvidenceController/uploadFile';
 $route['downloadEvidence'] = 'EvidenceController/downloadFile';
 $route['uploadFeedback'] = 'FeedbackController/uploadFile';
+$route['downloadFeedback'] = 'FeedbackController/downloadFile';
 $route['updateDelStatus'] = 'FeedbackController/markDelStatus';
 
 $route['staff-home'] = 'staff';
@@ -64,11 +65,11 @@ $route['view-student/(:any)'] = 'staff/viewStudent/$1';
 $route['view-deliverable/(:num)'] = 'staff/viewDeliverable/$1';
 $route['view-evidence/(:num)'] = 'staff/viewEvidence/$1';
 $route['manage-requests'] = 'staff/ManageRequests';
-$route['all-supervisors'] = 'staff/viewAllSupervisors';
 $route['latest-submissions'] = 'staff/viewSubmittedEvidences';
 
 $route['student-allocation'] = 'staff/allocateStudents';
 $route['allocationPortal'] = 'staff/processAllocation';
+$route['all-supervisors'] = 'staff/viewAllSupervisors';
 
 $route['default_controller'] = 'landing';
 $route['studentRegister'] = 'landing/registerStudent';
