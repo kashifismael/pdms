@@ -1,10 +1,26 @@
 <div class="container-fluid">
+    <?php
+    if (isset($_SESSION['feedbackSubmission']) || isset($_SESSION['feedbackUpload'])) {
+        ?>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php if (isset($_SESSION['feedbackSubmission'])) { ?>
+                        <p><strong>Successfully marked Deliverable and evidence!</strong></p>
+                    <?php } ?>     
+                    <?php if (isset($_SESSION['feedbackUpload'])) { ?>
+                        <p><strong>Successfully uploaded feedback!</strong></p>
+                    <?php } ?>    
+                </div>
+            </div>  
+        </div>
+    <?php } ?>
     <ol class="breadcrumb" style="padding-left: 10%;">
-        <li><a href="<?= base_url('view-student/'.$evidence->getStudentID()) ?>">View Student</a></li>
-        <li><a href="<?= base_url('view-deliverable/'.$evidence->getDeliverableNo()) ?>">View Deliverable</a></li>
+        <li><a href="<?= base_url('view-student/' . $evidence->getStudentID()) ?>">View Student</a></li>
+        <li><a href="<?= base_url('view-deliverable/' . $evidence->getDeliverableNo()) ?>">View Deliverable</a></li>
         <li class="active">View Evidence</li>
     </ol>
-
     <div class="row row-mobile" >
         <div class="col-xs-6 text-center">
             <form method="POST" action="<?= base_url('downloadEvidence') ?>">

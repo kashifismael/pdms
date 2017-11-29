@@ -64,6 +64,12 @@ class Staff extends CI_Controller {
         $this->load->view('header', $data);
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/viewEvidence');
+        if (isset($_SESSION['feedbackSubmission'])) {
+            unset($_SESSION['feedbackSubmission']);
+        }
+        if (isset($_SESSION['feedbackUpload'])) {
+            unset($_SESSION['feedbackUpload']);
+        }
     }
 
     public function allocateStudents() {
@@ -103,7 +109,7 @@ class Staff extends CI_Controller {
         }
     }
 
-    public function viewSubmittedEvidences(){
+    public function viewSubmittedEvidences() {
         $this->load->model('user');
         $this->load->model('student');
         $this->load->model('supervisor');
@@ -114,8 +120,8 @@ class Staff extends CI_Controller {
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/latestSubmissions');
     }
-    
-    public function viewAllSupervisors(){
+
+    public function viewAllSupervisors() {
         $this->load->model('user');
         $this->load->model('supervisor');
         $this->load->model('moduleLeader');
@@ -125,7 +131,7 @@ class Staff extends CI_Controller {
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('moduleLeaderViews/viewAllSupervisors');
     }
-    
+
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
             //echo "<p>User is authorised</p>";
