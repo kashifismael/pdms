@@ -1,4 +1,4 @@
-<body style="padding-top: 70px;">
+<body style="padding-top: 70px; background-color: #d1e2b1">
     <nav class="navbar navbar-inner navbar-fixed-top navbar-inverse">
         <div class="container">
             <div class="navbar-header">
