@@ -32,6 +32,21 @@ class Feedback extends CI_Model {
         return $feedbackList;
     }
 
+    public function getAllFeedbacksOfEvidence($evidId){
+                $feedbackList = array();
+        $query = "SELECT * 
+                    FROM `fyp_Feedback` 
+                    WHERE evidence_ID = '$evidId' 
+                    ORDER BY `fyp_Feedback`.`feedbackDate` DESC";
+        $result = $this->db->query($query);
+        foreach ($result->result() as $row) {
+            $newFeedback = self::feedbackConstructor($row->feedback_ID, new DateTime($row->feedbackDate));
+            $feedbackList[] = $newFeedback;
+        }
+        return $feedbackList;
+    }
+
+
     public function uploadFeedbackFile($fileName, $file_tmp) {
         $newFileName = uniqid('', true) . $this->session->userName . $fileName;
         $fileDestination = "feedbackUploads/" . $newFileName;
