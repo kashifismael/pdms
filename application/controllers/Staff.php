@@ -52,6 +52,9 @@ class Staff extends CI_Controller {
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/viewDeliverableInfo');
         $this->load->view('staffViews/viewDeliverableFooter');
+        if (isset($_SESSION['statusUpdate'])) {
+            unset($_SESSION['statusUpdate']);
+        }
     }
 
     public function viewEvidence($evidID) {

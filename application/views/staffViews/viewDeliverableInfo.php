@@ -1,6 +1,18 @@
 <div class="container-fluid">
+    <?php
+    if (isset($_SESSION['statusUpdate'])) {
+        ?>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Successfully updated Status!</strong>
+                </div>
+            </div>  
+        </div>
+    <?php } ?>
     <ol class="breadcrumb" style="padding-left: 10%;">
-        <li><a href="<?= base_url('view-student/'.$deliverableInfo->getStudentID()) ?>">View Student</a></li>
+        <li><a href="<?= base_url('view-student/' . $deliverableInfo->getStudentID()) ?>">View Student</a></li>
         <li class="active">View Deliverable</li>
     </ol>
     <div class="row row-mobile" > 
