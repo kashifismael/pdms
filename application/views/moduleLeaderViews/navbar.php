@@ -17,7 +17,7 @@
       <li<?= activeCheck("latest-submissions") ?>><a href="<?= base_url("latest-submissions")?>">Latest submissions</a></li>
       <li><a href="#">View Supervisor group</a></li>
       <li<?= activeCheck("manage-requests") ?>><a href="<?= base_url("manage-requests")?>">Manage requests</a></li>
-      <li class="dropdown">
+      <li class="dropdown <?= activeCheckTwo("all-supervisors","student-allocation") ?>">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">More<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li<?= activeCheck("all-supervisors") ?>><a href="<?= base_url("all-supervisors")?>">View All Supervisors</a></li>
