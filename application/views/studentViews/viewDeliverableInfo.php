@@ -25,7 +25,7 @@
                     class="btn btn-success navbar-btn btn-block btn-text-wrap visible-xs visible-sm">
                 <span class="glyphicon glyphicon-open"></span> Upload Evidence to <?= $deliverableInfo->getDeliverableName() ?></button>
         </div>
-    </div>
+    </div> 
 
     <div class="row row-mobile" > 
         <div class="col-xs-6 text-center visible-xs visible-sm">
@@ -34,8 +34,9 @@
         <div class="col-xs-6 text-center visible-xs visible-sm">
             <a data-toggle="modal" data-target="#delDeletion" class="btn btn-danger btn-block btn-text-wrap"><span class="glyphicon glyphicon-remove-sign"></span> Request Deliverable Delete</a>
         </div>
-        <div class="col-xs-6"><p class="visible-xs visible-sm"></p></div>  
+    <!--    <div class="col-xs-6"><p class="visible-xs visible-sm"></p></div>  -->
     </div>
+    <div style="padding-top: 10px"></div>
     <div class="row">
 
         <div class="col-md-2 col-md-offset-1" >
