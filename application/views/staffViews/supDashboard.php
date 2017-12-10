@@ -11,8 +11,6 @@
         </div>
     <?php } ?>
     <h1 class="text-center">Staff Dashboard</h1>
-    <p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?></p>
-    <p>staff ID of <?= $this->session->secondaryID ?></p>
     <div class="row">
         
 <?php $this->load->view('staffViews/dashboardEvidenceFeed') ?>

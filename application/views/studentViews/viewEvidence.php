@@ -37,7 +37,6 @@
             </form>
             <div style="padding-top: 5px;"></div>
             <a href="#" data-toggle="modal" data-target="#editModal" class="btn btn-primary btn-warning btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-            <p> display evidence <?= $evidID ?></p>
         </div>
 
         <div class="col-md-7 " >

@@ -18,7 +18,6 @@
                     <p><label>Email Address:</label> <?= $student->getEmail() ?></p>
                 </div>
             </div>
-            <p>Display deliverables of <?= $studentID ?> </p>
         </div>
         <div class="col-md-8" >
 

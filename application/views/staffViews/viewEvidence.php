@@ -7,10 +7,10 @@
                 <div class="alert alert-success alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <?php if (isset($_SESSION['feedbackSubmission'])) { ?>
-                        <p><strong>Successfully marked Deliverable and evidence!</strong></p>
+                        <p><strong>Successfully marked Deliverable and Evidence!</strong></p>
                     <?php } ?>     
                     <?php if (isset($_SESSION['feedbackUpload'])) { ?>
-                        <p><strong>Successfully uploaded feedback!</strong></p>
+                        <p><strong>Successfully uploaded Feedback!</strong></p>
                     <?php } ?>    
                 </div>
             </div>  
@@ -33,7 +33,7 @@
         </div>
 
     </div>
-
+    <div style="padding-top: 10px;"></div>
     <div class="row">
 
         <div class="col-md-2 col-md-offset-1" >
@@ -51,8 +51,6 @@
             </form>
             <div style="padding-top: 5px;"></div>
             <a href="#" data-toggle="modal" data-target="#newUpModal" class="btn btn-primary btn-success btn-block hidden-xs hidden-sm"> + New Feedback</a>
-
-            <h4 class="text-center"><?= $evidenceID ?></h4>
 
         </div>
 

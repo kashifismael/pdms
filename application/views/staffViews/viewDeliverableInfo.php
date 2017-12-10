@@ -41,7 +41,6 @@
                         class="btn btn-primary navbar-btn btn-block btn-text-wrap hidden-xs hidden-sm">
                     <span class="glyphicon glyphicon-pencil"></span> Update Status of <?= $deliverableInfo->getDeliverableName() ?></button>
             </div>     
-            <p>Display deliverable <?= $deliverableID ?></p>
         </div> 
 
         <div class="col-md-8">

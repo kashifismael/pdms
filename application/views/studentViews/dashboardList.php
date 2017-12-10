@@ -61,7 +61,5 @@
         </div>
     </div>  
 
-    <p><?= $this->session->userFirstName . " " . $this->session->userLastName . " " . $this->session->userName . " " . $this->session->userTypeID ?></p>
-    <p>student ID of <?= $this->session->secondaryID ?></p>
 </div>
 
