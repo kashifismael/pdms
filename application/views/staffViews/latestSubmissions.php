@@ -1,7 +1,7 @@
 <div class="container-fluid" style="padding-left: 10%; padding-right:10%;">
     
     <div class="text-center">
-        <h2>View all supervisors</h2>
+        <h2>View Latest Submissions</h2>
     </div>
     
                 <table class="table" >
