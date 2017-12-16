@@ -27,6 +27,7 @@ class Staff extends CI_Controller {
     }
 
     public function viewStudent($studentID) {
+        self::checkIfAuthorised();
         $this->load->model('user');
         $this->load->model('student');
         $this->load->model('supervisor');
@@ -41,6 +42,7 @@ class Staff extends CI_Controller {
     }
 
     public function viewDeliverable($delID) {
+        self::checkIfAuthorised();
         $this->load->model('deliverable');
         $this->load->model('evidence');
         $this->load->model('feedback');
@@ -60,6 +62,7 @@ class Staff extends CI_Controller {
     }
 
     public function viewEvidence($evidID) {
+        self::checkIfAuthorised();
         $this->load->model('deliverable');
         $this->load->model('evidence');
         $this->load->model('feedback');
@@ -80,6 +83,7 @@ class Staff extends CI_Controller {
     }
 
     public function allocateStudents() {
+        self::checkIfAuthorised();
         $this->load->model('user');
         $this->load->model('student');
         $this->load->model('supervisor');
@@ -96,14 +100,15 @@ class Staff extends CI_Controller {
     }
 
     public function manageRequests() {
+        self::checkIfAuthorised();
         $data['title'] = "Manage Requests";
         $this->load->view('header', $data);
-        //$this->load->view('staffViews/navbar');
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/manageRequests');
     }
 
     public function processAllocation() {
+        self::checkIfAuthorised();
         if (isset($_POST['students'])) {
             $this->load->model('user');
             $this->load->model('student');
@@ -117,6 +122,7 @@ class Staff extends CI_Controller {
     }
 
     public function viewSubmittedEvidences() {
+        self::checkIfAuthorised();
         $this->load->model('user');
         $this->load->model('student');
         $this->load->model('supervisor');
@@ -129,6 +135,7 @@ class Staff extends CI_Controller {
     }
 
     public function viewAllSupervisors() {
+        self::checkIfAuthorised();
         $this->load->model('user');
         $this->load->model('supervisor');
         $this->load->model('moduleLeader');
@@ -141,10 +148,10 @@ class Staff extends CI_Controller {
 
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
-            //echo "<p>User is authorised</p>";
+            //user is authorised
         } else {
-            echo "user is not authorised, redirect user away";
-            //force redirect
+            //echo "user is not authorised, redirect user away";
+            redirect('/?isAuthorised=false');
         }
     }
 

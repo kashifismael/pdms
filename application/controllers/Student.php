@@ -15,9 +15,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Student extends CI_Controller {
 
     public function index() {
+        self::checkIfAuthorised();
         $this->load->model('user');
         $this->load->model('deliverable');
-        self::checkIfAuthorised();
         $data['title'] = "Dashboard";
         $data['myDeliverables'] = $this->deliverable->getAllStudentDeliverables($this->session->userName);
         $this->load->view('header', $data);
@@ -37,6 +37,7 @@ class Student extends CI_Controller {
     }
 
     public function viewDeliverable($delID) {
+        self::checkIfAuthorised();
         $this->load->model('deliverable');
         $this->load->model('evidence');
         $this->load->model('feedback');
@@ -56,6 +57,7 @@ class Student extends CI_Controller {
     }
 
     public function viewEvidence($evidID) {
+        self::checkIfAuthorised();
         $this->load->model('evidence');
         $this->load->model('feedback');
         $data['evidence'] = $this->evidence->getOneEvidence($evidID);
@@ -70,10 +72,10 @@ class Student extends CI_Controller {
 
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 3) {
-            //echo "<p>User is authorised</p>";
+            //User is authorised
         } else {
-            echo "user is not authorised, redirect user away";
-            //force redirect
+            //echo "user is not authorised, redirect user away";
+            redirect('/?isAuthorised=false');
         }
     }
 

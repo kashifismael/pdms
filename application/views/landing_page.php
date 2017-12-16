@@ -34,7 +34,7 @@
     </nav>
 
     <div class="hidden-xs hidden-sm" style="padding-bottom: 100px"></div>
-    
+
     <div class="container-fluid">
         <h1 class="text-center" >Welcome to UniDiss!</h1>
         <div class="col-md-4 col-md-offset-4">
@@ -57,6 +57,11 @@
                         <strong>Incorrect details!</strong> Please enter your username/password again
                     </div>
                 <?php } ?> 
+                <?php if (isset($_GET['isAuthorised'])) { ?>
+                    <div class="alert alert-danger">
+                        <strong>Unauthorised Access!</strong> You must log in to use this website
+                    </div>
+                <?php } ?>
 
                 <div class="pull-right">
                     <div class="input-group">
@@ -150,30 +155,30 @@
         </div>
     </div>
 
-  <!--  <div class="container">
-        <p>This table has <!?= $query->num_rows(); ?> rows </p>
-        <table class="table">
-            <tr>
-                <th>User Type</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-                <th>Email address</th>
-            </tr>
-            <!?php
-            foreach ($query->result() as $row) {
-                ?>
-                <tr>
-                    <td> <!?= $row->userType; ?> </td>
-                    <td> <!?= $row->firstName ?> </td>
-                    <td> <!?= $row->lastName ?> </td>
-                    <td> <!?= $row->username ?> </td>
-                    <td> <!?= $row->emailAddress ?> </td>
-                </tr>
-                <!?php
-            }
-            ?> 
-        </table>
-    </div> -->
+    <!--  <div class="container">
+          <p>This table has <!?= $query->num_rows(); ?> rows </p>
+          <table class="table">
+              <tr>
+                  <th>User Type</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                  <th>Email address</th>
+              </tr>
+              <!?php
+              foreach ($query->result() as $row) {
+                  ?>
+                  <tr>
+                      <td> <!?= $row->userType; ?> </td>
+                      <td> <!?= $row->firstName ?> </td>
+                      <td> <!?= $row->lastName ?> </td>
+                      <td> <!?= $row->username ?> </td>
+                      <td> <!?= $row->emailAddress ?> </td>
+                  </tr>
+                  <!?php
+              }
+              ?> 
+          </table>
+      </div> -->
 </body>
 </html>
