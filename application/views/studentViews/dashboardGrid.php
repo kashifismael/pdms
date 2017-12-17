@@ -17,12 +17,12 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-12">
-                    <div class="input-group">
-                        <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                        </span>
-                    </div>
+                    <!-- <div class="input-group"> -->
+                    <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
+                  <!--  <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                    </span> -->
+                    <!--   </div> -->
                 </div>
             </div>
             <div class="flex-row row" id="myDeck">
@@ -110,7 +110,7 @@
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
                 $("#myDeck .myCard").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    $(this).toggle($(this).find(".card-title").text().toLowerCase().indexOf(value) > -1)
                 });
             });
         });
