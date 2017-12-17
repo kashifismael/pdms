@@ -1,7 +1,7 @@
                  
 <div class="row row-mobile" > 
     <div class="col-sm-6">
-        <h3 class="text-center"><?= $student->getFirstName()?>'s Deliverables</h3>
+        <h3 class="text-center"><?= $student->getFirstName() ?>'s Deliverables</h3>
     </div>
     <div class="col-sm-3 col-xs-12 text-center" >
         <strong>View</strong>
@@ -11,19 +11,19 @@
         </div>
     </div>
     <div class="col-sm-3 col-xs-12">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Deliverable...">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-            </span>
-        </div>
+        <!--   <div class="input-group"> -->
+        <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
+   <!--     <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </span> -->
+        <!--   </div> -->
     </div>
 </div>
 
-<div class="flex-row row">
+<div class="flex-row row " id="myDeck">
     <!-- <div class="card-deck"> -->
     <?php foreach ($theirDeliverables as $deliverable) { ?>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">                             
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">                             
             <div class="card text-center" style="margin-top: 5%;">                  
                 <a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" style="color: black;">
                     <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail' . rand(1, 13)) ?>" alt="Card image cap">
@@ -41,7 +41,7 @@
             </div>                                
         </div> 
     <?php } ?>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
         <div class="card text-center" style="margin-top: 5%;">                  <!-- new, with added style -->
             <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail7') ?>" alt="Card image cap">
             <div class="card-block">
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
         <div class="card text-center" style="margin-top: 5%;">   
             <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/cd29f98-kingston-university-fc0978d-postgraduate-prospectus.jpg" alt="Card image cap">
             <div class="card-block">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
         <div class="card text-center" style="margin-top: 5%;">   
             <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/26ba482-kingston-university-ce1a1a6-international-scholarships.jpg" alt="Card image cap">
             <div class="card-block">
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- new -->
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
         <div class="card text-center" style="margin-top: 5%;">   
             <img class="card-img-top center-block img-responsive" src="http://cdn.kingston.ac.uk/includes/img/cms/site-images/resized/9c65a6c-kingston-university-69c2e74-research-degrees.jpg" alt="Card image cap">
             <div class="card-block">
@@ -96,3 +96,14 @@
     </div>
     <!--/div-->
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myDeck .myCard").filter(function () {
+                $(this).toggle($(this).find(".card-title").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

@@ -1,6 +1,6 @@
 <div class="row row-mobile" > 
     <div class="col-sm-6">
-        <h3 class="text-center"><?= $student->getFirstName()?>'s Deliverables</h3>
+        <h3 class="text-center"><?= $student->getFirstName() ?>'s Deliverables</h3>
     </div>
     <div class="col-sm-3 col-xs-12 text-center" >
         <strong>View</strong>
@@ -10,16 +10,16 @@
         </div>
     </div>
     <div class="col-sm-3 col-xs-12">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Deliverable...">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-            </span>
-        </div>
+        <!--   <div class="input-group"> -->
+        <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
+   <!--     <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </span> -->
+        <!--    </div> -->
     </div>
 </div>
 
-<table class="table">
+<table class="table" id="myTable">
     <thead>   
         <tr>
             <th>Deliverable Name</th>
@@ -31,29 +31,34 @@
     <tbody>
         <?php foreach ($theirDeliverables as $deliverable) { ?>
             <tr>
-                <td><?= $deliverable->getDeliverableName() ?></td>
+                <td class="deliverable"><?= $deliverable->getDeliverableName() ?></td>
                 <td><?= date_format($deliverable->getDeadlineDate(), 'G:i - D j M') ?></td>
                 <td><?= $deliverable->getDelstatusDesc() ?></td>
                 <td><a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" class="card-text">Click to view</a></td>
             </tr>
         <?php } ?>
         <tr>
-            <td>Proposal</td>
+            <td class="deliverable">Proposal</td>
             <td>3 days ago</td>
             <td>6</td>
             <td><a href="#" class="card-text">Click to view</a></td>
         </tr>
         <tr>
-            <td>Prototype</td>
+            <td class="deliverable">Prototype</td>
             <td>6 days ago</td>
             <td>6</td>
             <td><a href="#" class="card-text">Click to view</a></td>
         </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).find(".deliverable").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

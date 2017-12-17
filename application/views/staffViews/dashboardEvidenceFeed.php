@@ -1,7 +1,7 @@
 <div class="col-md-7 col-md-offset-1" >
     <div class="panel panel-default" style="height : 700px;">
         <div class="panel-heading">
-            <h3 class="text-center">Latest Submissions</h3>
+            <h3 class="text-center">Latest Evidence Submissions</h3>
         </div>
         <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
             <!-- <div class="table-feed"> -->

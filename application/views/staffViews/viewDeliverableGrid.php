@@ -10,18 +10,18 @@
         </div>
     </div>
     <div class="col-sm-3 col-xs-12">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Deliverable...">
-            <span class="input-group-btn">
+    <!--    <div class="input-group"> -->
+            <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
+      <!--      <span class="input-group-btn">
                 <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-            </span>
-        </div>
+            </span> -->
+    <!--    </div> -->
     </div>
 </div>
 
-<div class="flex-row row">
+<div class="flex-row row" id="myDeck">
     <?php foreach ($myEvidences as $evidence) { ?>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
             <div class="card text-center" style="margin-top: 5%;">
                 <a href="<?= base_url('view-evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
                     <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail' . rand(1, 13)) ?>" alt="Card image cap">
@@ -41,7 +41,7 @@
             </div>
         </div>
     <?php } ?>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
         <div class="card text-center" style="margin-top: 5%;">
       <!-- <img class="card-img-top center-block" src="../images/computer-icon-1031.png" alt="Card image cap" width="100" > -->
             <div class="card-block">
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
         <div class="card text-center" style="margin-top: 5%;">
       <!-- <img class="card-img-top center-block" src="..." alt="Card image cap"> -->
             <div class="card-block">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
         <div class="card text-center" style="margin-top: 5%;">
       <!-- <img class="card-img-top center-block" src="..." alt="Card image cap"> -->
             <div class="card-block">
@@ -85,3 +85,14 @@
     </div>
     <!--/div-->
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myDeck .myCard").filter(function () {
+                $(this).toggle($(this).find(".card-title").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

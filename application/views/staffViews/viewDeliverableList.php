@@ -10,15 +10,15 @@
         </div>
     </div>
     <div class="col-sm-3 col-xs-12">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Deliverable...">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-            </span>
-        </div>
+        <!--     <div class="input-group"> -->
+        <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
+ <!--       <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </span> -->
+        <!--    </div> -->
     </div>
 </div>
-<table class="table">
+<table class="table" id="myTable">
     <thead>
         <tr>
             <th>Evidence name</th>
@@ -30,29 +30,40 @@
     <tbody>
         <?php foreach ($myEvidences as $evidence) { ?>
             <tr>
-                <td><?= $evidence->getEvidenceName() ?></td>
+                <td class="evidence"><?= $evidence->getEvidenceName() ?></td>
                 <td><?= $evidence->getEvidenceStatus() ?></td>
                 <td><?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></td>
                 <td><a href="<?= base_url('view-evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text">Click to view</a></td>
             </tr>
         <?php } ?>
         <tr>
-            <td>Draft1</td>
+            <td class="evidence">Draft1</td>
             <td>Not finished</td>
             <td>6 days ago</td>
             <td><a href="#" class="card-text">Click to view</a></td>
         </tr>
         <tr>
-            <td>ProposalProof</td>
+            <td class="evidence">ProposalProof</td>
             <td>None</td>
             <td>3 mins ago</td>
             <td><a href="#" class="card-text">Click to view</a></td>
         </tr>
         <tr>
-            <td>Plan</td>
+            <td class="evidence">Plan</td>
             <td>Submitted</td>
             <td>3 days ago</td>
             <td><a href="#" class="card-text">Click to view</a></td>
         </tr>
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).find(".evidence").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
