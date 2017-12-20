@@ -39,7 +39,7 @@
                                     </div>
                                 </div>                                
                                 <div class="card-footer">
-                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                    <small class="text-muted">Last updated <time class="timeago" datetime="<?= $deliverable->getLastUpdated() ?>"></time></small>
                                 </div>
                             </a>
                         </div>                                 
@@ -114,6 +114,7 @@
                 });
             });
         });
+
     </script>
 </div>
 

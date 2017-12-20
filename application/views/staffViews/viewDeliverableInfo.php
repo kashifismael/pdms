@@ -33,6 +33,7 @@
                     <p><label>Deliverable:</label> <?= $deliverableInfo->getDeliverableName() ?></p>
                     <p><label>Deadline date:</label> <?= date_format($deliverableInfo->getDeadlineDate(), 'G:i - D j M') ?></p>
                     <p><label>Status:</label> <?= $deliverableInfo->getDelstatusDesc() ?></p>
+                    <p><label>Last Updated:</label> <time class="timeago" datetime="<?= $deliverableInfo->getLastUpdated() ?>"></time></p>
                 </div>
             </div>
 
