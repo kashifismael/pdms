@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1"> 
             <div class="row row-mobile" >
-                <div class="col-sm-6 col-xs-12 text-center">
+                <div class="col-sm-5 col-xs-12 text-center">
                     <h3 class="visible-xs">Welcome back, <?= $this->session->userFirstName ?></h3>
                     <h2 class="hidden-xs">Welcome back, <?= $this->session->userFirstName ?></h2>
                 </div>
-                <div class="col-sm-3 col-xs-12 text-center" >
+                <div class="col-sm-2 col-xs-12 text-center" >
                     <strong>View</strong>
                     <div class="btn-group">
                         <a href="<?= base_url('student-home?flow=list') ?>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
@@ -17,12 +17,20 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-12">
-                    <!-- <div class="input-group"> -->
                     <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
-                  <!--  <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                    </span> -->
-                    <!--   </div> -->
+                </div>
+                <div class="col-sm-2 col-xs-12 text-center" style="position: relative">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-md dropdown-toggle btn-block" type="button" data-toggle="dropdown">Sort By
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="right: 0; position: absolute">
+                            <li<?= getRequestCheckTwo('sort')?>><a href="<?= base_url('student-home') ?>">Last Updated</a></li>
+                            <li<?= getRequestCheck('sort')?>><a href="<?= base_url('student-home?sort=deadline') ?>">Deadline Date</a></li>
+                            <li class="divider"></li>
+                            <li id="hideCompleted"><a href="#">Hide Done Deliverables</a></li>
+                            <li id="showCompleted" class="active"><a href="#">Show Done Deliverables</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="flex-row row" id="myDeck">
@@ -35,7 +43,7 @@
                                     <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>
                                     <div class="card-text">
                                         <p><strong>Deadline date:</strong> <?= date_format($deliverable->getDeadlineDate(), 'G:i - D j M') ?></p>
-                                        <p><strong>Status:</strong> <?= $deliverable->getDelstatusDesc() ?></p>
+                                        <p class="status"><strong>Status:</strong> <?= $deliverable->getDelstatusDesc() ?></p>
                                     </div>
                                 </div>                                
                                 <div class="card-footer">
@@ -112,6 +120,17 @@
                 $("#myDeck .myCard").filter(function () {
                     $(this).toggle($(this).find(".card-title").text().toLowerCase().indexOf(value) > -1)
                 });
+            });
+            $("#hideCompleted").on("click", function () {
+                $("#myDeck .myCard .status:contains('Done')").closest('.myCard').hide();
+                $("#hideCompleted").toggleClass("active", true);
+                $("#showCompleted").toggleClass("active", false);
+            });
+
+            $("#showCompleted").on("click", function () {
+                $("#myDeck .myCard .status:contains('Done')").closest('.myCard').show();
+                $("#showCompleted").toggleClass("active",true);
+                $("#hideCompleted").toggleClass("active", false);
             });
         });
 

@@ -14,3 +14,15 @@ function activeCheckTwo($pageRouteOne, $pageRouteTwo){
         echo 'active'; 
     }
 }
+
+function getRequestCheck($getParameter){
+    if(isset($_GET[$getParameter])){
+        echo ' class="active"';
+    }
+}
+
+function getRequestCheckTwo($getParameter){
+    if(!isset($_GET[$getParameter])){
+        echo ' class="active"';
+    }
+}

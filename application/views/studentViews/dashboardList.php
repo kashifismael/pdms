@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1"> 
             <div class="row row-mobile" >
-                <div class="col-sm-6 col-xs-12 text-center">
+                <div class="col-sm-5 col-xs-12 text-center">
                     <h3 class="visible-xs">Welcome back, <?= $this->session->userFirstName ?></h3>
                     <h2 class="hidden-xs">Welcome back, <?= $this->session->userFirstName ?></h2>
                 </div>
-                <div class="col-sm-3 col-xs-12 text-center" >
+                <div class="col-sm-2 col-xs-12 text-center" >
                     <strong>View</strong>
                     <div class="btn-group">
                         <a href="#" id="list" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th-list"></span>List</a>
@@ -17,12 +17,17 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-12">
-                    <!--   <div class="input-group"> -->
                     <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
-             <!--       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                    </span> -->
-                    <!--    </div> -->
+                </div>
+                <div class="col-sm-2 col-xs-12 text-center" style="position: relative">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-md dropdown-toggle btn-block" type="button" data-toggle="dropdown">Sort By
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="right: 0; position: absolute">
+                            <li><a href="<?= base_url('student-home?flow=list') ?>">Last Updated</a></li>
+                            <li><a href="<?= base_url('student-home?flow=list&sort=deadline') ?>">Deadline Date</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <table class="table" id="myTable">

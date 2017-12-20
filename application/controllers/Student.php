@@ -28,6 +28,10 @@ class Student extends CI_Controller {
             $this->load->view('studentViews/dashboardGrid');
         }
         $this->load->view('studentViews/footer');
+        self::clearNotifications();
+    }
+
+    private function clearNotifications() {
         if (isset($_SESSION['deliverableCreation'])) {
             unset($_SESSION['deliverableCreation']);
         }
