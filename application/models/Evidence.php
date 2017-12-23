@@ -10,7 +10,8 @@ class Evidence extends CI_Model {
     private $evidenceName;
     private $deliverableName;
     private $studentName;
-
+    private $thumbnail;
+            
     function __construct() {
         parent::__construct();
     }
@@ -45,6 +46,7 @@ class Evidence extends CI_Model {
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
             $newEvid = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
+            $newEvid->setThumbnail($row->thumbnail);
             $evidenceList[] = $newEvid;
         }
         return $evidenceList;
@@ -107,6 +109,7 @@ class Evidence extends CI_Model {
             'evidStatus_ID' => 1,
             'evidenceName' => $this->input->post('evidenceName'),
             'filePath' => $newFileName,
+            'thumbnail' => "thumbnail".rand(1,13).".jpg",
         );
         return $this->db->insert('fyp_Evidence', $data);
     }
@@ -139,6 +142,14 @@ class Evidence extends CI_Model {
         return $query;
     }
 
+    function getThumbnail() {
+        return $this->thumbnail;
+    }
+
+    function setThumbnail($thumbnail) {
+        $this->thumbnail = $thumbnail;
+    }
+    
     function getStudentID() {
         return $this->studentID;
     }
