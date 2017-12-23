@@ -24,8 +24,11 @@
                         <button class="btn btn-default btn-md dropdown-toggle btn-block" type="button" data-toggle="dropdown">Sort By
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="right: 0; position: absolute">
-                            <li><a href="<?= base_url('student-home?flow=list') ?>">Last Updated</a></li>
-                            <li><a href="<?= base_url('student-home?flow=list&sort=deadline') ?>">Deadline Date</a></li>
+                            <li<?= getRequestCheckTwo('sort') ?>><a href="<?= base_url('student-home?flow=list') ?>">Last Updated</a></li>
+                            <li<?= getRequestCheck('sort') ?>><a href="<?= base_url('student-home?flow=list&sort=deadline') ?>">Deadline Date</a></li>
+                            <li class="divider"></li>
+                            <li id="hideCompleted"><a href="#">Hide Done Deliverables</a></li>
+                            <li id="showCompleted" class="active"><a href="#">Show Done Deliverables</a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,20 +44,20 @@
                 </thead>
                 <tbody>
                     <?php foreach ($myDeliverables as $deliverable) { ?> 
-                        <tr>
+                        <tr class="myDeliverable">
                             <td class="deliverable"><?= $deliverable->getDeliverableName() ?></td>
                             <td><?= date_format($deliverable->getDeadlineDate(), 'G:i - D j M') ?></td>
-                            <td><?= $deliverable->getDelstatusDesc() ?></td>
+                            <td class="status"><?= $deliverable->getDelstatusDesc() ?></td>
                             <td><a href="<?= base_url("deliverable/" . $deliverable->getDeliverableNo() . "") ?>" class="card-text">Click to view</a></td>
                         </tr>
                     <?php } ?>
-                    <tr>
+                    <tr class="myDeliverable">
                         <td class="deliverable">Proposal</td>
                         <td>3 days ago</td>
                         <td>6</td>
                         <td><a href="#" class="card-text">Click to view</a></td>
                     </tr>
-                    <tr>
+                    <tr class="myDeliverable">
                         <td class="deliverable">Prototype</td>
                         <td>6 days ago</td>
                         <td>6</td>
@@ -73,6 +76,17 @@
                 $("#myTable tr").filter(function () {
                     $(this).toggle($(this).find(".deliverable").text().toLowerCase().indexOf(value) > -1)
                 });
+            });
+            $("#hideCompleted").on("click", function () {
+                $("#myTable .myDeliverable .status:contains('Done')").closest('.myDeliverable').hide();
+                $("#hideCompleted").toggleClass("active", true);
+                $("#showCompleted").toggleClass("active", false);
+            });
+
+            $("#showCompleted").on("click", function () {
+                $("#myTable .myDeliverable .status:contains('Done')").closest('.myDeliverable').show();
+                $("#showCompleted").toggleClass("active", true);
+                $("#hideCompleted").toggleClass("active", false);
             });
         });
     </script>

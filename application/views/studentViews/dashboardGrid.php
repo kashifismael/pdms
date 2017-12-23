@@ -24,8 +24,8 @@
                         <button class="btn btn-default btn-md dropdown-toggle btn-block" type="button" data-toggle="dropdown">Sort By
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="right: 0; position: absolute">
-                            <li<?= getRequestCheckTwo('sort')?>><a href="<?= base_url('student-home') ?>">Last Updated</a></li>
-                            <li<?= getRequestCheck('sort')?>><a href="<?= base_url('student-home?sort=deadline') ?>">Deadline Date</a></li>
+                            <li<?= getRequestCheckTwo('sort') ?>><a href="<?= base_url('student-home') ?>">Last Updated</a></li>
+                            <li<?= getRequestCheck('sort') ?>><a href="<?= base_url('student-home?sort=deadline') ?>">Deadline Date</a></li>
                             <li class="divider"></li>
                             <li id="hideCompleted"><a href="#">Hide Done Deliverables</a></li>
                             <li id="showCompleted" class="active"><a href="#">Show Done Deliverables</a></li>
@@ -129,7 +129,7 @@
 
             $("#showCompleted").on("click", function () {
                 $("#myDeck .myCard .status:contains('Done')").closest('.myCard').show();
-                $("#showCompleted").toggleClass("active",true);
+                $("#showCompleted").toggleClass("active", true);
                 $("#hideCompleted").toggleClass("active", false);
             });
         });
