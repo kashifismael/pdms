@@ -129,9 +129,7 @@ class Evidence extends CI_Model {
     }
 
     public function checkStudentAgainstEvidence($evidID) {
-        //query to check if evidID author matches student session id
         $studentID = $this->session->secondaryID;
-        //$query = $this->db->query("SELECT * FROM `fyp_Deliverable` WHERE deliverable_ID = '$delID' and student_ID = '$studentID'");
         $query = $this->db->query("SELECT * 
                                 FROM `fyp_Evidence` 
                                 INNER JOIN fyp_Deliverable

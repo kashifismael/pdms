@@ -74,7 +74,6 @@ class Feedback extends CI_Model {
     }
 
     public function updateDelStatus($delID, $delStatus) {
-        //$query = $this->db->query("UPDATE fyp_Deliverable SET delStatus_ID = '$delStatus' WHERE deliverable_ID = '$delID'");
         $query = $this->db->query("UPDATE fyp_Deliverable SET delStatus_ID = '$delStatus' , lastUpdated = NOW() WHERE deliverable_ID = '$delID'");
         return $query;
     }

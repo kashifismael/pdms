@@ -10,6 +10,7 @@ class Deliverable extends CI_Model {
     private $deadlineDate;
     private $studentName;
     private $lastUpdatedDate;
+    private $thumbnail;
 
     function __construct() {
         parent::__construct();
@@ -27,7 +28,7 @@ class Deliverable extends CI_Model {
 
     public function getAllStudentDeliverables($username) {
         $deliverableList = array();
-        $query = "SELECT deliverable_ID , deliverableName, deadlineDate, delStatusDesc, lastUpdated
+        $query = "SELECT deliverable_ID , deliverableName, deadlineDate, delStatusDesc, lastUpdated, thumbnail
                     FROM (((`fyp_Deliverable` 
                     INNER JOIN fyp_DeliverableStatus ON fyp_DeliverableStatus.delStatus_ID = fyp_Deliverable.delStatus_ID) 
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID) 
@@ -42,6 +43,7 @@ class Deliverable extends CI_Model {
         foreach ($result->result() as $row) {
             $newDel = self::deliverableConstructor($row->deliverable_ID, $row->delStatusDesc, $row->deliverableName, new DateTime($row->deadlineDate));
             $newDel->setLastUpdated($row->lastUpdated);
+            $newDel->setThumbnail($row->thumbnail);
             $deliverableList[] = $newDel;
         }
         return $deliverableList;
@@ -68,18 +70,15 @@ class Deliverable extends CI_Model {
             'student_ID' => $this->session->secondaryID,
             'deliverableName' => $this->input->post('delName'),
             'deadlineDate' => $deadlineDate,
+            'thumbnail' => "thumbnail".rand(1,13).".jpg",
         );
         $this->session->set_userdata('deliverableCreation', 'success');
         return $this->db->insert('fyp_Deliverable', $delData);
     }
 
     public function checkStudentAgainstDeliverable($delID) {
-        //query to check if delID author matches student session id
         $studentID = $this->session->secondaryID;
         $query = $this->db->query("SELECT * FROM `fyp_Deliverable` WHERE deliverable_ID = '$delID' and student_ID = '$studentID'");
-//        if ($query->num_rows() === 0) {
-//            echo "user is not authorised to view this content";
-//        }
         return $query;
     }
 
@@ -88,6 +87,14 @@ class Deliverable extends CI_Model {
         return $this->db->query($query);
     }
 
+    function getThumbnail() {
+        return $this->thumbnail;
+    }
+
+    function setThumbnail($thumbnail) {
+        $this->thumbnail = $thumbnail;
+    }
+    
     function getLastUpdated() {
         return $this->lastUpdatedDate;
     }

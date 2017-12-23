@@ -39,7 +39,6 @@ class Student extends CI_Controller {
         self::checkIfAuthorised();
         $this->load->model('deliverable');
         if (self::isStudentAuthorOfDeliverable($delID) == false) {
-            //echo "user is not authorised to view this content";
             return $this->load->view('unauthorisedAccess');
         }
         $this->load->model('evidence');
