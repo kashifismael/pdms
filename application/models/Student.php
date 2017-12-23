@@ -8,8 +8,8 @@ class Student extends User {
     public function __construct() {
         parent::__construct();
     }
-    
-    public static function studentConstructor($studentID, $firstName, $lastName, $username){
+
+    public static function studentConstructor($studentID, $firstName, $lastName, $username) {
         $student = new Student();
         $student->setStudentID($studentID);
         $student->setFirstName($firstName);
@@ -17,8 +17,8 @@ class Student extends User {
         $student->setUsername($username);
         return $student;
     }
-    
-        public static function studentConstructorTwo($firstName, $lastName, $username, $email){
+
+    public static function studentConstructorTwo($firstName, $lastName, $username, $email) {
         $student = new Student();
         $student->setEmail($email);
         $student->setFirstName($firstName);
@@ -26,7 +26,7 @@ class Student extends User {
         $student->setUsername($username);
         return $student;
     }
-    
+
     public function insertStudent($username, $pass1, $pass2, $userType) {
         //print_r($_POST);
         echo"<br>";
@@ -59,7 +59,7 @@ class Student extends User {
             'User_ID' => $userID->user_ID
         );
         $this->db->insert('fyp_Student', $data2);
-        self::putStudentIdIntoSession($userID->user_ID);      
+        self::putStudentIdIntoSession($userID->user_ID);
     }
 
     public function putStudentIdIntoSession($userID) {
@@ -67,7 +67,7 @@ class Student extends User {
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->student_ID);
     }
-    
+
     function getSupervisor_ID() {
         return $this->supervisor_ID;
     }
@@ -83,6 +83,5 @@ class Student extends User {
     function setStudentID($studentID) {
         $this->studentID = $studentID;
     }
-
 
 }

@@ -44,8 +44,7 @@ class Evidence extends CI_Model {
                 . "ORDER BY `fyp_Evidence`.`submissionDate` DESC";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
-            $newEvid = self::evidenceConstructor($row->evidence_ID, 
-                    $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
+            $newEvid = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
             $evidenceList[] = $newEvid;
         }
         return $evidenceList;
@@ -64,14 +63,13 @@ class Evidence extends CI_Model {
                     ORDER BY `fyp_Evidence`.`submissionDate` DESC";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
-            $newEvid = self::evidenceContructorTwo($row->evidence_ID, new DateTime($row->submissionDate), 
-                    $row->evidenceName, $row->deliverableName, $row->firstName . " " . $row->lastName);
+            $newEvid = self::evidenceContructorTwo($row->evidence_ID, new DateTime($row->submissionDate), $row->evidenceName, $row->deliverableName, $row->firstName . " " . $row->lastName);
             $evidenceList[] = $newEvid;
         }
         return $evidenceList;
     }
 
-    public function getOneEvidence($evidID){
+    public function getOneEvidence($evidID) {
         $query = "SELECT * 
                     FROM `fyp_Evidence` 
                     INNER JOIN fyp_Deliverable ON fyp_Deliverable.deliverable_ID = fyp_Evidence.deliverable_ID 
@@ -81,14 +79,13 @@ class Evidence extends CI_Model {
                     WHERE evidence_ID = '$evidID'";
         $result = $this->db->query($query);
         $row = $result->row();
-        $evidence = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, 
-                new DateTime($row->submissionDate), $row->evidenceName);
+        $evidence = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
         $evidence->setDeliverableNo($row->deliverable_ID);
         $evidence->setDeliverableName($row->deliverableName);
         $evidence->setStudentID($row->username);
         return $evidence;
     }
-    
+
     public function uploadEvidenceFile($fileName, $file_tmp) {
         $newFileName = uniqid('', true) . $this->session->userName . $fileName;
         $fileDestination = "evidenceUploads/" . $newFileName;
@@ -124,11 +121,24 @@ class Evidence extends CI_Model {
         $filename = $evidenceRow->filePath;
         $file = base_url('evidenceUploads/' . $filename);
         $file = str_replace(' ', '%20', $file);
-        header("Content-Description: File Transfer"); 
-        header("Content-Type: application/octet-stream"); 
-        header("Content-Disposition: attachment; filename='" . basename($file) . "'"); 
-        readfile ($file);
+        header("Content-Description: File Transfer");
+        header("Content-Type: application/octet-stream");
+        header("Content-Disposition: attachment; filename='" . basename($file) . "'");
+        readfile($file);
         exit();
+    }
+
+    public function checkStudentAgainstEvidence($evidID) {
+        //query to check if evidID author matches student session id
+        $studentID = $this->session->secondaryID;
+        //$query = $this->db->query("SELECT * FROM `fyp_Deliverable` WHERE deliverable_ID = '$delID' and student_ID = '$studentID'");
+        $query = $this->db->query("SELECT * 
+                                FROM `fyp_Evidence` 
+                                INNER JOIN fyp_Deliverable
+                                ON fyp_Evidence.deliverable_ID = fyp_Deliverable.deliverable_ID
+                                where fyp_Deliverable.student_ID = '$studentID'
+                                and fyp_Evidence.evidence_ID = '$evidID'");
+        return $query;
     }
 
     function getStudentID() {
@@ -138,7 +148,7 @@ class Evidence extends CI_Model {
     function setStudentID($studentID) {
         $this->studentID = $studentID;
     }
-       
+
     function getDeliverableName() {
         return $this->deliverableName;
     }

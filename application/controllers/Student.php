@@ -1,11 +1,6 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of Student
@@ -43,6 +38,10 @@ class Student extends CI_Controller {
     public function viewDeliverable($delID) {
         self::checkIfAuthorised();
         $this->load->model('deliverable');
+        if (self::isStudentAuthorOfDeliverable($delID) == false) {
+            //echo "user is not authorised to view this content";
+            return $this->load->view('unauthorisedAccess');
+        }
         $this->load->model('evidence');
         $this->load->model('feedback');
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
@@ -60,9 +59,21 @@ class Student extends CI_Controller {
         }
     }
 
+    private function isStudentAuthorOfDeliverable($delID) {
+        $result = $this->deliverable->checkStudentAgainstDeliverable($delID);
+        if ($result->num_rows() === 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function viewEvidence($evidID) {
         self::checkIfAuthorised();
         $this->load->model('evidence');
+        if (self::isStudentAuthorOfEvidence($evidID) == false) {
+            return $this->load->view('unauthorisedAccess');
+        }
         $this->load->model('feedback');
         $data['evidence'] = $this->evidence->getOneEvidence($evidID);
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksOfEvidence($evidID);
@@ -72,6 +83,15 @@ class Student extends CI_Controller {
         $this->load->view('studentViews/navbar');
         $this->load->view('studentViews/viewEvidence');
         $this->load->view('studentViews/footer');
+    }
+
+    private function isStudentAuthorOfEvidence($evidID) {
+        $result = $this->evidence->checkStudentAgainstEvidence($evidID);
+        if ($result->num_rows() === 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private static function checkIfAuthorised() {
