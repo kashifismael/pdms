@@ -12,6 +12,7 @@
         </div>
     <?php } ?>
     <ol class="breadcrumb" style="padding-left: 10%;">
+        <li><a href="<?= base_url('staff-home')?>"> Dashboard</a></li>
         <li><a href="<?= base_url('view-student/' . $deliverableInfo->getStudentID()) ?>">View Student</a></li>
         <li class="active">View Deliverable</li>
     </ol>

@@ -1,12 +1,8 @@
 <div class="container-fluid">    
     <ol class="breadcrumb" style="padding-left: 10%;">
+        <li><a href="<?= base_url('staff-home')?>"> Dashboard</a></li>
         <li class="active">View Student</li>
     </ol>
-  <!--  <div class="row row-mobile"> 
-        <div class="text-center">
-            <h1><!--?= $student->getFirstName() . " " . $student->getLastName() ?></h1>
-        </div>
-    </div> -->
     <div class="row">
 
         <div class="col-md-2 col-md-offset-1" >

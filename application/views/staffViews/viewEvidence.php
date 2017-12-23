@@ -17,6 +17,7 @@
         </div>
     <?php } ?>
     <ol class="breadcrumb" style="padding-left: 10%;">
+        <li><a href="<?= base_url('staff-home')?>"> Dashboard</a></li>
         <li><a href="<?= base_url('view-student/' . $evidence->getStudentID()) ?>">View Student</a></li>
         <li><a href="<?= base_url('view-deliverable/' . $evidence->getDeliverableNo()) ?>">View Deliverable</a></li>
         <li class="active">View Evidence</li>
