@@ -94,10 +94,12 @@ class Evidence extends CI_Model {
         $fileDestination = "evidenceUploads/" . $newFileName;
         if (move_uploaded_file($file_tmp, $fileDestination)) {
             $insert = self::insertFileRecord($newFileName);
+            $delID = $this->input->post('deliverableID');
+            $update = $this->db->query("UPDATE fyp_Deliverable SET lastUpdated = NOW() WHERE deliverable_ID = '$delID' ");
         } else {
             echo "file upload didnt work";
         }
-        if ($insert === true) {
+        if ($insert === true && $update === true) {
             return true;
         }
     }
