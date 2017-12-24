@@ -21,8 +21,9 @@ class EmailController extends CI_Controller {
             $this->email->from('unidissKU@gmail.com', 'UniDiss');
             $this->email->to('k.ismael@hotmail.co.uk');
             $this->email->subject($this->input->post('subject'));
-            //$this->email->message("<p>".$this->input->post('content')."</p>");
-            $body = $this->load->view('emailViews/announceTest', $data, TRUE);
+            //$body = $this->load->view('emailViews/announceTest', $data, TRUE);
+            
+            $body = $this->load->view('emailViews/emailTemplate', $data, TRUE);
             $this->email->message($body);
             $result = $this->email->send();
             if($result === true){
