@@ -52,6 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['student-home'] = 'student';
 $route['deliverable/(:num)'] = 'student/viewDeliverable/$1';
 $route['evidence/(:num)'] = 'student/viewEvidence/$1';
+$route['view-requests'] = 'student/viewRequests';
+$route['view-all-evidence'] = 'student/viewAllEvidences';
+$route['view-all-feedback'] = 'student/viewAllFeedbacks';
+$route['view-supervisor'] = 'student/viewSupervisor';
 
 $route['createDeliverable'] = 'DeliverableController/create';
 $route['uploadEvidence'] = 'EvidenceController/uploadFile';

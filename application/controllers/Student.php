@@ -92,6 +92,42 @@ class Student extends CI_Controller {
         }
     }
 
+    public function viewRequests() {
+        self::checkIfAuthorised();
+        $data['title'] = "View Requests";
+        $this->load->view('header', $data);
+        $this->load->view('studentViews/navbar');
+        $this->load->view('studentViews/viewRequests');
+        $this->load->view('studentViews/footer');
+    }
+
+    public function viewAllEvidences() {
+        self::checkIfAuthorised();
+        $data['title'] = "View All Evidences";
+        $this->load->view('header', $data);
+        $this->load->view('studentViews/navbar');
+        $this->load->view('studentViews/viewAllEvidences');
+        $this->load->view('studentViews/footer');
+    }
+
+    public function viewAllFeedbacks() {
+        self::checkIfAuthorised();
+        $data['title'] = "View All Feedbacks";
+        $this->load->view('header', $data);
+        $this->load->view('studentViews/navbar');
+        $this->load->view('studentViews/viewAllFeedbacks');
+        $this->load->view('studentViews/footer');
+    }
+
+    public function viewSupervisor() {
+        self::checkIfAuthorised();
+        $data['title'] = "View Supervisor";
+        $this->load->view('header', $data);
+        $this->load->view('studentViews/navbar');
+        $this->load->view('studentViews/viewSupervisor');
+        $this->load->view('studentViews/footer');
+    }
+
     private static function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 3) {
             //User is authorised
