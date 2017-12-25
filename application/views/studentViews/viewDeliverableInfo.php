@@ -12,6 +12,18 @@
             </div>  
         </div>
     <?php } ?>
+        <?php
+    if (isset($_SESSION['requestSubmission'])) {
+        ?>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-success alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Successfully submitted Request!</strong>
+                </div>
+            </div>  
+        </div>
+    <?php } ?>
 
     <div class="row row-mobile" >
         <div class="text-center">

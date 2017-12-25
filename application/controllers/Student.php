@@ -2,11 +2,6 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Description of Student
- *
- * @author Kashif
- */
 class Student extends CI_Controller {
 
     public function index() {
@@ -33,6 +28,12 @@ class Student extends CI_Controller {
         if (isset($_SESSION['account'])) {
             unset($_SESSION['account']);
         }
+        if (isset($_SESSION['evidenceCreation'])) {
+            unset($_SESSION['evidenceCreation']);
+        }
+        if (isset($_SESSION['requestSubmission'])) {
+            unset($_SESSION['requestSubmission']);
+        }
     }
 
     public function viewDeliverable($delID) {
@@ -53,9 +54,7 @@ class Student extends CI_Controller {
         $this->load->view('studentViews/viewDeliverableInfo');
         $this->load->view('studentViews/viewDeliverableModals');
         $this->load->view('studentViews/footer');
-        if (isset($_SESSION['evidenceCreation'])) {
-            unset($_SESSION['evidenceCreation']);
-        }
+        self::clearNotifications();
     }
 
     private function isStudentAuthorOfDeliverable($delID) {

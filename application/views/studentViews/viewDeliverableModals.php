@@ -1,3 +1,4 @@
+<?php $minDate = new DateTime('now'); ?>
 <div id="newEvidUpModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -11,11 +12,11 @@
                     <div class="form-group">
                         <label for="date">Enter Name of Evidence</label>
                         <input type="text" class="form-control" id="evidenceName" name="evidenceName" required>
-                        <input type="hidden" value="<?=$delID ?>" name="deliverableID">
+                        <input type="hidden" value="<?= $delID ?>" name="deliverableID">
                     </div>
                     <div class="form-group">
                         <label for="text">Choose Deliverable</label>
-                        <input type="text" class="form-control" value="<?=$deliverableInfo->getDeliverableName() ?>" disabled>
+                        <input type="text" class="form-control" value="<?= $deliverableInfo->getDeliverableName() ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Select File</label>
@@ -35,28 +36,33 @@
 
 <div id="deadlineChange" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Request Deadline Change</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="date">New: Deadline Date</label>
-                    <input type="date" class="form-control" id="pwd">
-                </div> 
-                <div class="form-group">
-                    <label for="comment">Reason for change:</label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+            <form method="post" action="<?= base_url('processDeadlineRequest') ?>" > 
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Request Deadline Change</h4>
                 </div>
-                <button type="submit" class="btn btn-success">Submit Request</button>
-            </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="date">New Deadline Date</label>
+                        <input type="date" class="form-control" id="reqDeadlineDate" name="reqDeadlineDate" min="<?=$minDate->format('Y-m-d')?>" value="<?=$minDate->format('Y-m-d')?>">
+                    </div> 
+                    <div class="form-group">
+                        <label for="date">New Deadline Time</label>
+                        <input type="time" class="form-control" id="reqDeadlineTime" name="reqDeadlineTime" value="23:59">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Reason for change:</label>
+                        <textarea class="form-control" rows="5" id="reason" name="reason" required></textarea>
+                        <input type="hidden" value="<?= $delID ?>" name="deliverableID">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit Request</button>                            
+                </div>
+            </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
-
     </div>
 </div>
 

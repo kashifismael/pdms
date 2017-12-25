@@ -63,6 +63,8 @@ $route['updateDelStatus'] = 'FeedbackController/markDelStatus';
 $route['emailTest'] = 'EmailController';
 $route['processEmail'] = 'EmailController/sendEmail';
 
+$route['processDeadlineRequest'] = 'RequestController/requestDeadlineExtension' ;
+
 $route['staff-home'] = 'staff';
 $route['view-student/(:any)'] = 'staff/viewStudent/$1';
 $route['view-deliverable/(:num)'] = 'staff/viewDeliverable/$1';
