@@ -4,8 +4,8 @@
     <h1 class="text-center">Manage requests</h1>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</a></span></li>
-        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Deletion Requests</a></span></li> 
+        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span></a></li>
+        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Deletion Requests</span></a></li> 
     </ul>
 
     <div class="tab-content">
@@ -25,43 +25,51 @@
                             <th>Requested Date</th>
                             <th>Reason</th>
                             <th>Approve</th>
-                            <th>Disapprove</th>
+                            <th>Reject</th>
                         </tr>
                     </thead>
                     <tbody style="overflow-y: scroll;">
-                        <?php foreach ($deleteRequests as $request) { ?>
-                            <tr>                   
-                                <td>
-                                    <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
-                                    <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
-                                    <input type="hidden" name="reqID" value="<?= $request->getRequestedDeadlineDate() ?>">
-                                    <?= $request->getStudentName() ?></td>
+                        <?php foreach ($deadlineRequests as $request) { ?>
+                        
+                            <tr>                    
+                                <td><?= $request->getStudentName() ?></td>
                                 <td><?= $request->getDeliverableName() ?></td>
                                 <td><?= $request->getCurrentDeadlineDate() ?></td>
                                 <td><?= $request->getRequestedDeadlineDate() ?></td>
                                 <td><?= $request->getReason() ?></td>
-                                <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                                <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+                                <td><form method="post" action="processDeadlineExtension">
+                                    <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
+                                    <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
+                                    <input type="hidden" name="reqDeadline" value="<?= $request->getRequestedDeadlineDate() ?>">
+                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                                </form></td>
+                                <td><form method="post" action="rejectDeadlineExtension">
+                                    <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
+                                    <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
+                                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
+                                </form></td>
+
                             </tr>
-                        <?php } ?>
-                        <tr>
-                            <td>Kashif Ismael</td>
-                            <td>Report</td>
-                            <td>01/09/17</td>
-                            <td>31/09/17</td>
-                            <td>I just really need the time bro</td>
-                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                        </tr>
-                        <tr>
-                            <td>Eden Hazard</td>
-                            <td>Prototype</td>
-                            <td>01/09/17</td>
-                            <td>31/09/17</td>
-                            <td>I also need the time</td>
-                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                        </tr>
+                        
+                    <?php } ?>
+                    <tr>
+                        <td>Kashif Ismael</td>
+                        <td>Report</td>
+                        <td>01/09/17</td>
+                        <td>31/09/17</td>
+                        <td>I just really need the time bro</td>
+                        <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
+                        <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+                    </tr>
+                    <tr>
+                        <td>Eden Hazard</td>
+                        <td>Prototype</td>
+                        <td>01/09/17</td>
+                        <td>31/09/17</td>
+                        <td>I also need the time</td>
+                        <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
+                        <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+                    </tr>
 
                     </tbody>
                 </table>
@@ -101,7 +109,7 @@
                             <th>Deliverable name</th>
                             <th>Reason</th>
                             <th>Approve</th>
-                            <th>Disapprove</th>
+                            <th>Reject</th>
                         </tr>
                     </thead>
                     <tbody style="overflow-y: scroll;">

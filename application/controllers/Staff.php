@@ -104,7 +104,7 @@ class Staff extends CI_Controller {
         $this->load->model('request');
         $this->load->model('deadlineRequest');
         $data['title'] = "Manage Requests";
-        $data['deleteRequests'] = $this->deadlineRequest->getAllPendingDeleteRequests($this->session->secondaryID);
+        $data['deadlineRequests'] = $this->deadlineRequest->getAllPendingDeleteRequests($this->session->secondaryID);
         $this->load->view('header', $data);
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/manageRequests');

@@ -23,4 +23,24 @@ class RequestController extends CI_Controller {
         }
     }
 
+    public function approveDeadlineRequest(){
+        if (isset($_POST['delID'])){
+            echo "approve this deadline request<br>";
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+        } else {
+            echo "nothing was posted, redirect away";
+        }
+    }
+        public function rejectDeadlineRequest(){
+        if (isset($_POST['delID'])){
+            echo "reject this deadline request<br>";
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+        } else {
+            echo "nothing was posted, redirect away";
+        }
+    }
 }
