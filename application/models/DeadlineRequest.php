@@ -8,8 +8,8 @@ class DeadlineRequest extends Request {
     function __construct() {
         parent::__construct();
     }
-    
-    public function deleteRequestConstructor($reqID, $delID, $currDeadline, $reqDeadline, $studentName, $delName ,$reason){
+
+    public function deleteRequestConstructor($reqID, $delID, $currDeadline, $reqDeadline, $studentName, $delName, $reason) {
         $delRequest = new DeadlineRequest();
         $delRequest->setRequestNo($reqID);
         $delRequest->setDeliverableNo($delID);
@@ -20,7 +20,7 @@ class DeadlineRequest extends Request {
         $delRequest->setReason($reason);
         return $delRequest;
     }
-    
+
     function getCurrentDeadlineDate() {
         return $this->currentDeadlineDate;
     }
@@ -28,7 +28,7 @@ class DeadlineRequest extends Request {
     function setCurrentDeadlineDate($currentDeadlineDate) {
         $this->currentDeadlineDate = $currentDeadlineDate;
     }
-    
+
     function getRequestedDeadlineDate() {
         return $this->requestedDeadlineDate;
     }
@@ -47,7 +47,17 @@ class DeadlineRequest extends Request {
         return $this->db->insert('fyp_Request', $data);
     }
 
-    public function getAllPendingDeleteRequests($staffID){
+    public function approveDeadlineRequest($reqID, $delID, $newDeadline) {
+        $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        $changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = '$newDeadline' WHERE `fyp_Deliverable`.`deliverable_ID` = '$delID'");
+        if($updateStatus === true && $changeDeadline === true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getAllPendingDeleteRequests($staffID) {
         $requestList = array();
         $query = "SELECT *
                     FROM `fyp_Request` 
@@ -58,14 +68,11 @@ class DeadlineRequest extends Request {
                     fyp_Request.requestStatus_ID = 1 AND
                     fyp_Student.staff_ID = '$staffID'";
         $result = $this->db->query($query);
-        foreach ($result->result() as $row){
-            $delRequest = self::deleteRequestConstructor($row->request_ID, 
-                    $row->deliverable_ID, $row->deadlineDate, $row->reqDeadlineDate,
-                    $row->firstName." ".$row->lastName, $row->deliverableName,
-                    $row->reason);
+        foreach ($result->result() as $row) {
+            $delRequest = self::deleteRequestConstructor($row->request_ID, $row->deliverable_ID, $row->deadlineDate, $row->reqDeadlineDate, $row->firstName . " " . $row->lastName, $row->deliverableName, $row->reason);
             $requestList[] = $delRequest;
-        }     
+        }
         return $requestList;
     }
-    
+
 }

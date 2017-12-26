@@ -68,8 +68,8 @@ $route['emailTest'] = 'EmailController';
 $route['processEmail'] = 'EmailController/sendEmail';
 
 $route['processDeadlineRequest'] = 'RequestController/requestDeadlineExtension';
-$route['processDeadlineExtension'] = 'RequestController/approveDeadlineRequest';
-$route['rejectDeadlineExtension'] = 'RequestController/rejectDeadlineRequest';
+$route['approveDeadlineExtension'] = 'RequestController/approveDeadlineRequest';
+$route['rejectRequestProcess'] = 'RequestController/rejectRequest';
 
 $route['staff-home'] = 'staff';
 $route['view-student/(:any)'] = 'staff/viewStudent/$1';

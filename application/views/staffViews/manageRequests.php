@@ -1,6 +1,27 @@
      
 <div class="container-fluid" style="padding-left: 10%; padding-right:10%;">  
 
+    <?php
+    if (isset($_SESSION['requestRejection'])) {
+        ?>
+        <div class="row">
+            <div class="alert alert-success alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Successfully rejected Request!</strong>
+            </div>
+        </div>
+    <?php } ?>
+    <?php
+    if (isset($_SESSION['deadlineRequestApproval'])) {
+        ?>
+        <div class="row">
+            <div class="alert alert-success alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Successfully approved Deadline Request!</strong>
+            </div>
+        </div>
+    <?php } ?>
+
     <h1 class="text-center">Manage requests</h1>
 
     <ul class="nav nav-tabs">
@@ -30,46 +51,43 @@
                     </thead>
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deadlineRequests as $request) { ?>
-                        
                             <tr>                    
                                 <td><?= $request->getStudentName() ?></td>
                                 <td><?= $request->getDeliverableName() ?></td>
                                 <td><?= $request->getCurrentDeadlineDate() ?></td>
                                 <td><?= $request->getRequestedDeadlineDate() ?></td>
                                 <td><?= $request->getReason() ?></td>
-                                <td><form method="post" action="processDeadlineExtension">
-                                    <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
-                                    <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
-                                    <input type="hidden" name="reqDeadline" value="<?= $request->getRequestedDeadlineDate() ?>">
-                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                                </form></td>
-                                <td><form method="post" action="rejectDeadlineExtension">
-                                    <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
-                                    <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
-                                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                                </form></td>
-
+                                <td><form method="post" action="approveDeadlineExtension">
+                                        <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
+                                        <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
+                                        <input type="hidden" name="reqDeadline" value="<?= $request->getRequestedDeadlineDate() ?>">
+                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                                    </form></td>
+                                <td><form method="post" action="rejectRequestProcess">
+                                        <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
+                                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
+                                    </form></td>
                             </tr>
-                        
-                    <?php } ?>
-                    <tr>
-                        <td>Kashif Ismael</td>
-                        <td>Report</td>
-                        <td>01/09/17</td>
-                        <td>31/09/17</td>
-                        <td>I just really need the time bro</td>
-                        <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                        <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                    </tr>
-                    <tr>
-                        <td>Eden Hazard</td>
-                        <td>Prototype</td>
-                        <td>01/09/17</td>
-                        <td>31/09/17</td>
-                        <td>I also need the time</td>
-                        <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                        <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                    </tr>
+
+                        <?php } ?>
+                        <tr>
+                            <td>Kashif Ismael</td>
+                            <td>Report</td>
+                            <td>01/09/17</td>
+                            <td>31/09/17</td>
+                            <td>I just really need the time bro</td>
+                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
+                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+                        </tr>
+                        <tr>
+                            <td>Eden Hazard</td>
+                            <td>Prototype</td>
+                            <td>01/09/17</td>
+                            <td>31/09/17</td>
+                            <td>I also need the time</td>
+                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
+                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+                        </tr>
 
                     </tbody>
                 </table>

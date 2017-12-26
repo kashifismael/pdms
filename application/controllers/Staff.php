@@ -108,6 +108,12 @@ class Staff extends CI_Controller {
         $this->load->view('header', $data);
         $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
         $this->load->view('staffViews/manageRequests');
+        if (isset($_SESSION['requestRejection'])) {
+            unset($_SESSION['requestRejection']);
+        }
+        if (isset($_SESSION['deadlineRequestApproval'])) {
+            unset($_SESSION['deadlineRequestApproval']);
+        }
     }
 
     public function processAllocation() {

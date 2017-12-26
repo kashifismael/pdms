@@ -12,6 +12,11 @@ class Request extends CI_Model {
     private $dateOfRequest;
     private $dateOfApproval;
     
+    public function rejectRequest($reqID){
+        $query = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '3' WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        return $query;
+    }
+    
     function __construct() {
         parent::__construct();
     }
