@@ -15,14 +15,13 @@ class EmailController extends CI_Controller {
             echo $this->input->post('subject')."<br>";
             $data['title'] = "Announcement Test";
             $data['content'] = $this->input->post('content');
-            $config = self::getEmailConfig();
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
+            //$config = self::getEmailConfig();
+            //$this->load->library('email', $config);
+            $this->load->library('email');
+            //$this->email->set_newline("\r\n");
             $this->email->from('unidissKU@gmail.com', 'UniDiss');
             $this->email->to('k.ismael@hotmail.co.uk');
-            $this->email->subject($this->input->post('subject'));
-            //$body = $this->load->view('emailViews/announceTest', $data, TRUE);
-            
+            $this->email->subject($this->input->post('subject'));            
             $body = $this->load->view('emailViews/emailTemplate', $data, TRUE);
             $this->email->message($body);
             $result = $this->email->send();

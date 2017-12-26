@@ -119,8 +119,8 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Good luck! Hope it works.</p>
+                                           <!--     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
+                                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Good luck! Hope it works.</p> -->
                                             <!--    <span><img style="vertical-align: middle;" id="logo" src="<!?= base_url("images/unidissLogo.png") ?>" height="28" alt="Card image cap">UniDiss</span> -->
                                             </td>
                                         </tr>
