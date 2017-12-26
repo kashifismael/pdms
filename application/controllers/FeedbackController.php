@@ -28,13 +28,29 @@ class FeedbackController extends CI_Controller {
     public function markDelStatus() {
         if (isset($_POST['delStatus'])) {
             $this->load->model('feedback');
-            echo $this->session->userName . " gave a status of " . $this->input->post('delStatus') . " for deliverable " . $this->input->post('delID');
+            $info = $this->feedback->getDeliverableInfoForEmail($this->input->post('delID'));
+            $message = "The status of the following deliverable has been updated:";
             $delUpdate = $this->feedback->updateDelStatus($this->input->post('delID'), $this->input->post('delStatus'));
             if ($delUpdate === true) {
+                self::sendNotificationEmail($info->emailAddress,$info->firstName,$info->deliverableName, $message);
                 $this->session->set_userdata('statusUpdate', 'success');
                 redirect('view-deliverable/' . $this->input->post('delID'));
             }
         }
+    }
+
+    private function sendNotificationEmail($email, $firstName, $deliverable, $message) {
+        $data['title'] = "Deliverable Status Updated";
+        $data['firstName'] = $firstName;
+        $data['message'] = $message;
+        $data['delName'] = $deliverable;
+        $this->load->library('email');
+        $this->email->from('unidissKU@gmail.com', 'UniDiss');
+        $this->email->to($email);
+        $this->email->subject("Deliverable Status Updated");
+        $body = $this->load->view('emailViews/updatedStatusEmail', $data, TRUE);
+        $this->email->message($body);
+        $this->email->send();
     }
 
     public function downloadFile() {
