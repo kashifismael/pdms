@@ -13,13 +13,35 @@ class RequestController extends CI_Controller {
             $this->load->model('deadlineRequest');
             $insert = $this->deadlineRequest->insertDeadlineRequest($postDateTime->format('Y-m-d H:i'));
             if ($insert === true) {
-                //echo "successful insert, redirect user back";
                 $this->session->set_userdata('requestSubmission', 'success');
                 redirect('deliverable/' . $this->input->post('deliverableID'));
             }
         } else {
             echo "nothing was posted, redirect away";
             redirect('student-home');
+        }
+    }
+
+    public function requestDeliverableDelete() {
+        if (isset($_POST['deleteReason'])) {
+            $this->load->model('request');
+            $this->load->model('deleteRequest');
+            $insert = $this->deleteRequest->insertDeleteRequest();
+            if ($insert === true) {
+                $this->session->set_userdata('requestSubmission', 'success');
+                redirect('deliverable/' . $this->input->post('deliverableID'));
+            }
+        } else {
+            echo "nothing was posted";
+        }
+    }
+    
+    public function approveDeliverableDelete(){
+        if (isset($_POST['delID'])) {
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+            echo "delete this deliverable (yet to be implemented)";
         }
     }
 

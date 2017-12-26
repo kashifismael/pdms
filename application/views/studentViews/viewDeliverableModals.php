@@ -75,11 +75,14 @@
                 <h4 class="modal-title">Request Deliverable Deletion</h4>
             </div>
             <div class="modal-body">
+                <form method="post" action="<?= base_url('processDeleteRequest')?>" >
                 <div class="form-group">
                     <label for="comment">Reason for Deletion:</label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <textarea class="form-control" rows="5" id="deleteReason" name="deleteReason"></textarea>
+                    <input type="hidden" value="<?= $delID ?>" name="deliverableID">
                 </div>
                 <button type="submit" class="btn btn-success">Submit Request</button>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

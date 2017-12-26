@@ -26,7 +26,7 @@
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span></a></li>
-        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Deletion Requests</span></a></li> 
+        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Deliverable</span></a></li> 
     </ul>
 
     <div class="tab-content">
@@ -112,14 +112,12 @@
 
 
         <div id="Dash2" class="tab-pane fade in">
-            <div class="row row-mobile" > <!-- doesnt show well on mobile -->
-                <!-- <div class="row" style="display: flex; justify-content: center; align-items: center;"> -->
+            <div class="row row-mobile" >
                 <div class="col-xs-12 text-center">
-                    <h3>Deletion Requests</h3>
+                    <h3>Delete Deliverable Requests</h3>
                 </div>
             </div>
             <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
-                <!-- <div class="table-feed"> -->
                 <table class="table" >
                     <thead>
                         <tr>
@@ -131,6 +129,22 @@
                         </tr>
                     </thead>
                     <tbody style="overflow-y: scroll;">
+                        <?php foreach ($deleteRequests as $delRequest) { ?>
+                            <tr>
+                                <td><?= $delRequest->getStudentName() ?></td>
+                                <td><?= $delRequest->getDeliverableName() ?></td>
+                                <td><?= $delRequest->getReason() ?></td>
+                                <td><form method="post" action="approveDelete">
+                                        <input type="hidden" name="delID" value="<?= $delRequest->getDeliverableNo() ?>">
+                                        <input type="hidden" name="reqID" value="<?= $delRequest->getRequestNo() ?>">
+                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                                    </form></td>
+                                <td><form method="post" action="rejectRequestProcess">
+                                        <input type="hidden" name="reqID" value="<?= $delRequest->getRequestNo() ?>">
+                                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
+                                    </form></td>
+                            </tr>
+                        <?php } ?>
                         <tr>
                             <td>Romelu Lukaku</td>
                             <td>Proposal</td>

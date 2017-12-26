@@ -9,16 +9,16 @@ class DeadlineRequest extends Request {
         parent::__construct();
     }
 
-    public function deleteRequestConstructor($reqID, $delID, $currDeadline, $reqDeadline, $studentName, $delName, $reason) {
-        $delRequest = new DeadlineRequest();
-        $delRequest->setRequestNo($reqID);
-        $delRequest->setDeliverableNo($delID);
-        $delRequest->setCurrentDeadlineDate($currDeadline);
-        $delRequest->setRequestedDeadlineDate($reqDeadline);
-        $delRequest->setStudentName($studentName);
-        $delRequest->setDeliverableName($delName);
-        $delRequest->setReason($reason);
-        return $delRequest;
+    public function deadlineRequestConstructor($reqID, $delID, $currDeadline, $reqDeadline, $studentName, $delName, $reason) {
+        $deadlineRequest = new DeadlineRequest();
+        $deadlineRequest->setRequestNo($reqID);
+        $deadlineRequest->setDeliverableNo($delID);
+        $deadlineRequest->setCurrentDeadlineDate($currDeadline);
+        $deadlineRequest->setRequestedDeadlineDate($reqDeadline);
+        $deadlineRequest->setStudentName($studentName);
+        $deadlineRequest->setDeliverableName($delName);
+        $deadlineRequest->setReason($reason);
+        return $deadlineRequest;
     }
 
     function getCurrentDeadlineDate() {
@@ -50,14 +50,15 @@ class DeadlineRequest extends Request {
     public function approveDeadlineRequest($reqID, $delID, $newDeadline) {
         $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = '$reqID'");
         $changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = '$newDeadline' WHERE `fyp_Deliverable`.`deliverable_ID` = '$delID'");
-        if($updateStatus === true && $changeDeadline === true){
+        $logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        if($updateStatus === true && $changeDeadline === true && $logDateOfApproval === true){
             return true;
         } else {
             return false;
         }
     }
 
-    public function getAllPendingDeleteRequests($staffID) {
+    public function getAllPendingDeadlineRequests($staffID) {
         $requestList = array();
         $query = "SELECT *
                     FROM `fyp_Request` 
@@ -69,8 +70,8 @@ class DeadlineRequest extends Request {
                     fyp_Student.staff_ID = '$staffID'";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
-            $delRequest = self::deleteRequestConstructor($row->request_ID, $row->deliverable_ID, $row->deadlineDate, $row->reqDeadlineDate, $row->firstName . " " . $row->lastName, $row->deliverableName, $row->reason);
-            $requestList[] = $delRequest;
+            $deadlineRequest = self::deadlineRequestConstructor($row->request_ID, $row->deliverable_ID, $row->deadlineDate, $row->reqDeadlineDate, $row->firstName . " " . $row->lastName, $row->deliverableName, $row->reason);
+            $requestList[] = $deadlineRequest;
         }
         return $requestList;
     }

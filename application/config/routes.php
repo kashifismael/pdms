@@ -68,7 +68,9 @@ $route['emailTest'] = 'EmailController';
 $route['processEmail'] = 'EmailController/sendEmail';
 
 $route['processDeadlineRequest'] = 'RequestController/requestDeadlineExtension';
+$route['processDeleteRequest'] = 'RequestController/requestDeliverableDelete';
 $route['approveDeadlineExtension'] = 'RequestController/approveDeadlineRequest';
+$route['approveDelete'] = 'RequestController/approveDeliverableDelete';
 $route['rejectRequestProcess'] = 'RequestController/rejectRequest';
 
 $route['staff-home'] = 'staff';
