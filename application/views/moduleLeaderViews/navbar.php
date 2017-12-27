@@ -15,13 +15,14 @@
     <ul class="nav navbar-nav">
       <li<?= activeCheck("staff-home") ?>><a href="<?= base_url("staff-home")?>">Dashboard</a></li>
       <li<?= activeCheck("latest-submissions") ?>><a href="<?= base_url("latest-submissions")?>">Latest submissions <span class="label label-primary">3</span></a></li>
-      <li><a href="#">View Supervisor group</a></li>
+    <!--  <li><a href="#">View Supervisor group</a></li> -->
       <li<?= activeCheck("manage-requests") ?>><a href="<?= base_url("manage-requests")?>">Manage requests <span class="label label-primary">1</span></a></li>
+      <li<?= activeCheck("student-allocation") ?>><a href="<?= base_url("student-allocation")?>">Student Allocation <span class="label label-primary">1</span></a></li>
       <li class="dropdown <?= activeCheckTwo("all-supervisors","student-allocation") ?>">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span class="label label-primary">1</span><span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li<?= activeCheck("all-supervisors") ?>><a href="<?= base_url("all-supervisors")?>">View All Supervisors</a></li>
-          <li<?= activeCheck("student-allocation") ?>><a href="<?= base_url("student-allocation")?>">Student Allocation <span class="label label-primary">1</span></a></li>
+       <!--   <li<!?= activeCheck("student-allocation") ?>><a href="<!?= base_url("student-allocation")?>">Student Allocation <span class="label label-primary">1</span></a></li> -->
           <li><a href="#">View All Students</a></li>
         </ul>
       </li>
