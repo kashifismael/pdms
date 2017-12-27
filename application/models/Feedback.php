@@ -105,6 +105,17 @@ class Feedback extends CI_Model {
         return $result->row();
     }
     
+    public function getEvidenceInfoForEmail($evidID){
+        $query = "SELECT fyp_Evidence.evidenceName ,fyp_Deliverable.deliverableName, fyp_User.firstName, fyp_User.emailAddress  
+                    FROM `fyp_Evidence`
+                    INNER JOIN fyp_Deliverable ON fyp_Evidence.deliverable_ID = fyp_Deliverable.deliverable_ID
+                    INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
+                    INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
+                    WHERE fyp_Evidence.evidence_ID = '$evidID'";
+        $result = $this->db->query($query);
+        return $result->row();
+    }
+    
     function getFeedbackID() {
         return $this->feedbackID;
     }

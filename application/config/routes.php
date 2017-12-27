@@ -60,7 +60,7 @@ $route['view-supervisor'] = 'student/viewSupervisor';
 $route['createDeliverable'] = 'DeliverableController/create';
 $route['uploadEvidence'] = 'EvidenceController/uploadFile';
 $route['downloadEvidence'] = 'EvidenceController/downloadFile';
-$route['uploadFeedback'] = 'FeedbackController/uploadFile';
+$route['uploadFeedback'] = 'FeedbackController/provideFeedback';
 $route['downloadFeedback'] = 'FeedbackController/downloadFile';
 $route['updateDelStatus'] = 'FeedbackController/markDelStatus';
 
