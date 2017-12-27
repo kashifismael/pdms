@@ -2,11 +2,6 @@
 
 class Supervisor extends User {
 
-    //private $userID;
-    //private $firstName;
-    //private $lastName;
-    //private $emailAddress;
-    //private $username;
     private $staffID;
 
     function __construct() {

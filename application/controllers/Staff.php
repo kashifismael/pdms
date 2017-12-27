@@ -6,16 +6,12 @@ class Staff extends CI_Controller {
 
     public function index() {
         self::checkIfAuthorised();
-        $this->load->model('user');
-        $this->load->model('student');
-        $this->load->model('supervisor');
-        $this->load->model('moduleLeader');
-        $this->load->model('evidence');
+        $this->load->model(array('user','student','supervisor','evidence'));
         $data['supervisorGroup'] = $this->supervisor->getAllSupervisorStudents($this->session->secondaryID);
         $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         if ($_SESSION['userTypeID'] == 1) {
             $data['unAllocatedStudentsNumber'] = $this->moduleLeader->unallocatedStudentsQuery();
             $this->load->view('moduleLeaderViews/mlDashboard', $data);
@@ -28,24 +24,19 @@ class Staff extends CI_Controller {
 
     public function viewStudent($studentID) {
         self::checkIfAuthorised();
-        $this->load->model('user');
-        $this->load->model('student');
-        $this->load->model('supervisor');
-        $this->load->model('deliverable');
+        $this->load->model(array('user','student','supervisor','deliverable'));
         $data['studentID'] = $studentID;
         $data['student'] = $this->supervisor->getStudentInfo($studentID);
         $data['theirDeliverables'] = $this->deliverable->getAllStudentDeliverables($studentID);
         $data['title'] = "View Student";
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('staffViews/viewStudentInfo');
     }
 
     public function viewDeliverable($delID) {
         self::checkIfAuthorised();
-        $this->load->model('deliverable');
-        $this->load->model('evidence');
-        $this->load->model('feedback');
+        $this->load->model(array('user','supervisor','deliverable','evidence','feedback'));
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksofDeliverable($delID);
@@ -53,7 +44,7 @@ class Staff extends CI_Controller {
         $data['deliverableID'] = $delID;
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('staffViews/viewDeliverableInfo');
         $this->load->view('staffViews/viewDeliverableFooter');
         if (isset($_SESSION['statusUpdate'])) {
@@ -63,16 +54,14 @@ class Staff extends CI_Controller {
 
     public function viewEvidence($evidID) {
         self::checkIfAuthorised();
-        $this->load->model('deliverable');
-        $this->load->model('evidence');
-        $this->load->model('feedback');
+        $this->load->model(array('user','supervisor','deliverable','evidence','feedback'));
         $data['evidence'] = $this->evidence->getOneEvidence($evidID);
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksOfEvidence($evidID);
         $data['title'] = "View Evidence";
         $data['evidenceID'] = $evidID;
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('staffViews/viewEvidence');
         if (isset($_SESSION['feedbackSubmission'])) {
             unset($_SESSION['feedbackSubmission']);
@@ -84,15 +73,12 @@ class Staff extends CI_Controller {
 
     public function allocateStudents() {
         self::checkIfAuthorised();
-        $this->load->model('user');
-        $this->load->model('student');
-        $this->load->model('supervisor');
-        $this->load->model('moduleLeader');
+        $this->load->model(array('user','student','supervisor','moduleLeader'));
         $data['title'] = "Student Allocation";
         $data['studentList'] = $this->moduleLeader->getAllUnallocatedStudents();
         $data['supervisorList'] = $this->moduleLeader->getAllSupervisors();
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('moduleLeaderViews/allocateStudents');
         if (isset($_SESSION['allocation'])) {
             unset($_SESSION['allocation']);
@@ -101,14 +87,12 @@ class Staff extends CI_Controller {
 
     public function manageRequests() {
         self::checkIfAuthorised();
-        $this->load->model('request');
-        $this->load->model('deadlineRequest');
-        $this->load->model('deleteRequest');
+        $this->load->model(array('user','supervisor','request','deadlineRequest','deleteRequest'));
         $data['title'] = "Manage Requests";
         $data['deadlineRequests'] = $this->deadlineRequest->getAllPendingDeadlineRequests($this->session->secondaryID);
         $data['deleteRequests'] = $this->deleteRequest->getAllPendingDeleteRequests($this->session->secondaryID);
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('staffViews/manageRequests');
         if (isset($_SESSION['requestRejection'])) {
             unset($_SESSION['requestRejection']);
@@ -121,10 +105,7 @@ class Staff extends CI_Controller {
     public function processAllocation() {
         self::checkIfAuthorised();
         if (isset($_POST['students'])) {
-            $this->load->model('user');
-            $this->load->model('student');
-            $this->load->model('supervisor');
-            $this->load->model('moduleLeader');
+            $this->load->model(array('user','student','supervisor','moduleLeader'));
             $this->moduleLeader->allocateStudentsToSupervisor();
             redirect('student-allocation');
         } else {
@@ -134,26 +115,21 @@ class Staff extends CI_Controller {
 
     public function viewSubmittedEvidences() {
         self::checkIfAuthorised();
-        $this->load->model('user');
-        $this->load->model('student');
-        $this->load->model('supervisor');
-        $this->load->model('evidence');
+        $this->load->model(array('user','student','supervisor','evidence'));
         $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
         $data['title'] = "Latest Submissions";
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('staffViews/latestSubmissions');
     }
 
     public function viewAllSupervisors() {
         self::checkIfAuthorised();
-        $this->load->model('user');
-        $this->load->model('supervisor');
-        $this->load->model('moduleLeader');
+        $this->load->model(array('user','supervisor','moduleLeader'));
         $data['supervisorList'] = $this->moduleLeader->getAllSupervisors();
         $data['title'] = "View All Supervisors";
         $this->load->view('header', $data);
-        $this->load->view(self::navbarLoader($_SESSION['userTypeID']));
+        self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('moduleLeaderViews/viewAllSupervisors');
     }
 
@@ -166,17 +142,13 @@ class Staff extends CI_Controller {
         }
     }
 
-    private static function navbarLoader($userTypeID) {
-        $navFilePath = "";
+    private function navbarLoader($userTypeID) {
         if ($userTypeID == 2) {
-            $navFilePath = 'staffViews/navbar';
-            return $navFilePath;
+            return $this->load->view('staffViews/navbar');
         } else if ($userTypeID == 1) {
-            $navFilePath = 'moduleLeaderViews/navbar';
-            return $navFilePath;
-        } else {
-            echo "user type is " . $userTypeID . ", which is unexpected";
-        }
+            $this->load->model('moduleLeader');
+            return $this->load->view('moduleLeaderViews/navbar');
+        } 
     }
 
 }
