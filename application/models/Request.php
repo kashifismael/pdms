@@ -17,6 +17,20 @@ class Request extends CI_Model {
         return $query;
     }
     
+    public function getRequestInfoForEmail($reqID){
+        $query = "SELECT fyp_Deliverable.deliverableName, fyp_User.firstName, fyp_User.emailAddress, 
+                    fyp_RequestType.requestTypeDesc ,fyp_RequestStatus.requestStatusDesc
+                    FROM fyp_Request
+                    INNER JOIN fyp_RequestType ON fyp_Request.requestType_ID = fyp_RequestType.requestType_ID
+                    INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID
+                    INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
+                    INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
+                    INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
+                    WHERE fyp_Request.request_ID = '$reqID'";
+        $result = $this->db->query($query);
+        return $result->row();
+    }
+    
     function __construct() {
         parent::__construct();
     }

@@ -35,8 +35,8 @@ class RequestController extends CI_Controller {
             echo "nothing was posted";
         }
     }
-    
-    public function approveDeliverableDelete(){
+
+    public function approveDeliverableDelete() {
         if (isset($_POST['delID'])) {
             echo "<pre>";
             print_r($_POST);
@@ -52,7 +52,10 @@ class RequestController extends CI_Controller {
             $approve = $this->deadlineRequest->approveDeadlineRequest(
                     $this->input->post('reqID'), $this->input->post('delID'), $this->input->post('reqDeadline'));
             if ($approve === true) {
+                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
                 $this->session->set_userdata('deadlineRequestApproval', 'success');
+                self::sendNotificationEmail($info->emailAddress, $info->firstName,
+                        $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
                 redirect('manage-requests');
             } else {
                 echo "something went wrong";
@@ -68,11 +71,29 @@ class RequestController extends CI_Controller {
             $reject = $this->request->rejectRequest($this->input->post('reqID'));
             if ($reject === true) {
                 $this->session->set_userdata('requestRejection', 'success');
+                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
+                self::sendNotificationEmail($info->emailAddress, $info->firstName,
+                        $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
                 redirect('manage-requests');
             }
         } else {
             echo "nothing was posted, redirect away";
         }
+    }
+
+    private function sendNotificationEmail($email, $firstName, $deliverable, $requestType, $requestStatus) {
+        $data['title'] = "Request ".$requestStatus;
+        $data['firstName'] = $firstName;
+        $data['requestType'] = $requestType;
+        $data['requestStatus'] = $requestStatus;
+        $data['delName'] = $deliverable;
+        $this->load->library('email');
+        $this->email->from('unidissKU@gmail.com', 'UniDiss');
+        $this->email->to($email);
+        $this->email->subject("Request ".$requestStatus);
+        $body = $this->load->view('emailViews/requestStatusEmail', $data, TRUE);
+        $this->email->message($body);
+        $this->email->send();
     }
 
 }
