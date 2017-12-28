@@ -26,3 +26,9 @@ function getRequestCheckTwo($getParameter){
         echo ' class="active"';
     }
 }
+
+function hideIfZero($resultNumber){
+    if($resultNumber === 0){
+        echo "hidden";
+    }
+}

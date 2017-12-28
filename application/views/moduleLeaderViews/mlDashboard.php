@@ -7,7 +7,7 @@
 
         <div class="col-md-3" >
             <div class="panel panel-default">
-                <div class="panel-heading"><strong><?= $unAllocatedStudentsNumber->num_rows() ?></strong> students awaiting allocation</div>
+                <div class="panel-heading"><strong><?= $unAllocatedStudentsNumber ?></strong> students awaiting allocation</div>
                 <div class="panel-body"><a href="<?= base_url('student-allocation') ?>">Click to view</a></div>
             </div>
 

@@ -5,25 +5,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Staff extends CI_Controller {
 
     public function index() {
-        self::checkIfAuthorised();
-        $this->load->model(array('user','student','supervisor','evidence'));
+        $data = self::checkIfAuthorised();
+        //$this->load->model(array('user','student','supervisor','evidence'));
+        $this->load->model(array('user','student','supervisor'));
         $data['supervisorGroup'] = $this->supervisor->getAllSupervisorStudents($this->session->secondaryID);
         $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
         $data['title'] = "Dashboard";
         $this->load->view('header', $data);
         self::navbarLoader($_SESSION['userTypeID']);
         if ($_SESSION['userTypeID'] == 1) {
-            $data['unAllocatedStudentsNumber'] = $this->moduleLeader->unallocatedStudentsQuery();
+            //$data['unAllocatedStudentsNumber'] = $this->moduleLeader->unallocatedStudentsQuery();
             $this->load->view('moduleLeaderViews/mlDashboard', $data);
         } else if ($_SESSION['userTypeID'] == 2) {
             $this->load->view('staffViews/supDashboard');
-        } else {
-            echo "user type is " . $_SESSION['userTypeID'] . ", which is unexpected";
-        }
+        } 
+//        else {
+//            echo "user type is " . $_SESSION['userTypeID'] . ", which is unexpected";
+//        }
     }
 
     public function viewStudent($studentID) {
-        self::checkIfAuthorised();
+        $data = self::checkIfAuthorised();
         $this->load->model(array('user','student','supervisor','deliverable'));
         $data['studentID'] = $studentID;
         $data['student'] = $this->supervisor->getStudentInfo($studentID);
@@ -35,8 +37,8 @@ class Staff extends CI_Controller {
     }
 
     public function viewDeliverable($delID) {
-        self::checkIfAuthorised();
-        $this->load->model(array('user','supervisor','deliverable','evidence','feedback'));
+        $data = self::checkIfAuthorised();
+        $this->load->model(array('user','supervisor','deliverable','feedback'));
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksofDeliverable($delID);
@@ -53,8 +55,8 @@ class Staff extends CI_Controller {
     }
 
     public function viewEvidence($evidID) {
-        self::checkIfAuthorised();
-        $this->load->model(array('user','supervisor','deliverable','evidence','feedback'));
+        $data = self::checkIfAuthorised();
+        $this->load->model(array('user','supervisor','deliverable','feedback'));
         $data['evidence'] = $this->evidence->getOneEvidence($evidID);
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksOfEvidence($evidID);
@@ -72,7 +74,7 @@ class Staff extends CI_Controller {
     }
 
     public function allocateStudents() {
-        self::checkIfAuthorised();
+        $data = self::checkIfAuthorised();
         $this->load->model(array('user','student','supervisor','moduleLeader'));
         $data['title'] = "Student Allocation";
         $data['studentList'] = $this->moduleLeader->getAllUnallocatedStudents();
@@ -86,7 +88,7 @@ class Staff extends CI_Controller {
     }
 
     public function manageRequests() {
-        self::checkIfAuthorised();
+        $data = self::checkIfAuthorised();
         $this->load->model(array('user','supervisor','request','deadlineRequest','deleteRequest'));
         $data['title'] = "Manage Requests";
         $data['deadlineRequests'] = $this->deadlineRequest->getAllPendingDeadlineRequests($this->session->secondaryID);
@@ -114,8 +116,8 @@ class Staff extends CI_Controller {
     }
 
     public function viewSubmittedEvidences() {
-        self::checkIfAuthorised();
-        $this->load->model(array('user','student','supervisor','evidence'));
+        $data = self::checkIfAuthorised();
+        $this->load->model(array('user','student','supervisor'));
         $data['submittedEvidences'] = $this->evidence->getAllEvidencesForSupervisor($this->session->secondaryID);
         $data['title'] = "Latest Submissions";
         $this->load->view('header', $data);
@@ -124,7 +126,7 @@ class Staff extends CI_Controller {
     }
 
     public function viewAllSupervisors() {
-        self::checkIfAuthorised();
+        $data = self::checkIfAuthorised();
         $this->load->model(array('user','supervisor','moduleLeader'));
         $data['supervisorList'] = $this->moduleLeader->getAllSupervisors();
         $data['title'] = "View All Supervisors";
@@ -133,9 +135,18 @@ class Staff extends CI_Controller {
         $this->load->view('moduleLeaderViews/viewAllSupervisors');
     }
 
-    private static function checkIfAuthorised() {
+    private function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
             //user is authorised
+            //load all supervisor models for nav
+            $this->load->model(array('request','evidence'));
+            //do count queries on the navbar options
+                //data[] = countAllRequests
+                $data['numberOfReqs'] = $this->request->countAllRequests($this->session->secondaryID);
+                //data[] = countAllEvidences
+                $data['numberOfEvids'] = $this->evidence->countAllSubmittedEvidences($this->session->secondaryID);
+                return $data;
+                
         } else {
             //echo "user is not authorised, redirect user away";
             redirect('/?isAuthorised=false');
@@ -147,7 +158,9 @@ class Staff extends CI_Controller {
             return $this->load->view('staffViews/navbar');
         } else if ($userTypeID == 1) {
             $this->load->model('moduleLeader');
-            return $this->load->view('moduleLeaderViews/navbar');
+                //count all unallocated students
+            $data['unAllocatedStudentsNumber'] = $this->moduleLeader->countAllUnallocatedStudents();
+            return $this->load->view('moduleLeaderViews/navbar',$data);
         } 
     }
 

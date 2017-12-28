@@ -71,6 +71,20 @@ class Evidence extends CI_Model {
         return $evidenceList;
     }
 
+    public function countAllSubmittedEvidences($staffID){
+        $query = "SELECT fyp_Evidence.evidence_ID
+                    FROM (((((`fyp_Evidence`
+                    INNER JOIN fyp_Deliverable ON fyp_Deliverable.deliverable_ID = fyp_Evidence.deliverable_ID)
+                    INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID)
+                    INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID)
+                    INNER JOIN fyp_Staff ON fyp_Student.staff_ID = fyp_Staff.staff_ID)
+                    INNER JOIN fyp_EvidenceStatus ON fyp_Evidence.evidStatus_ID = fyp_EvidenceStatus.evidStatus_ID)
+                    WHERE fyp_Staff.staff_ID = '$staffID' 
+                    AND fyp_Evidence.evidStatus_ID = 1";
+        $result = $this->db->query($query);
+        return $result->num_rows();
+    }
+    
     public function getOneEvidence($evidID) {
         $query = "SELECT * 
                     FROM `fyp_Evidence` 

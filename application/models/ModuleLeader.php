@@ -19,8 +19,15 @@ class ModuleLeader extends Supervisor {
                 ON fyp_Student.user_ID = fyp_User.user_ID 
                 WHERE fyp_Student.staff_ID IS NULL";
         return $this->db->query($query);
+        //$result = $this->db->query($query);
+        //return $result->num_rows();
     }
 
+    public function countAllUnallocatedStudents(){
+        $result = self::unallocatedStudentsQuery();
+        return $result->num_rows();
+    }
+    
     public function getAllSupervisors() {
         $supervisors = array();
         $query = "SELECT * 
