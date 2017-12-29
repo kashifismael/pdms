@@ -101,14 +101,14 @@ class Student extends CI_Controller {
         $this->load->view('studentViews/footer');
     }
 
-    public function viewAllEvidences() {
-        self::checkIfAuthorised();
-        $data['title'] = "View All Evidences";
-        $this->load->view('header', $data);
-        $this->load->view('studentViews/navbar');
-        $this->load->view('studentViews/viewAllEvidences');
-        $this->load->view('studentViews/footer');
-    }
+//    public function viewAllEvidences() {
+//        self::checkIfAuthorised();
+//        $data['title'] = "View All Evidences";
+//        $this->load->view('header', $data);
+//        $this->load->view('studentViews/navbar');
+//        $this->load->view('studentViews/viewAllEvidences');
+//        $this->load->view('studentViews/footer');
+//    }
 
     public function viewAllFeedbacks() {
         self::checkIfAuthorised();

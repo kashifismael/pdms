@@ -10,14 +10,13 @@
     
     <div class="tab-content">
            <div id="Dash1" class="tab-pane fade in active">
-  <div class="row row-mobile" > <!-- doesnt show well on mobile -->
-<!-- <div class="row" style="display: flex; justify-content: center; align-items: center;"> -->
+  <div class="row row-mobile" > 
   <div class="col-xs-12 text-center">
       <h3>Deadline Change Requests</h3>
   </div>
   </div>
 <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
-<!-- <div class="table-feed"> -->
+
   <table class="table" >
 <thead>
   <tr>
@@ -61,14 +60,13 @@
   </div> 
             
       <div id="Dash2" class="tab-pane fade in">
-  <div class="row row-mobile" > <!-- doesnt show well on mobile -->
-<!-- <div class="row" style="display: flex; justify-content: center; align-items: center;"> -->
+  <div class="row row-mobile" > 
   <div class="col-xs-12 text-center">
       <h3>Deletion Requests</h3>
   </div>
   </div>
 <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
-<!-- <div class="table-feed"> -->
+
   <table class="table" >
 <thead>
   <tr>
