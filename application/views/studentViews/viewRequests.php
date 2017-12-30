@@ -70,27 +70,21 @@
   <table class="table" >
 <thead>
   <tr>
-    <th>Student name</th>
     <th>Deliverable name</th>
     <th>Reason</th>
-    <th>Approve</th>
-    <th>Disapprove</th>
+    <th>Status</th>
   </tr>
 </thead>
 <tbody style="overflow-y: scroll;">
     <tr>
-        <td>Romelu Lukaku</td>
         <td>Proposal</td>
         <td>I dont need this anymore</td>
-        <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-        <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+        <td>Approved</td>
     </tr>
         <tr>
-        <td>Luis Suarez</td>
         <td>Application</td>
         <td>i want to change my fyp idea</td>
-        <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-        <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
+        <td>rejected</td>
     </tr>
     
 </tbody>

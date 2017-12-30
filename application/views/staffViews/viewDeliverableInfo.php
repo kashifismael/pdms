@@ -12,7 +12,7 @@
         </div>
     <?php } ?>
     <ol class="breadcrumb" style="padding-left: 10%;">
-        <li><a href="<?= base_url('staff-home')?>"> Dashboard</a></li>
+        <li><a href="<?= base_url('staff-home') ?>"> Dashboard</a></li>
         <li><a href="<?= base_url('view-student/' . $deliverableInfo->getStudentID()) ?>">View Student</a></li>
         <li class="active">View Deliverable</li>
     </ol>
@@ -49,6 +49,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-home"></span><span class="hidden-xs"> View Evidences</span></a></li>
                 <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-tasks"></span><span class="hidden-xs"> View Feedback</span></a></li>
+                <li><a data-toggle="tab" href="#Dash3"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Requests</span></a></li>
+                <li><a data-toggle="tab" href="#Dash4"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Requests</span></a></li>
             </ul>   
             <div class="tab-content">
                 <div id="Dash1" class="tab-pane fade in active">
@@ -103,6 +105,48 @@
                                 <td>July</td>
                                 <td>Dooley</td>
                                 <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="Dash3" class="tab-pane fade in">
+                    <h3>deadline requests</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Requested Deadline</th>
+                                <th>Reason</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>17 mon nov</td>
+                                <td>because innit</td>
+                                <td>tue 28 oct</td>
+                                <td>rejected</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="Dash4" class="tab-pane fade in">
+                    <h3>delete requests</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date of Request</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>17 mon nov</td>
+                                <td>because innit</td>
+                                <td>rejected</td>
                             </tr>
                         </tbody>
                     </table>

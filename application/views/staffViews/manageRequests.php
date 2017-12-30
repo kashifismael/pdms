@@ -25,8 +25,9 @@
     <h1 class="text-center">Manage requests</h1>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span></a></li>
-        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Deliverable</span></a></li> 
+        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span> <span class="label label-primary <?= hideIfZero($deadlineReqNumber) ?>"><?= $deadlineReqNumber ?></span></a></li>
+        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Deliverable</span> <span class="label label-primary <?= hideIfZero($deleteReqNumber) ?>"><?= $deleteReqNumber ?></span></a></li> 
+        <li><a data-toggle="tab" href="#Dash3"><span class="glyphicon glyphicon-backward"></span><span class="hidden-xs"> Previous Requests</span></a></li> 
     </ul>
 
     <div class="tab-content">
@@ -105,12 +106,6 @@
             </div>
         </div> 
 
-
-
-
-
-
-
         <div id="Dash2" class="tab-pane fade in">
             <div class="row row-mobile" >
                 <div class="col-xs-12 text-center">
@@ -176,7 +171,47 @@
             </div>
         </div>   
 
+        <div id="Dash3" class="tab-pane fade in">
+            <div class="row row-mobile" >
+                <div class="col-xs-12 text-center">
+                    <h3>Previous Requests</h3>
+                </div>
+            </div>
+            <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th>Student name</th>
+                            <th>Deliverable name</th>
+                            <th>Submitted</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="overflow-y: scroll;">
+                        <tr>
+                            <td>Romelu Lukaku</td>
+                            <td>Proposal</td>
+                            <td>Mon 17 Dec</td>
+                            <td>Delete</td>
+                            <td>Rejected</td>
+                            <td><a href="#">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Luis Suarez</td>
+                            <td>Application</td>
+                            <td>Tue 3 Nov</td>
+                            <td>Deadline</td>
+                            <td>Accepted</td>
+                            <td><a href="#">View</a></td>
+                        </tr>
 
+                    </tbody>
+                </table>
+            </div>
+
+        </div> 
 
     </div>    
 
