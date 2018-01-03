@@ -23,7 +23,7 @@
                     <li<?= activeCheck("student-home") ?>><a href="<?= base_url("student-home"); ?>">Dashboard</a></li>
                     <!--li<!?= activeCheck("view-all-evidence") ?>><a href="<!?= base_url("view-all-evidence"); ?>">View Evidences</a></li-->
                     <li<?= activeCheck("view-all-feedback") ?>><a href="<?= base_url("view-all-feedback"); ?>">View Feedbacks <span class="label label-primary <?= hideIfZero($unSeenFeedbackNumber) ?>" ><?= $unSeenFeedbackNumber ?></span></a></li>
-                    <li<?= activeCheck("view-requests") ?>><a href="<?= base_url('view-requests') ?>">View Requests</a></li>
+                    <li<?= activeCheck("view-requests") ?>><a href="<?= base_url('view-requests') ?>">View Requests <span class="label label-primary <?= hideIfZero($reqResponseNumber) ?>" ><?= $reqResponseNumber ?></span></a></li>
                     <li<?= activeCheck("view-supervisor") ?>><a href="<?= base_url("view-supervisor"); ?>">View Supervisor</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

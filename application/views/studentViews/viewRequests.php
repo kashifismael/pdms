@@ -1,111 +1,139 @@
      
 <div class="container-fluid" style="padding-left: 10%; padding-right:10%;">  
- 
-    <h1 class="text-center">Manage requests</h1>
-    
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span></a></li>
-            <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Deletion Requests</span></a></li> 
-        </ul>
-    
+
+    <h1 class="text-center">View requests</h1>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Pending Requests</span></a></li>
+        <li><a data-toggle="tab" href="#Dash2" onclick="myFunction()"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Request responses </span> <span class="label label-primary <?= hideIfZero($reqResponseNumber) ?>"><?= $reqResponseNumber ?></span></a></li> 
+    </ul>
+
     <div class="tab-content">
-           <div id="Dash1" class="tab-pane fade in active">
-  <div class="row row-mobile" > 
-  <div class="col-xs-12 text-center">
-      <h3>Deadline Change Requests</h3>
-  </div>
-  </div>
-<div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
+        <div id="Dash1" class="tab-pane fade in active">
+            <div class="row row-mobile" > 
+                <div class="col-xs-12 text-center">
+                    <h3>Pending Requests</h3>
+                </div>
+            </div>
+            <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
 
-  <table class="table" >
-<thead>
-  <tr>
-    <th>Deliverable name</th>
-    <th>Current Date</th>
-    <th>Requested Date</th>
-    <th>Reason</th>
-    <th>Status</th>
-  </tr>
-</thead>
-<tbody style="overflow-y: scroll;">
-    <tr>
-        <td>Report</td>
-        <td>01/09/17</td>
-        <td>31/09/17</td>
-        <td>I just really need the time bro</td>
-        <td>Submitted</td>
-    </tr>
-        <tr>
-        <td>Prototype</td>
-        <td>01/09/17</td>
-        <td>31/09/17</td>
-        <td>I also need the time</td>
-        <td>Submitted</td>
-    </tr>
-    
-</tbody>
-</table>
-</div>
-               
-          
-        <div class="text-center">
-              <ul class="pagination">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-              </ul>
-        </div>
-  </div> 
-            
-      <div id="Dash2" class="tab-pane fade in">
-  <div class="row row-mobile" > 
-  <div class="col-xs-12 text-center">
-      <h3>Deletion Requests</h3>
-  </div>
-  </div>
-<div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th>Deliverable name</th>
+                            <th>Request Type</th>
+                            <th>Submitted</th>
+                            <th>Reason</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="overflow-y: scroll;">
+                        <?php foreach ($pendingRequests as $request) { ?>
+                            <tr>
+                                <td><?= $request->getDeliverableName() ?></td>
+                                <td><?= $request->getRequestType() ?></td>
+                                <td><?= $request->getDateOfRequest() ?></td>
+                                <td><?= $request->getReason() ?></td>
+                                <td><a href="<?= base_url('deliverable/' . $request->getDeliverableNo()) ?>">View</a></td>
+                            </tr>
+                        <?php } ?>
+                        <tr>
+                            <td>Report</td>
+                            <td>Delete</td>
+                            <td>31/09/17</td>
+                            <td>I just really need the time bro</td>
+                            <td><a href="#">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Prototype</td>
+                            <td>Deadline</td>
+                            <td>31/09/17</td>
+                            <td>I also need the time</td>
+                            <td><a href="#">View</a></td>
+                        </tr>
 
-  <table class="table" >
-<thead>
-  <tr>
-    <th>Deliverable name</th>
-    <th>Reason</th>
-    <th>Status</th>
-  </tr>
-</thead>
-<tbody style="overflow-y: scroll;">
-    <tr>
-        <td>Proposal</td>
-        <td>I dont need this anymore</td>
-        <td>Approved</td>
-    </tr>
-        <tr>
-        <td>Application</td>
-        <td>i want to change my fyp idea</td>
-        <td>rejected</td>
-    </tr>
-    
-</tbody>
-</table>
-</div>
-               
-          
-        <div class="text-center">
-              <ul class="pagination">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-              </ul>
-        </div>
-  </div>   
-        
-        
-        
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="text-center">
+                <ul class="pagination">
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
+        </div> 
+
+        <div id="Dash2" class="tab-pane fade in">
+            <div class="row row-mobile" > 
+                <div class="col-xs-12 text-center">
+                    <h3>Request responses</h3>
+                </div>
+            </div>
+            <div class="panel-body" style="max-height: 600px; overflow-y: scroll;">
+
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th>Deliverable name</th>
+                            <th>Request Type</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="overflow-y: scroll;">
+                        <?php foreach ($requestsResponses as $request) { ?>
+                            <tr>
+                                <td><?= $request->getDeliverableName() ?></td>
+                                <td><?= $request->getRequestType() ?></td>
+                                <td><?= $request->getRequestStatus() ?></td>
+                                <td><a href="<?= base_url('deliverable/' . $request->getDeliverableNo()) ?>">View</a></td>
+                            </tr>
+                        <?php } ?>                       
+                        <tr>
+                            <td>Proposal</td>
+                            <td>Delete</td>
+                            <td>Approved</td>
+                            <td><a href="#">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Application</td>
+                            <td>Deadline</td>
+                            <td>rejected</td>
+                            <td><a href="#">View</a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="text-center">
+                <ul class="pagination">
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
+        </div>   
+
+
+
     </div>    
-      
-    
+
+
 </div>  
+
+<script>
+    function myFunction() {
+        console.log("Set the hasBeenSeen status of all these requests to true");
+        //make ajax request
+    }
+</script>
+
