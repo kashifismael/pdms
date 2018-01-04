@@ -24,11 +24,16 @@
             </div>  
         </div>
     <?php } ?>
-
+    
+    <ol class="breadcrumb hidden-xs" style="padding-left: 10%;">
+        <li><a href="<?= base_url('student-home') ?>"> Dashboard</a></li>
+        <li class="active">View Deliverable</li>
+    </ol>
+    
     <div class="row row-mobile" >
         <div class="text-center">
             <h3 class="visible-xs"><?= $deliverableInfo->getDeliverableName() ?></h3>
-            <h1 class="hidden-xs"><?= $deliverableInfo->getDeliverableName() ?></h1>
+      <!--      <h1 class="hidden-xs"><!?= $deliverableInfo->getDeliverableName() ?></h1> -->
         </div>
     </div>
     <div class="row row-mobile" > 

@@ -1,9 +1,15 @@
 
 <div class="container-fluid">
+    <ol class="breadcrumb hidden-xs" style="padding-left: 10%;">
+        <li><a href="<?= base_url('student-home') ?>"> Dashboard</a></li>
+        <li><a href="<?= base_url('deliverable/' . $evidence->getDeliverableNo()) ?>"> View Deliverable</a></li>
+        <li class="active">View Evidence</li>
+    </ol>
+
     <div class="row row-mobile" > <!-- doesnt show well on mobile -->
         <div class=" col-xs-12 text-center">
             <h3 class="visible-xs"><?= $evidence->getEvidenceName() ?></h3>
-            <h1 class="hidden-xs"><?= $evidence->getEvidenceName() ?></h1>
+            <!--     <h1 class="hidden-xs"><!?= $evidence->getEvidenceName() ?></h1> -->
         </div>
     </div>
     <div class="row row-mobile" >
@@ -22,10 +28,11 @@
 
     <div class="row">
 
-        <div class="col-md-3 col-md-offset-1" >
+        <div class="col-md-2 col-md-offset-1" >
             <div class="panel panel-default">
                 <div class="panel-heading"><h4 class="text-center">Info</h3></div>
                 <div class="panel-body">
+                    <p><label>Evidence:</label> <?= $evidence->getEvidenceName() ?></p>
                     <p><label>Deliverable:</label> <?= $evidence->getDeliverableName() ?></p>
                     <p><label>Status:</label> <?= $evidence->getEvidenceStatus() ?></p>
                     <p><label>Submitted:</label> <?= date_format($evidence->getSubmissionDate(), 'G:i - D j M') ?></p>
@@ -39,8 +46,8 @@
             <a href="#" data-toggle="modal" data-target="#editModal" class="btn btn-primary btn-warning btn-block hidden-xs hidden-sm"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
         </div>
 
-        <div class="col-md-7 " >
-            <h3 class="text-center">Feedback List</h3>
+        <div class="col-md-8 " >
+            <h3 class="text-center"><?= $evidence->getEvidenceName() ?> - Feedback List</h3>
             <table class="table" >
                 <thead>
                     <tr>

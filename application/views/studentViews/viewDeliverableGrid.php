@@ -1,6 +1,6 @@
 <div class="row row-mobile" >
     <div class="col-sm-6 col-xs-12">
-        <h3 class="text-center">List of Evidences</h3>
+        <h3 class="text-center"><?= $deliverableInfo->getDeliverableName() ?> - List of Evidences</h3>
     </div>
     <div class="col-sm-3 col-xs-12 text-center" >
         <strong>View</strong>
