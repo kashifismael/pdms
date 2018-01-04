@@ -65,6 +65,18 @@ class Deliverable extends CI_Model {
         return $deliverableInfo;
     }
 
+    public function getAverageScoreOfOneStudent($username){
+        $query = "SELECT ROUND(AVG(delStatusScore)*100, 2) AS avgScore
+                    FROM fyp_Deliverable 
+                    INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID 
+                    INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID 
+                    INNER JOIN fyp_DeliverableStatus ON fyp_DeliverableStatus.delStatus_ID = fyp_Deliverable.delStatus_ID 
+                    WHERE fyp_User.username = '$username'";
+        $result = $this->db->query($query);
+        $row = $result->row();
+        return $row->avgScore;
+    }
+    
     public function insertDeliverable($deadlineDate) {
         $delData = array(
             'student_ID' => $this->session->secondaryID,

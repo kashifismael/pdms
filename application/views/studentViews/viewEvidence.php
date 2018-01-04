@@ -30,7 +30,7 @@
 
         <div class="col-md-2 col-md-offset-1" >
             <div class="panel panel-default">
-                <div class="panel-heading"><h4 class="text-center">Info</h3></div>
+                <div class="panel-heading"><h4 class="text-center">Info</h4></div>
                 <div class="panel-body">
                     <p><label>Evidence:</label> <?= $evidence->getEvidenceName() ?></p>
                     <p><label>Deliverable:</label> <?= $evidence->getDeliverableName() ?></p>

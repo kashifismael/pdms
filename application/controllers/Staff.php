@@ -30,6 +30,7 @@ class Staff extends CI_Controller {
         $data['studentID'] = $studentID;
         $data['student'] = $this->supervisor->getStudentInfo($studentID);
         $data['theirDeliverables'] = $this->deliverable->getAllStudentDeliverables($studentID);
+        $data['score'] = $this->deliverable->getAverageScoreOfOneStudent($studentID);
         $data['title'] = "View Student";
         $this->load->view('header', $data);
         self::navbarLoader($_SESSION['userTypeID']);

@@ -12,6 +12,7 @@
                     <p><label>Name:</label> <?= $student->getFirstName() . " " . $student->getLastName() ?></p>
                     <p><label>K Number:</label> <?= $student->getUsername() ?></p>
                     <p><label>Email Address:</label> <?= $student->getEmail() ?></p>
+                    <p><label>Score:</label> <?= $score ?>%</p>
                 </div>
             </div>
         </div>
