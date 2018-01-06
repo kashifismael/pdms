@@ -67,16 +67,34 @@ class Request extends CI_Model {
     }
 
     public function countAllRequestResponsesForOneStudent($studentID) {
-        $query = "SELECT fyp_Request.request_ID
-                            FROM `fyp_Request` 
-                            INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID
-                            INNER JOIN fyp_RequestType ON fyp_RequestType.requestType_ID = fyp_Request.requestType_ID
-                            INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
-                            INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
-                            WHERE fyp_Request.requestStatus_ID = 2 OR fyp_Request.requestStatus_ID = 3 AND
-                            fyp_Student.student_ID = '$studentID'";
+        $query =  self::getAllUnseenRequestsQuery($studentID);
         $result = $this->db->query($query);
         return $result->num_rows();
+    }
+
+    public function getAllUnseenRequestIDs($studentID){
+        $query =  self::getAllUnseenRequestsQuery($studentID);
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+    
+    public function setUnseenRequestsToSeen($unseenrequests){
+        foreach ($unseenrequests as $request){
+            $this->db->query("UPDATE `fyp_Request` SET `hasBeenSeen` = '1' WHERE `fyp_Request`.`request_ID` = '$request->request_ID'");
+        }
+    }
+    
+    private function getAllUnseenRequestsQuery($studentID) {
+        $query = "SELECT fyp_Request.request_ID
+                    FROM `fyp_Request` 
+                    INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID
+                    INNER JOIN fyp_RequestType ON fyp_RequestType.requestType_ID = fyp_Request.requestType_ID
+                    INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
+                    INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
+                    WHERE fyp_Request.hasBeenSeen = 0 AND 
+                    fyp_Student.student_ID = '$studentID' AND 
+                    (fyp_Request.requestStatus_ID = 2 OR fyp_Request.requestStatus_ID = 3)";
+        return $query;
     }
 
     public function getAllPendingRequestsOfStudent($studentID) {
@@ -106,7 +124,7 @@ class Request extends CI_Model {
                     INNER JOIN fyp_RequestType ON fyp_RequestType.requestType_ID = fyp_Request.requestType_ID
                     INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
-                    WHERE fyp_Request.requestStatus_ID = 2 OR fyp_Request.requestStatus_ID = 3
+                    WHERE (fyp_Request.requestStatus_ID = 2 OR fyp_Request.requestStatus_ID = 3)
                     AND fyp_Student.student_ID = '$studentID'
                     ORDER BY `fyp_Request`.`dateOfRequest` ASC";
         $result = $this->db->query($query);

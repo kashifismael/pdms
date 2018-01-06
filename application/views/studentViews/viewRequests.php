@@ -5,7 +5,7 @@
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Pending Requests</span></a></li>
-        <li><a data-toggle="tab" href="#Dash2" onclick="myFunction()"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Request responses </span> <span class="label label-primary <?= hideIfZero($reqResponseNumber) ?>"><?= $reqResponseNumber ?></span></a></li> 
+        <li><a data-toggle="tab" href="#Dash2" id="myFunction"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Request responses </span> <span class="label label-primary notif <?= hideIfZero($reqResponseNumber) ?>"><?= $reqResponseNumber ?></span></a></li> 
     </ul>
 
     <div class="tab-content">
@@ -131,9 +131,20 @@
 </div>  
 
 <script>
-    function myFunction() {
-        console.log("Set the hasBeenSeen status of all these requests to true");
-        //make ajax request
-    }
+    $(document).ready(function () {
+        $("#myFunction").click(function () {
+            $.post("updateRequestStatus",
+                    {
+                        hasBeenSeen: true
+                    },
+                    function (data) {
+                        $(document).ajaxSuccess(function () {
+                            $(".notif").hide();
+                            console.log(data);
+                        });
+                    });
+
+        });
+    });
 </script>
 
