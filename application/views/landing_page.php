@@ -91,27 +91,27 @@
                                 <form method="POST" action="studentRegister">
                                     <div class="form-group">
                                         <label for="text">Enter First Name</label>
-                                        <input type="text" class="form-control" id="stFirstName" name="stFirstName" required>
+                                        <input type="text" class="form-control" id="stFirstName" name="stFirstName" maxlength="30" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Last Name</label>
-                                        <input type="text" class="form-control" id="stLastName" name="stLastName" required>
+                                        <input type="text" class="form-control" id="stLastName" name="stLastName" maxlength="30" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Student ID</label>
-                                        <input type="text" class="form-control" id="stUsername" name="stUsername" required>
+                                        <input type="text" class="form-control" id="stUsername" name="stUsername" maxlength="10" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Email</label>
-                                        <input type="email" class="form-control" id="stEmail" name="stEmail" required>
+                                        <input type="email" class="form-control" id="stEmail" name="stEmail" maxlength="200" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Password</label>
-                                        <input type="password" class="form-control" id="stpwd1" name="stpwd1" required>
+                                        <input type="password" class="form-control" id="stpwd1" name="stpwd1" maxlength="20" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Confirm password</label>
-                                        <input type="password" class="form-control" id="stpwd2" name="stpwd2" required>
+                                        <input type="password" class="form-control" id="stpwd2" name="stpwd2" maxlength="20" required>
                                     </div>
                                     <button type="submit" class="btn btn-success">Sign up</button>
                                 </form>
@@ -120,27 +120,27 @@
                                 <form method="POST" action="staffRegister">
                                     <div class="form-group">
                                         <label for="text">Enter First Name</label>
-                                        <input type="text" class="form-control" id="kuFirstName" name="kuFirstName" required>
+                                        <input type="text" class="form-control" id="kuFirstName" name="kuFirstName" maxlength="30" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Last Name</label>
-                                        <input type="text" class="form-control" id="kuLastName" name="kuLastName" required>
+                                        <input type="text" class="form-control" id="kuLastName" name="kuLastName" maxlength="30" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Staff ID</label>
-                                        <input type="text" class="form-control" id="kuUsername" name="kuUsername" required>
+                                        <input type="text" class="form-control" id="kuUsername" name="kuUsername" maxlength="10" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Email</label>
-                                        <input type="email" class="form-control" id="kuEmail" name="kuEmail" required>
+                                        <input type="email" class="form-control" id="kuEmail" name="kuEmail" maxlength="200" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Enter Password</label>
-                                        <input type="password" class="form-control" id="kupwd1" name="kupwd1" required>
+                                        <input type="password" class="form-control" id="kupwd1" name="kupwd1" maxlength="20" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Confirm password</label>
-                                        <input type="password" class="form-control" id="kupwd2" name="kupwd2" required>
+                                        <input type="password" class="form-control" id="kupwd2" name="kupwd2" maxlength="20" required>
                                     </div>
                                     <button type="submit" class="btn btn-success">Sign up</button>
                                 </form>

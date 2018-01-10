@@ -4,6 +4,7 @@ $(document).ready(function () {
         html: true,
         content: function () {
             return $('#popover-content').html();
+            //return $('#newDelModal').html();
         }
     });
 });

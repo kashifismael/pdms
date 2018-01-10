@@ -11,7 +11,7 @@
                 <form action="<?= base_url('uploadEvidence') ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="date">Enter Name of Evidence</label>
-                        <input type="text" class="form-control" id="evidenceName" name="evidenceName" required>
+                        <input type="text" class="form-control" id="evidenceName" name="evidenceName" maxlength="50" required>
                         <input type="hidden" value="<?= $delID ?>" name="deliverableID">
                     </div>
                     <div class="form-group">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <label for="comment">Reason for change:</label>
-                        <textarea class="form-control" rows="5" id="reason" name="reason" required></textarea>
+                        <textarea class="form-control" rows="5" id="reason" name="reason" maxlength="250" required></textarea>
                         <input type="hidden" value="<?= $delID ?>" name="deliverableID">
                     </div>
                     <button type="submit" class="btn btn-success">Submit Request</button>                            
@@ -78,7 +78,7 @@
                 <form method="post" action="<?= base_url('processDeleteRequest')?>" >
                 <div class="form-group">
                     <label for="comment">Reason for Deletion:</label>
-                    <textarea class="form-control" rows="5" id="deleteReason" name="deleteReason"></textarea>
+                    <textarea class="form-control" rows="5" id="deleteReason" name="deleteReason" maxlength="250" required></textarea>
                     <input type="hidden" value="<?= $delID ?>" name="deliverableID">
                 </div>
                 <button type="submit" class="btn btn-success">Submit Request</button>

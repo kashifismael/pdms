@@ -11,11 +11,12 @@
                     <span><img id="logo"  src="<?= base_url("images/unidissLogo.png") ?>" height="28">
                         UniDiss</span></a>
                 <div class="visible-xs pull-right">
-                    <button data-placement="bottom" data-toggle="popover"
-                            data-container="body" type="button" data-trigger="focus"
-                            data-html="true" id="newButton1"
-                            class="btn btn-success navbar-btn">
-                        <span class="glyphicon glyphicon-plus"></span> New</button>
+                    <!--       <button data-placement="bottom" data-toggle="popover"
+                                   data-container="body" type="button" data-trigger="focus"
+                                   data-html="true" id="newButton1"
+                                   class="btn btn-success navbar-btn"> -->
+                    <button data-toggle="modal" data-target="#newDelModal" type="button" id="newButton1" class="btn btn-success navbar-btn">
+                        <span class="glyphicon glyphicon-plus"></span> New Deliverable</button>
                 </div>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -28,11 +29,12 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden-xs">
-                        <button data-placement="bottom" data-toggle="popover"
-                                data-container="body" type="button" data-trigger="focus"
-                                data-html="true" id="newButton2"
-                                class="btn btn-success navbar-btn">
-                            <span class="glyphicon glyphicon-plus"></span> New</button>
+                        <!--     <button data-placement="bottom" data-toggle="popover"
+                                     data-container="body" type="button" data-trigger="focus"
+                                     data-html="true" id="newButton2"
+                                     class="btn btn-success navbar-btn"> -->
+                        <button data-toggle="modal" data-target="#newDelModal" type="button" id="newButton2" class="btn btn-success navbar-btn">
+                            <span class="glyphicon glyphicon-plus"></span> New <span class="hidden-sm">Deliverable</span></button>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>

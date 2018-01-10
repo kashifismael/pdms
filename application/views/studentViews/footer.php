@@ -1,7 +1,7 @@
 <?php $todayDate = new DateTime('now'); ?>
 <div id="popover-content" class="hide">
     <p><a data-toggle="modal" data-target="#newDelModal"><span class="glyphicon glyphicon-plus"></span> New deliverable</a></p>
-    <p><a data-toggle="modal" data-target="#newUpModal"><span class="glyphicon glyphicon-open"></span> Upload evidence</a></p>
+    <p><a data-toggle="modal" data-target="#newUpModal"><span class="glyphicon glyphicon-open"></span> Upload evidence</a></p> 
 </div>
 
 <div id="newDelModal" class="modal fade" role="dialog">
@@ -16,7 +16,7 @@
                 <form method="POST" action="createDeliverable">
                     <div class="form-group">
                         <label for="usr">Deliverable Name:</label>
-                        <input type="text" class="form-control" id="delName" name="delName" required>
+                        <input type="text" class="form-control" id="delName" name="delName" maxlength="50" required>
                     </div>
                     <div class="form-group">
                         <label for="date">Set Deadline Date</label>
