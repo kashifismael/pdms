@@ -91,23 +91,15 @@
                                 $count++;
                             }
                             ?> 
-                            <tr>
-                                <td>Proposal</td>
-                                <td>3 days ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                            </tr>
-                            <tr>
-                                <td>Prototype</td>
-                                <td>6 days ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                            </tr>
                         </tbody>
                     </table>
+
+                    <?php if (sizeof($myFeedbacks) == 0) { ?>
+                        <div class="text-center">
+                            <p> You have not given any feedback for this deliverable yet</p>
+                        </div>
+                    <?php } ?>
+
                 </div>
 
                 <div id="Dash3" class="tab-pane fade in">

@@ -29,12 +29,13 @@
 </div>
 
 <div class="flex-row row " id="myDeck">
-    <!-- <div class="card-deck"> -->
+
     <?php foreach ($theirDeliverables as $deliverable) { ?>
+
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">                             
             <div class="card text-center" style="margin-top: 5%;">                  
                 <a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" style="color: black;">
-                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/'.$deliverable->getThumbnail() ) ?>" alt="Card image cap">
+                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/' . $deliverable->getThumbnail()) ?>" alt="Card image cap">
                     <div class="card-block">
                         <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>
                         <div class="card-text">
@@ -48,62 +49,16 @@
                 </a>
             </div>                                
         </div> 
-    <?php } ?>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
-        <div class="card text-center" style="margin-top: 5%;">                  <!-- new, with added style -->
-            <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail6') ?>" alt="Card image cap">
-            <div class="card-block">
-                <h4 class="card-title">Proposal</h4>
-                <div class="card-text">
-                    <p><strong>Deadline date:</strong> 27/1/18</p>
-                    <p><strong>Status:</strong> Incomplete</p>
-                </div>
-                <a href="#" class="card-text">Click to view</a>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
-        <div class="card text-center" style="margin-top: 5%;">   
-            <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail7') ?>" alt="Card image cap">
-            <div class="card-block">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
-        <div class="card text-center" style="margin-top: 5%;">   
-            <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail8') ?>" alt="Card image cap">
-            <div class="card-block">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> <!-- new -->
-        <div class="card text-center" style="margin-top: 5%;">   
-            <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail9') ?>" alt="Card image cap">
-            <div class="card-block">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
-    <!--/div-->
+    <?php } ?>
+
 </div>
+
+<?php if (sizeof($theirDeliverables) == 0) { ?>
+    <div class="text-center" style="padding-top: 58px;">
+        <p>This student does not have any deliverables at the moment</p>
+    </div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {

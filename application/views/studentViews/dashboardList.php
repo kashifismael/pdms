@@ -51,20 +51,16 @@
                             <td><a href="<?= base_url("deliverable/" . $deliverable->getDeliverableNo() . "") ?>" class="card-text">Click to view</a></td>
                         </tr>
                     <?php } ?>
-                    <tr class="myDeliverable">
-                        <td class="deliverable">Proposal</td>
-                        <td>3 days ago</td>
-                        <td>6</td>
-                        <td><a href="#" class="card-text">Click to view</a></td>
-                    </tr>
-                    <tr class="myDeliverable">
-                        <td class="deliverable">Prototype</td>
-                        <td>6 days ago</td>
-                        <td>6</td>
-                        <td><a href="#" class="card-text">Click to view</a></td>
-                    </tr>
                 </tbody>
             </table>
+            <?php if (sizeof($myDeliverables) == 0) { ?>
+            <div class="text-center">
+            <p> You have no deliverables at the moment, click below to create a deliverable</p>
+            <button data-toggle="modal" data-target="#newDelModal" type="button" id="newButton3" class="btn btn-success navbar-btn">
+                        <span class="glyphicon glyphicon-plus"></span> New Deliverable</button>
+            </div>
+            <?php } ?>
+
 
         </div>
     </div>  

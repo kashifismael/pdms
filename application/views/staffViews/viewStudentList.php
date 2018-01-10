@@ -45,20 +45,14 @@
                 <td><a href="<?= base_url("view-deliverable/" . $deliverable->getDeliverableNo() . "") ?>" class="card-text">Click to view</a></td>
             </tr>
         <?php } ?>
-        <tr class="myDeliverable">
-            <td class="deliverable">Proposal</td>
-            <td>3 days ago</td>
-            <td>6</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
-        <tr class="myDeliverable">
-            <td class="deliverable">Prototype</td>
-            <td>6 days ago</td>
-            <td>6</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
     </tbody>
 </table>
+
+<?php if (sizeof($theirDeliverables) == 0) { ?>
+    <div class="text-center">
+        <p>This student does not have any deliverables at the moment</p>
+    </div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {

@@ -12,7 +12,7 @@
             </div>  
         </div>
     <?php } ?>
-        <?php
+    <?php
     if (isset($_SESSION['requestSubmission'])) {
         ?>
         <div class="row">
@@ -24,16 +24,16 @@
             </div>  
         </div>
     <?php } ?>
-    
+
     <ol class="breadcrumb hidden-xs" style="padding-left: 10%;">
         <li><a href="<?= base_url('student-home') ?>"> Dashboard</a></li>
         <li class="active">View Deliverable</li>
     </ol>
-    
+
     <div class="row row-mobile" >
         <div class="text-center">
             <h3 class="visible-xs"><?= $deliverableInfo->getDeliverableName() ?></h3>
-      <!--      <h1 class="hidden-xs"><!?= $deliverableInfo->getDeliverableName() ?></h1> -->
+            <!--      <h1 class="hidden-xs"><!?= $deliverableInfo->getDeliverableName() ?></h1> -->
         </div>
     </div>
     <div class="row row-mobile" > 
@@ -64,7 +64,7 @@
                     <p><label>Deadline date:</label> <?= date_format($deliverableInfo->getDeadlineDate(), 'G:i - D j M') ?></p>
                     <p><label>Status:</label> <?= $deliverableInfo->getDelstatusDesc() ?></p>
                     <p><label>Last Updated:</label> <time class="timeago" datetime="<?= $deliverableInfo->getLastUpdated() ?>"></time></p>
-                    
+
                 </div>
             </div>
 
@@ -108,36 +108,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                             $count = 1;
-                            foreach ($myFeedbacks as $feedback) { 
+                            foreach ($myFeedbacks as $feedback) {
                                 ?>
                                 <tr>
                                     <td><?= $count ?></td>
                                     <td><?= date_format($feedback->getFeedbackDate(), 'G:i - D j M') ?></td>
                                     <td>
                                         <form method="POST" action="<?= base_url('downloadFeedback') ?>">
-                                        <input type="hidden" name="feedbackID" value="<?= $feedback->getFeedbackID() ?>">
-                                        <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+                                            <input type="hidden" name="feedbackID" value="<?= $feedback->getFeedbackID() ?>">
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
                                         </form>
                                     </td>
                                 </tr>
-                            <?php 
-                            $count++;
-                            } 
+                                <?php
+                                $count++;
+                            }
                             ?> 
-                            <tr>
-                                <td>Prototype</td>
-                                <td>6 days ago</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
-                            </tr>
                         </tbody>
                     </table>
+                    
+                    <?php if (sizeof($myFeedbacks) == 0) { ?>
+                        <div class="text-center">
+                            <p> You have not received any feedback for this deliverable</p>
+                        </div>
+                    <?php } ?>
+
                 </div>
             </div>
 

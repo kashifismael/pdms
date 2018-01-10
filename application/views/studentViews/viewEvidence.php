@@ -75,23 +75,15 @@
                         $count++;
                     }
                     ?> 
-                    <tr>
-                        <td>Feedback 111</td>
-                        <td>2 mins ago</td>
-                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
-                    </tr>
-                    <tr>
-                        <td>Feedback 222</td>
-                        <td>3 days ago</td>
-                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
-                    </tr>
-                    <tr>
-                        <td>Feedback 333</td>
-                        <td>6 days ago</td>
-                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button></td>
-                    </tr>
                 </tbody>
             </table>
+
+            <?php if (sizeof($myFeedbacks) == 0) { ?>
+                <div class="text-center">
+                    <p> You have not received any feedback for this evidence</p>
+                </div>
+            <?php } ?>
+
         </div>
 
     </div>

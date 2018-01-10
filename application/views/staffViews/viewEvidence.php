@@ -17,7 +17,7 @@
         </div>
     <?php } ?>
     <ol class="breadcrumb" style="padding-left: 10%;">
-        <li><a href="<?= base_url('staff-home')?>"> Dashboard</a></li>
+        <li><a href="<?= base_url('staff-home') ?>"> Dashboard</a></li>
         <li><a href="<?= base_url('view-student/' . $evidence->getStudentID()) ?>">View Student</a></li>
         <li><a href="<?= base_url('view-deliverable/' . $evidence->getDeliverableNo()) ?>">View Deliverable</a></li>
         <li class="active">View Evidence</li>
@@ -84,23 +84,16 @@
                         $count++;
                     }
                     ?> 
-                    <tr>
-                        <td>Feedback 333</td>
-                        <td>2 mins ago</td>
-                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                    </tr>
-                    <tr>
-                        <td>Feedback 222</td>
-                        <td>3 days ago</td>
-                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                    </tr>
-                    <tr>
-                        <td>Feedback 111</td>
-                        <td>6 days ago</td>
-                        <td><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Feedback</button></td>
-                    </tr>
                 </tbody>
             </table>
+
+            <?php if (sizeof($myFeedbacks) == 0) { ?>
+                <div class="text-center">
+                    <p> You have not given any feedback for this evidence, click below to provide feedback</p>
+                    <a href="#" data-toggle="modal" data-target="#newUpModal" class="btn btn-primary btn-success"> + New Feedback</a>
+                </div>
+            <?php } ?>
+
         </div>
 
 

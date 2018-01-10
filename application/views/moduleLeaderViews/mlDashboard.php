@@ -17,9 +17,6 @@
                     <?php foreach ($supervisorGroup as $student) { ?>
                         <p><a href="<?= base_url("view-student/" . $student->getUsername() . "") ?>"><?= $student->getFirstName() . " " . $student->getLastName() ?> </a></p>
                     <?php } ?>
-                    <p>Student 2</p>
-                    <p>Student 3</p>
-                    <p>Student 4</p>
                 </div>
             </div>
         </div>

@@ -10,12 +10,7 @@
         </div>
     </div>
     <div class="col-sm-3 col-xs-12">
-    <!--    <div class="input-group"> -->
             <input id="myInput" type="text" class="form-control" placeholder="Search for Deliverable...">
-      <!--      <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-            </span> -->
-    <!--    </div> -->
     </div>
 </div>
 
@@ -41,50 +36,13 @@
             </div>
         </div>
     <?php } ?>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-        <div class="card text-center" style="margin-top: 5%;">
-      <!-- <img class="card-img-top center-block" src="../images/computer-icon-1031.png" alt="Card image cap" width="100" > -->
-            <div class="card-block">
-                <h4 class="card-title">Draft1</h4>
-                <p><label>Status:</label> Not finished</p>
-                <p><label>Type:</label> Draft</p>
-                <p class="text-muted">Last updated 6 days ago</p>
-            </div>
-            <div class="card-footer">
-                <a href="<?= base_url("view-evidence/123"); ?>" class="card-text">Click to view</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-        <div class="card text-center" style="margin-top: 5%;">
-      <!-- <img class="card-img-top center-block" src="..." alt="Card image cap"> -->
-            <div class="card-block">
-                <h4 class="card-title">ProposalProof</h4>
-                <p><label>Status:</label> None</p>
-                <p><label>Type:</label> Evidence</p>
-                <p class="text-muted">Last updated 3 mins ago</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="card-text">Click to view</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-        <div class="card text-center" style="margin-top: 5%;">
-      <!-- <img class="card-img-top center-block" src="..." alt="Card image cap"> -->
-            <div class="card-block">
-                <h4 class="card-title">Plan</h4>
-                <p><label>Status:</label> Submitted</p>
-                <p><label>Type:</label> Exectable file</p>
-                <p class="text-muted">Last updated 3 days ago</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="card-text">Click to view</a>
-            </div>
-        </div>
-    </div>
-    <!--/div-->
 </div>
+
+<?php if (sizeof($myEvidences) == 0) { ?>
+<div class="text-center" style="padding-top: 58px">
+        <p>This student has not submitted any pieces of evidence towards this deliverable</p>
+    </div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {

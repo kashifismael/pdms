@@ -24,7 +24,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
             <div class="card text-center" style="margin-top: 5%;">
                 <a href="<?= base_url('evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">        
-                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/'.$evidence->getThumbnail()) ?>" alt="Card image cap">
+                    <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/' . $evidence->getThumbnail()) ?>" alt="Card image cap">
                 </a>
                 <div class="card-block">
                     <a href="<?= base_url('evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text" style="color: black;">
@@ -41,46 +41,16 @@
             </div>
         </div>
     <?php } ?>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-        <div class="card text-center" style="margin-top: 5%;">
-            <div class="card-block">
-                <h4 class="card-title">Draft1</h4>
-                <p><label>Status:</label> Not finished</p>
-                <p><label>Type:</label> Draft</p>
-                <p class="text-muted">Last updated 6 days ago</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="card-text">Click to view</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-        <div class="card text-center" style="margin-top: 5%;">
-            <div class="card-block">
-                <h4 class="card-title">ProposalProof</h4>
-                <p><label>Status:</label> None</p>
-                <p><label>Type:</label> Evidence</p>
-                <p class="text-muted">Last updated 3 mins ago</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="card-text">Click to view</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-        <div class="card text-center" style="margin-top: 5%;">
-            <div class="card-block">
-                <h4 class="card-title">Plan</h4>
-                <p><label>Status:</label> Submitted</p>
-                <p><label>Type:</label> Exectable file</p>
-                <p class="text-muted">Last updated 3 days ago</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="card-text">Click to view</a>
-            </div>
-        </div>
-    </div>
 </div>
+
+<?php if (sizeof($myEvidences) == 0) { ?>
+    <div class="text-center" style="padding-top: 58px">
+        <p> You have no evidences at the moment, click below to submit pieces of evidence</p>
+        <button data-toggle="modal" data-target="#newEvidUpModal"
+                class="btn btn-success navbar-btn btn-text-wrap">
+            <span class="glyphicon glyphicon-open"></span> Upload Evidence to <?= $deliverableInfo->getDeliverableName() ?></button>
+    </div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {

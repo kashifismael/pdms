@@ -38,7 +38,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">                               
                         <div class="card text-center" style="margin-top: 5%;">                 
                             <a href="<?= base_url("deliverable/" . $deliverable->getDeliverableNo() . "") ?>" style="color: black;">
-                                <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/'.$deliverable->getThumbnail() ) ?>" alt="Card image cap">
+                                <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/' . $deliverable->getThumbnail()) ?>" alt="Card image cap">
                                 <div class="card-block">
                                     <h4 class="card-title"><strong><?= $deliverable->getDeliverableName() ?></strong></h4>
                                     <div class="card-text">
@@ -55,53 +55,17 @@
 
                 <?php } ?>
 
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> 
-                    <div class="card text-center" style="margin-top: 5%;">                  
-                        <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail2') ?>" alt="Card image cap">
-                        <div class="card-block">
-                            <h4 class="card-title">Proposal</h4>
-                            <div class="card-text">
-                                <p><strong>Deadline date:</strong> 27/1/18</p>
-                                <p><strong>Status:</strong> Incomplete</p>
-                            </div>
-                            <a href="#" class="card-text">Click to view</a>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> 
-                    <div class="card text-center" style="margin-top: 5%;">               
-                        <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail4') ?>" alt="Card image cap">
-                        <div class="card-block">
-                            <h4 class="card-title">Prototype</h4>
-                            <p class="card-text">This Deliverable has two items.</p>
-                            <a href="#" class="card-text">Click to view</a>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 6 days ago</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard"> 
-                    <div class="card text-center" style="margin-top: 5%;">   
-                        <img class="card-img-top center-block img-responsive" src="<?= base_url('images/thumbnails/thumbnail1') ?>" alt="Card image cap">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
-            <div class="text-center">
+
+            <?php if (sizeof($myDeliverables) == 0) { ?>
+            <div class="text-center" style="padding-top: 58px;">
+                    <p> You have no deliverables at the moment, click below to create a deliverable</p>
+                    <button data-toggle="modal" data-target="#newDelModal" type="button" id="newButton3" class="btn btn-success navbar-btn">
+                        <span class="glyphicon glyphicon-plus"></span> New Deliverable</button>
+                </div>
+            <?php } ?>
+
+      <!--      <div class="text-center">
                 <ul class="pagination">
                     <li><a href="#">1</a></li>
                     <li class="active"><a href="#">2</a></li>
@@ -109,7 +73,7 @@
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>  
 

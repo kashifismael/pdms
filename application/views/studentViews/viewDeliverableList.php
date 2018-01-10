@@ -37,27 +37,17 @@
                 <td><a href="<?= base_url('evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text">Click to view</a></td>
             </tr>
         <?php } ?>
-   <!-- <tr> -->
-        <tr>
-            <td class="evidence">Draft1</td>
-            <td>Not finished</td>
-            <td>6 days ago</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
-        <tr>
-            <td class="evidence">ProposalProof</td>
-            <td>None</td>
-            <td>3 mins ago</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
-        <tr>
-            <td class="evidence">Plan</td>
-            <td>Submitted</td>
-            <td>3 days ago</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
     </tbody>
 </table>
+
+<?php if (sizeof($myEvidences) == 0) { ?>
+    <div class="text-center">
+        <p> You have no evidences at the moment, click below to submit pieces of evidence</p>
+        <button data-toggle="modal" data-target="#newEvidUpModal"
+                class="btn btn-success navbar-btn btn-text-wrap">
+            <span class="glyphicon glyphicon-open"></span> Upload Evidence to <?= $deliverableInfo->getDeliverableName() ?></button>
+    </div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {

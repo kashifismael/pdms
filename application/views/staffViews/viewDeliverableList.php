@@ -36,26 +36,14 @@
                 <td><a href="<?= base_url('view-evidence/' . $evidence->getEvidenceNo()) ?>" class="card-text">Click to view</a></td>
             </tr>
         <?php } ?>
-        <tr>
-            <td class="evidence">Draft1</td>
-            <td>Not finished</td>
-            <td>6 days ago</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
-        <tr>
-            <td class="evidence">ProposalProof</td>
-            <td>None</td>
-            <td>3 mins ago</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
-        <tr>
-            <td class="evidence">Plan</td>
-            <td>Submitted</td>
-            <td>3 days ago</td>
-            <td><a href="#" class="card-text">Click to view</a></td>
-        </tr>
     </tbody>
 </table>
+
+<?php if (sizeof($myEvidences) == 0) { ?>
+    <div class="text-center">
+        <p>This student has not submitted any pieces of evidence towards this deliverable</p>
+    </div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {
