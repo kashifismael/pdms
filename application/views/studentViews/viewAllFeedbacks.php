@@ -48,6 +48,11 @@
                 }
                 ?>
             </div>
+
+            <?php if (sizeof($unseenFeedbacks) == 0) { ?>
+                <p>You have no unseen feedbacks</p>
+            <?php } ?>
+
             <h2>Seen Feedbacks</h2>
             <div class="flex-row row">
                 <?php
@@ -74,27 +79,14 @@
                             </div>
                         </div>
                     </div>
-                <?php 
-                } 
+                    <?php
+                }
                 ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 myCard">
-                    <div class="card text-center" style="margin-top: 5%;">
-                        <div class="card-block">
-                            <a href="#" style="color: black;">
-                                <p><label>Deliverable:</label> Design Chapter</p>
-                                <p><label>Evidence:</label> Data Dictionary</p>
-                                <p class="text-muted">Received about a month ago</p>
-                            </a> 
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
-                        </div>
-                    </div>
-                </div>
-
-
-
             </div>
+
+            <?php if (sizeof($seenFeedbacks) == 0) { ?>
+                <p>You have no previous feedbacks</p>
+            <?php } ?>
 
         </div>
     </div>

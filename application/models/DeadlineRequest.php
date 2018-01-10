@@ -50,14 +50,14 @@ class DeadlineRequest extends Request {
         return $result->num_rows();
     }
 
-    public function insertDeadlineRequest($reqDeadlineDate) {
+    public function insertDeadlineRequest($reqDeadlineDate,$reason) {
         $data = array(
             'deliverable_ID' => $this->input->post('deliverableID'),
             'requestType_ID' => 2,
             'reqDeadlineDate' => $reqDeadlineDate,
-            'reason' => $this->input->post('reason'),
+            'reason' => $reason,
         );
-        return $this->db->insert('fyp_Request', $data);
+        return $this->db->insert('fyp_Request', $data, TRUE);
     }
 
     public function approveDeadlineRequest($reqID, $delID, $newDeadline) {

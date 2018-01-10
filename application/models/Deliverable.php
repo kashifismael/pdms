@@ -33,13 +33,13 @@ class Deliverable extends CI_Model {
                     INNER JOIN fyp_DeliverableStatus ON fyp_DeliverableStatus.delStatus_ID = fyp_Deliverable.delStatus_ID) 
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID) 
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID) 
-                    WHERE fyp_User.username = '$username'";
+                    WHERE fyp_User.username = ? ";
         if (isset($_GET['sort']) && $_GET['sort'] == "deadline") {
             $query = $query . "ORDER BY `fyp_Deliverable`.`deadlineDate` ASC";
         } else {
             $query = $query . " ORDER BY `fyp_Deliverable`.`lastUpdated` DESC";
         }
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $username);
         foreach ($result->result() as $row) {
             $newDel = self::deliverableConstructor($row->deliverable_ID, $row->delStatusDesc, $row->deliverableName, new DateTime($row->deadlineDate));
             $newDel->setLastUpdated($row->lastUpdated);
@@ -71,8 +71,8 @@ class Deliverable extends CI_Model {
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID 
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID 
                     INNER JOIN fyp_DeliverableStatus ON fyp_DeliverableStatus.delStatus_ID = fyp_Deliverable.delStatus_ID 
-                    WHERE fyp_User.username = '$username'";
-        $result = $this->db->query($query);
+                    WHERE fyp_User.username = ? ";
+        $result = $this->db->query($query, $username);
         $row = $result->row();
         return $row->avgScore;
     }
@@ -85,7 +85,7 @@ class Deliverable extends CI_Model {
             'thumbnail' => "thumbnail".rand(1,13).".jpg",
         );
         $this->session->set_userdata('deliverableCreation', 'success');
-        return $this->db->insert('fyp_Deliverable', $delData);
+        return $this->db->insert('fyp_Deliverable', $delData, TRUE);
     }
 
     public function checkStudentAgainstDeliverable($delID) {

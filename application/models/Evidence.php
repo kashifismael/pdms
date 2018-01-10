@@ -125,7 +125,7 @@ class Evidence extends CI_Model {
             'filePath' => $newFileName,
             'thumbnail' => "thumbnail".rand(1,13).".jpg",
         );
-        return $this->db->insert('fyp_Evidence', $data);
+        return $this->db->insert('fyp_Evidence', $data, TRUE);
     }
 
     public function downloadEvidenceFile() {

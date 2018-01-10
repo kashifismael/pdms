@@ -71,39 +71,27 @@
                             </tr>
 
                         <?php } ?>
-                        <tr>
-                            <td>Kashif Ismael</td>
-                            <td>Report</td>
-                            <td>01/09/17</td>
-                            <td>31/09/17</td>
-                            <td>I just really need the time bro</td>
-                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                        </tr>
-                        <tr>
-                            <td>Eden Hazard</td>
-                            <td>Prototype</td>
-                            <td>01/09/17</td>
-                            <td>31/09/17</td>
-                            <td>I also need the time</td>
-                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                        </tr>
 
                     </tbody>
                 </table>
+                <?php if (sizeof($deadlineRequests) == 0) { ?>
+                    <div class="text-center">
+                        <p>You have no deadline requests awaiting approval</p>
+                    </div>
+                <?php } ?>
+
             </div>
 
 
-            <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-            </div>
+            <!--        <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div> -->
         </div> 
 
         <div id="Dash2" class="tab-pane fade in">
@@ -139,28 +127,20 @@
                                         <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
                                     </form></td>
                             </tr>
+
                         <?php } ?>
-                        <tr>
-                            <td>Romelu Lukaku</td>
-                            <td>Proposal</td>
-                            <td>I dont need this anymore</td>
-                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                        </tr>
-                        <tr>
-                            <td>Luis Suarez</td>
-                            <td>Application</td>
-                            <td>i want to change my fyp idea</td>
-                            <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </a></td>
-                            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a></td>
-                        </tr>
 
                     </tbody>
                 </table>
+                <?php if (sizeof($deadlineRequests) == 0) { ?>
+                    <div class="text-center">
+                        <p>You have no delete requests awaiting approval</p>
+                    </div>
+                <?php } ?>
             </div>
 
 
-            <div class="text-center">
+     <!--       <div class="text-center">
                 <ul class="pagination">
                     <li><a href="#">1</a></li>
                     <li class="active"><a href="#">2</a></li>
@@ -168,7 +148,7 @@
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>   
 
         <div id="Dash3" class="tab-pane fade in">

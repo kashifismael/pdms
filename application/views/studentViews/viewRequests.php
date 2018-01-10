@@ -37,35 +37,25 @@
                                 <td><a href="<?= base_url('deliverable/' . $request->getDeliverableNo()) ?>">View</a></td>
                             </tr>
                         <?php } ?>
-                        <tr>
-                            <td>Report</td>
-                            <td>Delete</td>
-                            <td>31/09/17</td>
-                            <td>I just really need the time bro</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>Prototype</td>
-                            <td>Deadline</td>
-                            <td>31/09/17</td>
-                            <td>I also need the time</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-
                     </tbody>
                 </table>
+
+                <?php if (sizeof($pendingRequests) == 0) { ?>
+                    <p>You have no pending requests</p>
+                <?php } ?>
+
             </div>
 
 
-            <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-            </div>
+            <!--      <div class="text-center">
+                      <ul class="pagination">
+                          <li><a href="#">1</a></li>
+                          <li class="active"><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                          <li><a href="#">4</a></li>
+                          <li><a href="#">5</a></li>
+                      </ul>
+                  </div> -->
         </div> 
 
         <div id="Dash2" class="tab-pane fade in">
@@ -94,21 +84,11 @@
                                 <td><a href="<?= base_url('deliverable/' . $request->getDeliverableNo()) ?>">View</a></td>
                             </tr>
                         <?php } ?>                       
-                        <tr>
-                            <td>Proposal</td>
-                            <td>Delete</td>
-                            <td>Approved</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>Application</td>
-                            <td>Deadline</td>
-                            <td>rejected</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-
                     </tbody>
                 </table>
+                <?php if (sizeof($requestsResponses) == 0) { ?>
+                    <p>You have no request responses</p>
+                <?php } ?>
             </div>
 
 

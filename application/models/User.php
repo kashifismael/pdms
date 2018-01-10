@@ -79,7 +79,8 @@ class User extends CI_Model {
     }
 
     public function isUserUnique($user) {
-        $query = $this->db->query("SELECT * FROM fyp_User WHERE username='$user'");
+        //$query = $this->db->query("SELECT * FROM fyp_User WHERE username='$user'");
+        $query = $this->db->query("SELECT * FROM fyp_User WHERE username = ? ", $user);
         if ($query->num_rows() > 0) {
             echo "this username already exists, try again";
             return false;

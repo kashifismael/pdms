@@ -35,7 +35,7 @@ class DeleteRequest extends Request {
             'requestType_ID' => 1,
             'reason' => $this->input->post('deleteReason'),
         );
-        return $this->db->insert('fyp_Request', $data);
+        return $this->db->insert('fyp_Request', $data, TRUE);
     }
 
         public function getAllPendingDeleteRequests($staffID) {

@@ -51,9 +51,10 @@ class Student extends User {
             'username' => $username,
             'password' => self::encrypt("theSecretKeyInit", $this->input->post('stpwd1')),
         );
-        $this->db->insert('fyp_User', $data1);
+        $this->db->insert('fyp_User', $data1, TRUE);
 
-        $query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username='$username'");
+        //$query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username='$username'");
+        $query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username = ? ", $username);
         $userID = $query->row();
         $data2 = array(
             'User_ID' => $userID->user_ID

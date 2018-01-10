@@ -41,9 +41,10 @@ class Supervisor extends User {
             'username' => $username,
             'password' => self::encrypt("theSecretKeyInit", $this->input->post('kupwd1')),
         );
-        $this->db->insert('fyp_User', $data1);
+        $this->db->insert('fyp_User', $data1, TRUE);
 
-        $query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username='$username'");
+        //$query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username='$username'");
+        $query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username = ? ", $username);
         $userID = $query->row();
         $data2 = array(
             'user_ID' => $userID->user_ID
@@ -77,8 +78,10 @@ class Supervisor extends User {
         $query ="SELECT * FROM `fyp_Student` "
                 . "INNER JOIN fyp_User "
                 . "ON fyp_Student.user_ID = fyp_User.user_ID "
-                . "WHERE fyp_User.username = '$username'";
-        $result = $this->db->query($query);
+               // . "WHERE fyp_User.username = '$username'";
+                . "WHERE fyp_User.username = ? ";
+        //$result = $this->db->query($query);
+        $result = $this->db->query($query, $username);
         $studentRow = $result->row();
         $student = Student::studentConstructorTwo($studentRow->firstName, $studentRow->lastName, $studentRow->username, $studentRow->emailAddress);
         return $student;

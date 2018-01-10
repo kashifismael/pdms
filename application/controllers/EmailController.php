@@ -33,17 +33,17 @@ class EmailController extends CI_Controller {
         }
     }
 
-    private function getEmailConfig() {
-        $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'unidissKU@gmail.com',
-            'smtp_pass' => 'kashiffyp',
-            'mailtype' => 'html',
-            'charset' => 'iso-8859-1'
-        );
-        return $config;
-    }
+//    private function getEmailConfig() {
+//        $config = Array(
+//            'protocol' => 'smtp',
+//            'smtp_host' => 'ssl://smtp.googlemail.com',
+//            'smtp_port' => 465,
+//            'smtp_user' => 'unidissKU@gmail.com',
+//            'smtp_pass' => 'kashiffyp',
+//            'mailtype' => 'html',
+//            'charset' => 'iso-8859-1'
+//        );
+//        return $config;
+//    }
 
 }
