@@ -132,7 +132,7 @@
 
                     </tbody>
                 </table>
-                <?php if (sizeof($deadlineRequests) == 0) { ?>
+                <?php if (sizeof($deleteRequests) == 0) { ?>
                     <div class="text-center">
                         <p>You have no delete requests awaiting approval</p>
                     </div>

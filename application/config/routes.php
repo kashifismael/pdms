@@ -53,7 +53,6 @@ $route['student-home'] = 'student';
 $route['deliverable/(:num)'] = 'student/viewDeliverable/$1';
 $route['evidence/(:num)'] = 'student/viewEvidence/$1';
 $route['view-requests'] = 'student/viewRequests';
-//$route['view-all-evidence'] = 'student/viewAllEvidences';
 $route['view-all-feedback'] = 'student/viewAllFeedbacks';
 $route['view-supervisor'] = 'student/viewSupervisor';
 
@@ -84,6 +83,7 @@ $route['latest-submissions'] = 'staff/viewSubmittedEvidences';
 $route['student-allocation'] = 'staff/allocateStudents';
 $route['allocationPortal'] = 'staff/processAllocation';
 $route['all-supervisors'] = 'staff/viewAllSupervisors';
+$route['all-students'] = 'staff/viewAllStudents';
 
 $route['default_controller'] = 'landing';
 $route['studentRegister'] = 'landing/registerStudent';

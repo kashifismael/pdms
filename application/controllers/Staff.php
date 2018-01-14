@@ -136,6 +136,16 @@ class Staff extends CI_Controller {
         $this->load->view('moduleLeaderViews/viewAllSupervisors');
     }
 
+        public function viewAllStudents() {
+        $data = self::checkIfAuthorised();
+        $this->load->model(array('user', 'supervisor', 'moduleLeader'));
+        $data['studentList'] = $this->moduleLeader->getAllStudents();
+        $data['title'] = "View All Students";
+        $this->load->view('header', $data);
+        self::navbarLoader($_SESSION['userTypeID']);
+        $this->load->view('moduleLeaderViews/viewAllStudents');
+    }
+    
     private function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 2 || $_SESSION['userTypeID'] == 1) {
             $this->load->model(array('request', 'deadlineRequest', 'deleteRequest', 'evidence'));
