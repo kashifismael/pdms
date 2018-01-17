@@ -21,6 +21,15 @@ class DeadlineRequest extends Request {
         return $deadlineRequest;
     }
 
+    public function deadlineRequestConstructorTwo($reqDeadline, $reason, $submitted, $status) {
+        $deadlineRequest = new DeadlineRequest();
+        $deadlineRequest->setRequestedDeadlineDate($reqDeadline);
+        $deadlineRequest->setReason($reason);
+        $deadlineRequest->setDateOfRequest($submitted);
+        $deadlineRequest->setRequestStatus($status);
+        return $deadlineRequest;
+    }
+            
     function getCurrentDeadlineDate() {
         return $this->currentDeadlineDate;
     }
@@ -89,4 +98,18 @@ class DeadlineRequest extends Request {
         return $requestList;
     }
 
+    public function getAllDeadlineRequestsOfDeliverable($delID){
+        $requestList = array();
+        $query = "SELECT * FROM fyp_Request 
+                    INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID 
+                    WHERE fyp_Request.deliverable_ID = $delID 
+                    and fyp_Request.requestType_ID = 2";
+        $result = $this->db->query($query);
+        foreach($result->result() as $row){
+            $deadlineRequest = self::deadlineRequestConstructorTwo($row->reqDeadlineDate, $row->reason, $row->dateOfRequest, $row->requestStatusDesc);
+            $requestList[] = $deadlineRequest;
+        }
+        return $requestList;
+    }
+    
 }

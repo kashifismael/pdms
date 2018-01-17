@@ -43,6 +43,8 @@ class Staff extends CI_Controller {
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksofDeliverable($delID);
+        $data['deadlineRequests'] = $this->deadlineRequest->getAllDeadlineRequestsOfDeliverable($delID);
+        $data['deleteRequests'] = $this->deleteRequest->getAllDeleteRequestsOfDeliverable($delID);
         $data['title'] = "View Deliverable";
         $data['deliverableID'] = $delID;
         $data['statusOptions'] = $this->deliverable->listStatusOptions();
@@ -94,6 +96,7 @@ class Staff extends CI_Controller {
         $data['title'] = "Manage Requests";
         $data['deadlineRequests'] = $this->deadlineRequest->getAllPendingDeadlineRequests($this->session->secondaryID);
         $data['deleteRequests'] = $this->deleteRequest->getAllPendingDeleteRequests($this->session->secondaryID);
+        $data['previousRequests'] = $this->request->getPreviousRequestForSupervisor($this->session->secondaryID);
         $this->load->view('header', $data);
         self::navbarLoader($_SESSION['userTypeID']);
         $this->load->view('staffViews/manageRequests');

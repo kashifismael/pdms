@@ -35,6 +35,39 @@ class Request extends CI_Model {
         return $request;
     }
 
+    public function requestConstructorThree($delID, $studentName, $delName, $dateOfRequest, $reqType, $reqStatus) {
+        $request = new Request();
+        $request->setDeliverableNo($delID);
+        $request->setStudentName($studentName);
+        $request->setDeliverableName($delName);
+        $request->setDateOfRequest($dateOfRequest);
+        $request->setRequestType($reqType);
+        $request->setRequestStatus($reqStatus);
+        return $request;
+    }
+
+    public function getPreviousRequestForSupervisor($staffID){
+        $requestList = array();
+        $query = "SELECT 
+                    fyp_User.firstName, fyp_User.lastName, fyp_Deliverable.deliverable_ID, fyp_Deliverable.deliverableName, 
+                    fyp_Request.dateOfRequest, fyp_RequestType.requestTypeDesc, fyp_RequestStatus.requestStatusDesc
+                    FROM `fyp_Request` 
+                    INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID
+                    INNER JOIN fyp_RequestType ON fyp_Request.requestType_ID = fyp_RequestType.requestType_ID
+                    INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
+                    INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
+                    INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID
+                    WHERE fyp_Student.staff_ID = $staffID AND
+                    fyp_Request.requestStatus_ID != 1";
+        $result = $this->db->query($query);
+        foreach($result->result() as $row){
+            $request = self::requestConstructorThree($row->deliverable_ID, "$row->firstName $row->lastName", $row->deliverableName,
+                    $row->dateOfRequest, $row->requestTypeDesc, $row->requestStatusDesc);
+            $requestList[] = $request;
+        }
+        return $requestList;
+    }
+    
     public function rejectRequest($reqID) {
         $query = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '3' WHERE `fyp_Request`.`request_ID` = '$reqID'");
         return $query;
@@ -67,23 +100,23 @@ class Request extends CI_Model {
     }
 
     public function countAllRequestResponsesForOneStudent($studentID) {
-        $query =  self::getAllUnseenRequestsQuery($studentID);
+        $query = self::getAllUnseenRequestsQuery($studentID);
         $result = $this->db->query($query);
         return $result->num_rows();
     }
 
-    public function getAllUnseenRequestIDs($studentID){
-        $query =  self::getAllUnseenRequestsQuery($studentID);
+    public function getAllUnseenRequestIDs($studentID) {
+        $query = self::getAllUnseenRequestsQuery($studentID);
         $result = $this->db->query($query);
         return $result->result();
     }
-    
-    public function setUnseenRequestsToSeen($unseenrequests){
-        foreach ($unseenrequests as $request){
+
+    public function setUnseenRequestsToSeen($unseenrequests) {
+        foreach ($unseenrequests as $request) {
             $this->db->query("UPDATE `fyp_Request` SET `hasBeenSeen` = '1' WHERE `fyp_Request`.`request_ID` = '$request->request_ID'");
         }
     }
-    
+
     private function getAllUnseenRequestsQuery($studentID) {
         $query = "SELECT fyp_Request.request_ID
                     FROM `fyp_Request` 

@@ -16,7 +16,15 @@ class DeleteRequest extends Request {
         return $deleteRequest;
     }
 
-        public function countAllRequests($staffID) {
+    public function deleteRequestContructorTwo($reason, $dateOfRequest, $status) {
+        $deleteRequest = new DeleteRequest();
+        $deleteRequest->setReason($reason);
+        $deleteRequest->setDateOfRequest($dateOfRequest);
+        $deleteRequest->setRequestStatus($status);
+        return $deleteRequest;
+    }
+
+    public function countAllRequests($staffID) {
         $query = "SELECT fyp_Request.request_ID
                     FROM `fyp_Request` 
                     INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
@@ -28,7 +36,7 @@ class DeleteRequest extends Request {
         $result = $this->db->query($query);
         return $result->num_rows();
     }
-    
+
     public function insertDeleteRequest() {
         $data = array(
             'deliverable_ID' => $this->input->post('deliverableID'),
@@ -38,7 +46,7 @@ class DeleteRequest extends Request {
         return $this->db->insert('fyp_Request', $data, TRUE);
     }
 
-        public function getAllPendingDeleteRequests($staffID) {
+    public function getAllPendingDeleteRequests($staffID) {
         $requestList = array();
         $query = "SELECT *
                     FROM `fyp_Request` 
@@ -55,5 +63,19 @@ class DeleteRequest extends Request {
         }
         return $requestList;
     }
-    
+
+    public function getAllDeleteRequestsOfDeliverable($delID) {
+        $requestList = array();
+        $query = "SELECT * FROM fyp_Request 
+                    INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID 
+                    WHERE fyp_Request.deliverable_ID = $delID 
+                    and fyp_Request.requestType_ID = 1";
+        $result = $this->db->query($query);
+        foreach ($result->result() as $row) {
+            $deleteRequest = self::deleteRequestContructorTwo($row->reason, $row->dateOfRequest, $row->requestStatusDesc);
+            $requestList[] = $deleteRequest;
+        }
+        return $requestList;
+    }
+
 }

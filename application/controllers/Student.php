@@ -42,11 +42,13 @@ class Student extends CI_Controller {
         if (self::isStudentAuthorOfDeliverable($delID) == false) {
             return $this->load->view('unauthorisedAccess');
         }
-        $this->load->model('evidence');
-        //$this->load->model('feedback');
+        //$this->load->model('evidence');
+        $this->load->model(array('evidence', 'deadlineRequest', 'deleteRequest'));
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksofDeliverable($delID);
+        $data['deadlineRequests'] = $this->deadlineRequest->getAllDeadlineRequestsOfDeliverable($delID);
+        $data['deleteRequests'] = $this->deleteRequest->getAllDeleteRequestsOfDeliverable($delID);
         $data['title'] = "View Deliverable";
         $data['delID'] = $delID;
         $this->load->view('header', $data);

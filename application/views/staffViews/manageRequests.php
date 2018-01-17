@@ -140,15 +140,15 @@
             </div>
 
 
-     <!--       <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-            </div> -->
+            <!--       <div class="text-center">
+                       <ul class="pagination">
+                           <li><a href="#">1</a></li>
+                           <li class="active"><a href="#">2</a></li>
+                           <li><a href="#">3</a></li>
+                           <li><a href="#">4</a></li>
+                           <li><a href="#">5</a></li>
+                       </ul>
+                   </div> -->
         </div>   
 
         <div id="Dash3" class="tab-pane fade in">
@@ -170,23 +170,16 @@
                         </tr>
                     </thead>
                     <tbody style="overflow-y: scroll;">
-                        <tr>
-                            <td>Romelu Lukaku</td>
-                            <td>Proposal</td>
-                            <td>Mon 17 Dec</td>
-                            <td>Delete</td>
-                            <td>Rejected</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>Luis Suarez</td>
-                            <td>Application</td>
-                            <td>Tue 3 Nov</td>
-                            <td>Deadline</td>
-                            <td>Accepted</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-
+                        <?php foreach ($previousRequests as $request): ?>
+                            <tr>
+                                <td><?= $request->getStudentName() ?></td>
+                                <td><?= $request->getDeliverableName() ?></td>
+                                <td><?= $request->getDateOfRequest() ?></td>
+                                <td><?= $request->getRequestType() ?></td>
+                                <td><?= $request->getRequestStatus() ?></td>
+                                <td><a href="<?= base_url("view-deliverable/" . $request->getDeliverableNo()) ?>">View</a></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

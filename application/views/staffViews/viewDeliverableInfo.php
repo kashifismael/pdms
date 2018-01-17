@@ -103,7 +103,7 @@
                 </div>
 
                 <div id="Dash3" class="tab-pane fade in">
-                    <h3>deadline requests</h3>
+                    <h3>Deadline requests</h3>
                     <table class="table">
                         <thead>
                             <tr>
@@ -114,14 +114,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>17 mon nov</td>
-                                <td>because innit</td>
-                                <td>tue 28 oct</td>
-                                <td>rejected</td>
-                            </tr>
+                            <?php foreach ($deadlineRequests as $request): ?>
+                                <tr>
+                                    <td><?= $request->getRequestedDeadlineDate() ?></td>
+                                    <td><?= $request->getReason() ?></td>
+                                    <td><?= $request->getDateOfRequest() ?></td>
+                                    <td><?= $request->getRequestStatus() ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
+                    
+                    <?php if (sizeof($deadlineRequests) == 0) : ?>
+                        <div class="text-center">
+                            <p>There are no deadline requests for this deliverable </p>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
 
                 <div id="Dash4" class="tab-pane fade in">
@@ -129,19 +138,28 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Date of Request</th>
                                 <th>Reason</th>
+                                <th>Submitted</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>17 mon nov</td>
-                                <td>because innit</td>
-                                <td>rejected</td>
-                            </tr>
+                            <?php foreach ($deleteRequests as $request): ?>
+                                <tr>
+                                    <td><?= $request->getReason() ?></td>
+                                    <td><?= $request->getDateOfRequest() ?></td>
+                                    <td><?= $request->getRequestStatus() ?></td>
+                                </tr>
+                            <?php endforeach; ?>   
                         </tbody>
                     </table>
+                                        
+                    <?php if (sizeof($deleteRequests) == 0) : ?>
+                        <div class="text-center">
+                            <p>There are no delete requests for this deliverable </p>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
 
             </div>

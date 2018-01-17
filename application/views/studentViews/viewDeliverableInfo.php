@@ -80,6 +80,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-home"></span><span class="hidden-xs"> View Evidences</span></a></li>
                 <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-tasks"></span><span class="hidden-xs"> View Feedback</span></a></li>
+                <li><a data-toggle="tab" href="#Dash3"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Requests</span></a></li>
+                <li><a data-toggle="tab" href="#Dash4"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Requests</span></a></li>
             </ul>     
 
             <div class="tab-content">
@@ -128,14 +130,75 @@
                             ?> 
                         </tbody>
                     </table>
-                    
+
                     <?php if (sizeof($myFeedbacks) == 0) { ?>
                         <div class="text-center">
                             <p> You have not received any feedback for this deliverable</p>
                         </div>
                     <?php } ?>
 
+                </div>               
+
+                <div id="Dash3" class="tab-pane fade in">
+                    <h3>Deadline requests</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Requested Deadline</th>
+                                <th>Reason</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($deadlineRequests as $request): ?>
+                                <tr>
+                                    <td><?= $request->getRequestedDeadlineDate() ?></td>
+                                    <td><?= $request->getReason() ?></td>
+                                    <td><?= $request->getDateOfRequest() ?></td>
+                                    <td><?= $request->getRequestStatus() ?></td>
+                                </tr>
+                            <?php endforeach; ?>                           
+                        </tbody>
+                    </table>
+
+                    <?php if (sizeof($deadlineRequests) == 0) : ?>
+                        <div class="text-center">
+                            <p>There are no deadline requests for this deliverable </p>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
+
+                <div id="Dash4" class="tab-pane fade in">
+                    <h3>delete requests</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Reason</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($deleteRequests as $request): ?>
+                                <tr>
+                                    <td><?= $request->getReason() ?></td>
+                                    <td><?= $request->getDateOfRequest() ?></td>
+                                    <td><?= $request->getRequestStatus() ?></td>
+                                </tr>
+                            <?php endforeach; ?>   
+                        </tbody>
+                    </table>
+
+                    <?php if (sizeof($deleteRequests) == 0) : ?>
+                        <div class="text-center">
+                            <p>There are no delete requests for this deliverable </p>
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+
             </div>
 
 
