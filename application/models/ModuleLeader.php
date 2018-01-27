@@ -56,11 +56,27 @@ class ModuleLeader extends Supervisor {
     }
 
     public function getAllStudents(){
-        $query = "SELECT 
+//        $query = "SELECT 
+//                    a.username,
+//                    a.firstName AS StudentFirstName, 
+//                    a.lastName AS StudentLastName,
+//                    ROUND(AVG(delStatusScore)*100, 2) AS avgScore, 
+//                    COUNT(fyp_Deliverable.deliverable_ID) AS NumOfDeliverables,
+//                    b.firstName AS SupervisorFirstName, 
+//                    b.lastName AS SupervisorLastName 
+//                    FROM fyp_Student 
+//                    INNER JOIN fyp_Staff ON fyp_Student.staff_ID = fyp_Staff.staff_ID 
+//                    INNER JOIN fyp_User a ON fyp_Student.user_ID = a.user_ID 
+//                    INNER JOIN fyp_User b ON fyp_Staff.user_ID = b.user_ID 
+//                    INNER JOIN fyp_Deliverable on fyp_Deliverable.student_ID = fyp_Student.student_ID 
+//                    INNER JOIN fyp_DeliverableStatus ON fyp_Deliverable.delStatus_ID = fyp_DeliverableStatus.delStatus_ID
+//                    GROUP by a.user_ID
+//                    ORDER BY `avgScore` DESC";
+        $query="SELECT 
                     a.username,
                     a.firstName AS StudentFirstName, 
                     a.lastName AS StudentLastName,
-                    ROUND(AVG(delStatusScore)*100, 2) AS avgScore, 
+                    ROUND(AVG(coalesce(delStatusScore,0))*100, 2) AS avgScore, 
                     COUNT(fyp_Deliverable.deliverable_ID) AS NumOfDeliverables,
                     b.firstName AS SupervisorFirstName, 
                     b.lastName AS SupervisorLastName 
@@ -68,8 +84,8 @@ class ModuleLeader extends Supervisor {
                     INNER JOIN fyp_Staff ON fyp_Student.staff_ID = fyp_Staff.staff_ID 
                     INNER JOIN fyp_User a ON fyp_Student.user_ID = a.user_ID 
                     INNER JOIN fyp_User b ON fyp_Staff.user_ID = b.user_ID 
-                    INNER JOIN fyp_Deliverable on fyp_Deliverable.student_ID = fyp_Student.student_ID 
-                    INNER JOIN fyp_DeliverableStatus ON fyp_Deliverable.delStatus_ID = fyp_DeliverableStatus.delStatus_ID
+                    LEFT JOIN fyp_Deliverable on fyp_Deliverable.student_ID = fyp_Student.student_ID 
+                    LEFT JOIN fyp_DeliverableStatus ON fyp_Deliverable.delStatus_ID = fyp_DeliverableStatus.delStatus_ID
                     GROUP by a.user_ID
                     ORDER BY `avgScore` DESC";
         return $this->db->query($query);
