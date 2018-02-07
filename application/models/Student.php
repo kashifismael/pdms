@@ -28,10 +28,9 @@ class Student extends User {
     }
 
     public function insertStudent($username, $pass1, $pass2, $userType) {
-        //print_r($_POST);
-        echo"<br>";
+        //echo"<br>";
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
-            echo "Creating account...";
+            //echo "Creating account...";
             self::createAccount($username, $userType);
             $this->session->set_userdata('userFirstName', $this->input->post('stFirstName'));
             $this->session->set_userdata('userLastName', $this->input->post('stLastName'));
@@ -39,6 +38,8 @@ class Student extends User {
             $this->session->set_userdata('userTypeID', 3);
             $this->session->set_userdata('account', 'new');
             redirect('student-home');
+        } else{
+            redirect('/');
         }
     }
 

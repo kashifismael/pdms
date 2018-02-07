@@ -22,16 +22,21 @@ class Landing extends CI_Controller {
     public function index() {
         $this->load->model('user');
         $data['title'] = "Welcome";
-        //$data['query'] = $this->user->displayAllUsers();
         $this->load->view('header', $data);
         $this->load->view('landing_page', $data);
+        if (isset($_SESSION['passNotMatching'])):
+            unset($_SESSION['passNotMatching']);
+        endif;
+        if (isset($_SESSION['notUnique'])):
+            unset($_SESSION['notUnique']);
+        endif;
     }
 
     public function registerStudent() {
         $this->load->model('user');
         $this->load->model('student');
-        echo "This is the student register page";
-        echo "<br>";
+//        echo "This is the student register page";
+//        echo "<br>";
         $userType = 3;
         if (isset($_POST['stUsername'])) {
             $username = $this->input->post('stUsername');
@@ -46,8 +51,8 @@ class Landing extends CI_Controller {
     public function registerStaff() {
         $this->load->model('user');
         $this->load->model('supervisor');
-        echo "<p>This is the supervisor register page</p>";
-        echo "<br>";
+//        echo "<p>This is the supervisor register page</p>";
+//        echo "<br>";
         $userType = 2;
         if (isset($_POST['kuUsername'])) {
             $username = $this->input->post('kuUsername');
@@ -61,8 +66,6 @@ class Landing extends CI_Controller {
 
     public function processLogin() {
         $this->load->model('user');
-        echo "This is the login portal";
-        echo "<br>";
         if (isset($_POST['username'])) {
             $username = $this->input->post('username');
             $password = $this->input->post('password');

@@ -82,7 +82,8 @@ class User extends CI_Model {
         //$query = $this->db->query("SELECT * FROM fyp_User WHERE username='$user'");
         $query = $this->db->query("SELECT * FROM fyp_User WHERE username = ? ", $user);
         if ($query->num_rows() > 0) {
-            echo "this username already exists, try again";
+            //echo "this username already exists, try again";
+            $this->session->set_userdata('notUnique', 'alreadyTaken');
             return false;
         } else {
             return true;
@@ -93,7 +94,8 @@ class User extends CI_Model {
         if ($password1 === $password2) {
             return true;
         } else {
-            echo "the passwords dont match";
+            //echo "the passwords dont match";
+            $this->session->set_userdata('passNotMatching', 'notMatching');
             return false;
         }
     }
