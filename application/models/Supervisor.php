@@ -8,7 +8,7 @@ class Supervisor extends User {
         parent::__construct();
     }
 
-    public static function supervisorConstructor($firstName, $lastName, $username, $staffID, $email){
+    public static function supervisorConstructor($firstName, $lastName, $username, $staffID, $email) {
         $supervisor = new Supervisor();
         $supervisor->setFirstName($firstName);
         $supervisor->setLastName($lastName);
@@ -17,7 +17,7 @@ class Supervisor extends User {
         $supervisor->setEmail($email);
         return $supervisor;
     }
-    
+
     public function insertStaff($username, $pass1, $pass2, $userType) {
         echo"<br>";
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
@@ -44,8 +44,6 @@ class Supervisor extends User {
             'password' => self::encrypt("theSecretKeyInit", $this->input->post('kupwd1')),
         );
         $this->db->insert('fyp_User', $data1, TRUE);
-
-        //$query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username='$username'");
         $query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username = ? ", $username);
         $userID = $query->row();
         $data2 = array(
@@ -60,33 +58,45 @@ class Supervisor extends User {
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
     }
-    
-    public function getAllSupervisorStudents($staffID){
+
+    public function getAllSupervisorStudents($staffID) {
         $supervisorGroup = array();
         $query = "SELECT * 
                     FROM `fyp_User` 
                     INNER JOIN fyp_Student 
                     ON fyp_Student.user_ID = fyp_User.user_ID 
                     where fyp_Student.staff_ID = '$staffID'";
-                $result = $this->db->query($query);
+        $result = $this->db->query($query);
         foreach ($result->result() as $row) {
             $student = Student::studentConstructor($row->student_ID, $row->firstName, $row->lastName, $row->username);
             $supervisorGroup[] = $student;
         }
         return $supervisorGroup;
     }
-    
-    public function getStudentInfo($username){
-        $query ="SELECT * FROM `fyp_Student` "
+
+    public function getStudentInfo($username) {
+        $query = "SELECT * FROM `fyp_Student` "
                 . "INNER JOIN fyp_User "
                 . "ON fyp_Student.user_ID = fyp_User.user_ID "
-               // . "WHERE fyp_User.username = '$username'";
                 . "WHERE fyp_User.username = ? ";
-        //$result = $this->db->query($query);
         $result = $this->db->query($query, $username);
         $studentRow = $result->row();
         $student = Student::studentConstructorTwo($studentRow->firstName, $studentRow->lastName, $studentRow->username, $studentRow->emailAddress);
         return $student;
+    }
+
+    public function getStudentSupervisor($studentID) {
+        $supervisor = null;
+        $query = "SELECT * FROM `fyp_Staff`
+                    INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Staff.user_ID
+                    WHERE fyp_Staff.staff_ID IN(SELECT fyp_Student.staff_ID FROM fyp_Student
+                                                WHERE fyp_Student.student_ID = ?)";
+        $result = $this->db->query($query, $studentID);
+        if ($result->num_rows() === 1):
+            $row = $result->row();
+            $supervisor = Supervisor::supervisorConstructor($row->firstName, $row->lastName, $row->username, $row->staff_ID, $row->emailAddress);
+        endif;
+        return $supervisor;
     }
 
     function getStaffID() {
@@ -96,6 +106,5 @@ class Supervisor extends User {
     function setStaffID($staffID) {
         $this->staffID = $staffID;
     }
-
 
 }

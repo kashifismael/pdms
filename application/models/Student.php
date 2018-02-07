@@ -28,9 +28,7 @@ class Student extends User {
     }
 
     public function insertStudent($username, $pass1, $pass2, $userType) {
-        //echo"<br>";
         if (self::isUserUnique($username) == true && self::doesPasswordsMatch($pass1, $pass2) == true) {
-            //echo "Creating account...";
             self::createAccount($username, $userType);
             $this->session->set_userdata('userFirstName', $this->input->post('stFirstName'));
             $this->session->set_userdata('userLastName', $this->input->post('stLastName'));
@@ -38,7 +36,7 @@ class Student extends User {
             $this->session->set_userdata('userTypeID', 3);
             $this->session->set_userdata('account', 'new');
             redirect('student-home');
-        } else{
+        } else {
             redirect('/');
         }
     }
@@ -53,8 +51,6 @@ class Student extends User {
             'password' => self::encrypt("theSecretKeyInit", $this->input->post('stpwd1')),
         );
         $this->db->insert('fyp_User', $data1, TRUE);
-
-        //$query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username='$username'");
         $query = $this->db->query("SELECT user_ID FROM fyp_User WHERE username = ? ", $username);
         $userID = $query->row();
         $data2 = array(

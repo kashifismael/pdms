@@ -42,7 +42,6 @@ class Student extends CI_Controller {
         if (self::isStudentAuthorOfDeliverable($delID) == false) {
             return $this->load->view('unauthorisedAccess');
         }
-        //$this->load->model('evidence');
         $this->load->model(array('evidence', 'deadlineRequest', 'deleteRequest'));
         $data['deliverableInfo'] = $this->deliverable->getOneDeliverable($delID);
         $data['myEvidences'] = $this->evidence->getAllEvidencesOfDeliverable($delID);
@@ -74,7 +73,6 @@ class Student extends CI_Controller {
         if (self::isStudentAuthorOfEvidence($evidID) == false) {
             return $this->load->view('unauthorisedAccess');
         }
-        //$this->load->model('feedback');
         $data['evidence'] = $this->evidence->getOneEvidence($evidID);
         $data['myFeedbacks'] = $this->feedback->getAllFeedbacksOfEvidence($evidID);
         $data['title'] = "View Evidence";
@@ -96,7 +94,6 @@ class Student extends CI_Controller {
 
     public function viewRequests() {
         $data = self::checkIfAuthorised();
-        //$this->load->model('request');
         $data['pendingRequests'] = $this->request->getAllPendingRequestsOfStudent($this->session->secondaryID);
         $data['requestsResponses'] = $this->request->getAllRequestResponses($this->session->secondaryID);
         $data['title'] = "View Requests";
@@ -106,18 +103,8 @@ class Student extends CI_Controller {
         $this->load->view('studentViews/footer');
     }
 
-//    public function viewAllEvidences() {
-//        self::checkIfAuthorised();
-//        $data['title'] = "View All Evidences";
-//        $this->load->view('header', $data);
-//        $this->load->view('studentViews/navbar');
-//        $this->load->view('studentViews/viewAllEvidences');
-//        $this->load->view('studentViews/footer');
-//    }
-
     public function viewAllFeedbacks() {
         $data = self::checkIfAuthorised();
-        //$this->load->model('feedback');
         $data['unseenFeedbacks'] = $this->feedback->getAllStudentsFeedbacks(0, $this->session->secondaryID);
         $data['seenFeedbacks'] = $this->feedback->getAllStudentsFeedbacks(1, $this->session->secondaryID);
         $data['title'] = "View All Feedbacks";
@@ -129,6 +116,8 @@ class Student extends CI_Controller {
 
     public function viewSupervisor() {
         $data = self::checkIfAuthorised();
+        $this->load->model(['user','supervisor']);
+        $data['supervisor'] = $this->supervisor->getStudentSupervisor($this->session->secondaryID);
         $data['title'] = "View Supervisor";
         $this->load->view('header', $data);
         $this->load->view('studentViews/navbar');
@@ -138,14 +127,11 @@ class Student extends CI_Controller {
 
     private function checkIfAuthorised() {
         if (isset($_SESSION['userName']) && $_SESSION['userTypeID'] == 3) {
-            //User is authorised
-            //$this->load->model('feedback');
             $this->load->model(array('feedback', 'request'));
             $data['reqResponseNumber'] = $this->request->countAllRequestResponsesForOneStudent($this->session->secondaryID);
             $data['unSeenFeedbackNumber'] = $this->feedback->countAllUnseenFeedbacks($this->session->secondaryID);
             return $data;
         } else {
-            //echo "user is not authorised, redirect user away";
             redirect('/?isAuthorised=false');
         }
     }
