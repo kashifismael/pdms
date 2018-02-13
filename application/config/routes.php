@@ -72,6 +72,8 @@ $route['approveDeadlineExtension'] = 'RequestController/approveDeadlineRequest';
 $route['approveDelete'] = 'RequestController/approveDeliverableDelete';
 $route['rejectRequestProcess'] = 'RequestController/rejectRequest';
 $route['updateRequestStatus'] = 'RequestController/setRequestToSeen';
+$route['processDeadlineResponses'] = 'RequestController/deadlineResponseProcess';
+$route['processDeleteResponses'] = 'RequestController/deleteResponseProcess';
 
 $route['staff-home'] = 'staff';
 $route['view-student/(:any)'] = 'staff/viewStudent/$1';

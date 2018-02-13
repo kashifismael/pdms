@@ -52,22 +52,34 @@
                     </thead>
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deadlineRequests as $request) { ?>
-                            <tr>                    
+                            <tr data-request="<?= $request->getRequestNo() ?>">                    
                                 <td><?= $request->getStudentName() ?></td>
                                 <td><?= $request->getDeliverableName() ?></td>
-                                <td><?= $request->getCurrentDeadlineDate() ?></td>
-                                <td><?= $request->getRequestedDeadlineDate() ?></td>
+                                <td>
+                                    <!-- <!?= $request->getCurrentDeadlineDate() ?> -->
+                                    <?= $request->formattedCurrentDeadline() ?>
+                                </td>
+                                <td>
+                                    <!--   <!?= $request->getRequestedDeadlineDate() ?> -->
+                                    <?= $request->formattedRequestedDeadline() ?>
+                                </td>
                                 <td><?= $request->getReason() ?></td>
-                                <td><form method="post" action="approveDeadlineExtension">
-                                        <input type="hidden" name="delID" value="<?= $request->getDeliverableNo() ?>">
-                                        <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
-                                        <input type="hidden" name="reqDeadline" value="<?= $request->getRequestedDeadlineDate() ?>">
-                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                                    </form></td>
-                                <td><form method="post" action="rejectRequestProcess">
-                                        <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
-                                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                                    </form></td>
+                                <td>
+                                    <!--         <form method="post" action="approveDeadlineExtension">
+                                                 <input type="hidden" name="delID" value="<!?= $request->getDeliverableNo() ?>">
+                                                 <input type="hidden" name="reqID" value="<!?= $request->getRequestNo() ?>">
+                                                 <input type="hidden" name="reqDeadline" value="<!?= $request->getRequestedDeadlineDate() ?>">
+                                                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                                             </form> -->
+                                    <input class="deadlineRadio" type="radio" name="row<?= $request->getRequestNo() ?>" value="Approve">
+                                </td>
+                                <td>
+                                    <!--    <form method="post" action="rejectRequestProcess">
+                                            <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
+                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
+                                        </form> -->
+                                    <input class="deadlineRadio" type="radio" name="row<?= $request->getRequestNo() ?>" value="Reject">
+                                </td>
                             </tr>
 
                         <?php } ?>
@@ -82,16 +94,7 @@
 
             </div>
 
-
-            <!--        <div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div> -->
+            <button id="deadlineResponse" type="submit" class="btn btn-success">Save Changes</button>
         </div> 
 
         <div id="Dash2" class="tab-pane fade in">
@@ -113,19 +116,25 @@
                     </thead>
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deleteRequests as $delRequest) { ?>
-                            <tr>
+                            <tr data-request="<?= $delRequest->getRequestNo() ?>">
                                 <td><?= $delRequest->getStudentName() ?></td>
                                 <td><?= $delRequest->getDeliverableName() ?></td>
                                 <td><?= $delRequest->getReason() ?></td>
-                                <td><form method="post" action="approveDelete">
-                                        <input type="hidden" name="delID" value="<?= $delRequest->getDeliverableNo() ?>">
-                                        <input type="hidden" name="reqID" value="<?= $delRequest->getRequestNo() ?>">
-                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                                    </form></td>
-                                <td><form method="post" action="rejectRequestProcess">
-                                        <input type="hidden" name="reqID" value="<?= $delRequest->getRequestNo() ?>">
-                                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                                    </form></td>
+                                <td>
+                                    <!--    <form method="post" action="approveDelete">
+                                            <input type="hidden" name="delID" value="<!?= $delRequest->getDeliverableNo() ?>">
+                                            <input type="hidden" name="reqID" value="<!?= $delRequest->getRequestNo() ?>">
+                                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                                        </form> -->
+                                    <input class="deleteRadio" type="radio" name="row<?= $delRequest->getRequestNo() ?>" value="Approve">
+                                </td>
+                                <td>
+                                    <!--   <form method="post" action="rejectRequestProcess">
+                                           <input type="hidden" name="reqID" value="<!?= $delRequest->getRequestNo() ?>">
+                                           <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
+                                       </form> -->
+                                    <input class="deleteRadio" type="radio" name="row<?= $delRequest->getRequestNo() ?>" value="Reject">
+                                </td>
                             </tr>
 
                         <?php } ?>
@@ -138,17 +147,7 @@
                     </div>
                 <?php } ?>
             </div>
-
-
-            <!--       <div class="text-center">
-                       <ul class="pagination">
-                           <li><a href="#">1</a></li>
-                           <li class="active"><a href="#">2</a></li>
-                           <li><a href="#">3</a></li>
-                           <li><a href="#">4</a></li>
-                           <li><a href="#">5</a></li>
-                       </ul>
-                   </div> -->
+            <button id="deleteResponse" type="submit" class="btn btn-success">Save Changes</button>
         </div>   
 
         <div id="Dash3" class="tab-pane fade in">
@@ -190,5 +189,64 @@
 
 
 </div>  
+
+<script>
+    var deadlineResponses = {};
+    var deleteResponses = {};
+
+    $('.deadlineRadio').click(addToDeadlineResponse);
+    $('.deleteRadio').click(addToDeleteResponse);
+
+    $('#deadlineResponse').click(submitDeadlineResponse);
+    $('#deleteResponse').click(submitDeleteResponse);
+
+    function submitDeadlineResponse() {
+        //console.log(JSON.stringify(deadlineResponses));
+        var responseList = JSON.stringify(deadlineResponses);
+        $.ajax({
+            method: 'POST',
+            url: "processDeadlineResponses",
+            data: {
+                responseObject: responseList,
+            },
+            success: function (data) {
+                console.log(data);
+                console.log("Show success message/redirect user");
+                //alert("show some sort of success message");
+            }
+        });
+    }
+
+    function submitDeleteResponse() {
+        //console.log(JSON.stringify(deleteResponses));
+        var responseList = JSON.stringify(deleteResponses);
+        $.ajax({
+            method: 'POST',
+            url: "processDeleteResponses",
+            data: {
+                responseObject: responseList,
+            },
+            success: function (data) {
+                console.log(data);
+                console.log("Show success message/redirect user");
+                //alert("show some sort of success message");
+            }
+        });
+    }
+
+    function addToDeadlineResponse(event) {
+        var $element = $(event.target);
+        var response = $element.val();
+        var request = $element.closest('tr[data-request]').data('request');
+        deadlineResponses[request] = response;
+    }
+    function addToDeleteResponse(event) {
+        var $element = $(event.target);
+        var response = $element.val();
+        var request = $element.closest('tr[data-request]').data('request');
+        deleteResponses[request] = response;
+    }
+</script>
+
 </body>
 </html>

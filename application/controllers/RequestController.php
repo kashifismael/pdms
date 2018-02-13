@@ -12,7 +12,7 @@ class RequestController extends CI_Controller {
             $postTime = new DateTime($this->input->post('reqDeadlineTime'));
             $postDateTime = new DateTime($postDate->format('Y-m-d') . ' ' . $postTime->format('H:i'));
             $reason = $this->input->post('reason');
-            $insert = $this->deadlineRequest->insertDeadlineRequest($postDateTime->format('Y-m-d H:i') , $reason);
+            $insert = $this->deadlineRequest->insertDeadlineRequest($postDateTime->format('Y-m-d H:i'), $reason);
             if ($insert === true) {
                 $this->session->set_userdata('requestSubmission', 'success');
                 redirect('deliverable/' . $this->input->post('deliverableID'));
@@ -35,6 +35,34 @@ class RequestController extends CI_Controller {
         } else {
             echo "nothing was posted";
         }
+    }
+
+    public function deadlineResponseProcess() {
+        if (!(isset($_POST['responseObject']))):
+            return;
+        endif;
+        $responseList = json_decode($this->input->post('responseObject'));
+        foreach ($responseList as $key => $value):
+            if ($value == "Approve"):
+                echo "Get deliverable id from request $key, change deadline date , then set request $key to $value \n";
+            elseif ($value == "Reject"):
+                echo "Set request $key to $value \n";
+            endif;
+        endforeach;
+    }
+
+    public function deleteResponseProcess() {
+        if (!(isset($_POST['responseObject']))):
+            return;
+        endif;
+        $responseList = json_decode($this->input->post('responseObject'));
+        foreach ($responseList as $key => $value):
+            if ($value == "Approve"):
+                echo "Get deliverable id from request $key, set to inactive , then set request $key to $value \n";
+            elseif ($value == "Reject"):
+                echo "Set request $key to $value \n";
+            endif;
+        endforeach;
     }
 
     public function approveDeliverableDelete() {

@@ -29,7 +29,7 @@ class DeadlineRequest extends Request {
         $deadlineRequest->setRequestStatus($status);
         return $deadlineRequest;
     }
-            
+
     function getCurrentDeadlineDate() {
         return $this->currentDeadlineDate;
     }
@@ -46,6 +46,16 @@ class DeadlineRequest extends Request {
         $this->requestedDeadlineDate = $requestedDeadlineDate;
     }
 
+    function formattedCurrentDeadline() {
+        $datetime = new DateTime($this->currentDeadlineDate);
+        return date_format($datetime, 'G:ia - D j M');
+    }
+
+    function formattedRequestedDeadline() {
+        $datetime = new DateTime($this->requestedDeadlineDate);
+        return date_format($datetime, 'G:ia - D j M');
+    }
+
     public function countAllRequests($staffID) {
         $query = "SELECT fyp_Request.request_ID
                     FROM `fyp_Request` 
@@ -59,7 +69,7 @@ class DeadlineRequest extends Request {
         return $result->num_rows();
     }
 
-    public function insertDeadlineRequest($reqDeadlineDate,$reason) {
+    public function insertDeadlineRequest($reqDeadlineDate, $reason) {
         $data = array(
             'deliverable_ID' => $this->input->post('deliverableID'),
             'requestType_ID' => 2,
@@ -98,18 +108,18 @@ class DeadlineRequest extends Request {
         return $requestList;
     }
 
-    public function getAllDeadlineRequestsOfDeliverable($delID){
+    public function getAllDeadlineRequestsOfDeliverable($delID) {
         $requestList = array();
         $query = "SELECT * FROM fyp_Request 
                     INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID 
                     WHERE fyp_Request.deliverable_ID = $delID 
                     and fyp_Request.requestType_ID = 2";
         $result = $this->db->query($query);
-        foreach($result->result() as $row){
+        foreach ($result->result() as $row) {
             $deadlineRequest = self::deadlineRequestConstructorTwo($row->reqDeadlineDate, $row->reason, $row->dateOfRequest, $row->requestStatusDesc);
             $requestList[] = $deadlineRequest;
         }
         return $requestList;
     }
-    
+
 }
