@@ -32,8 +32,8 @@
     <h1 class="text-center">Manage requests</h1>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span> <span class="label label-primary <?= hideIfZero($deadlineReqNumber) ?>"><?= $deadlineReqNumber ?></span></a></li>
-        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Deliverable</span> <span class="label label-primary <?= hideIfZero($deleteReqNumber) ?>"><?= $deleteReqNumber ?></span></a></li> 
+        <li class="active"><a data-toggle="tab" href="#Dash1"><span class="glyphicon glyphicon-time"></span><span class="hidden-xs"> Deadline Changes</span> <span id="deadlineReqNumber" class="label label-primary <?= hideIfZero($deadlineReqNumber) ?>"><?= $deadlineReqNumber ?></span></a></li>
+        <li><a data-toggle="tab" href="#Dash2"><span class="glyphicon glyphicon-remove-sign"></span><span class="hidden-xs"> Delete Deliverable</span> <span id="deleteReqNumber" class="label label-primary <?= hideIfZero($deleteReqNumber) ?>"><?= $deleteReqNumber ?></span></a></li> 
         <li><a data-toggle="tab" href="#Dash3"><span class="glyphicon glyphicon-backward"></span><span class="hidden-xs"> Previous Requests</span></a></li> 
     </ul>
 
@@ -59,7 +59,7 @@
                     </thead>
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deadlineRequests as $request) { ?>
-                            <tr data-request="<?= $request->getRequestNo() ?>">                    
+                            <tr data-request="<?= $request->getRequestNo() ?>" id="request<?= $request->getRequestNo() ?>">                    
                                 <td><?= $request->getStudentName() ?></td>
                                 <td><?= $request->getDeliverableName() ?></td>
                                 <td>
@@ -123,7 +123,7 @@
                     </thead>
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deleteRequests as $delRequest) { ?>
-                            <tr data-request="<?= $delRequest->getRequestNo() ?>">
+                            <tr data-request="<?= $delRequest->getRequestNo() ?>" id="request<?= $delRequest->getRequestNo() ?>">
                                 <td><?= $delRequest->getStudentName() ?></td>
                                 <td><?= $delRequest->getDeliverableName() ?></td>
                                 <td><?= $delRequest->getReason() ?></td>
@@ -208,7 +208,6 @@
     $('#deleteResponse').click(submitDeleteResponse);
 
     function submitDeadlineResponse() {
-        //console.log(JSON.stringify(deadlineResponses));
         var responseList = JSON.stringify(deadlineResponses);
         $.ajax({
             method: 'POST',
@@ -217,15 +216,22 @@
                 responseObject: responseList,
             },
             success: function (data) {
-                console.log(data);
-                //console.log("Show success message/redirect user");
+                var deadlineReqNumber = Number(document.getElementById("deadlineReqNumber").innerHTML);
+                var totalRequestNumber = Number(document.getElementById("totalReqs").innerHTML);
+                var responded = JSON.parse(data);
+                responded.forEach(function (element) {
+                    $("#request" + element).remove();
+                });
+                document.getElementById("deadlineReqNumber").innerHTML = deadlineReqNumber - responded.length;
+                document.getElementById("totalReqs").innerHTML = totalRequestNumber - responded.length;
                 $("#requestSuccessNotif").fadeIn("slow");
+                deadlineResponses = {};
+                $('#deadlineResponse').prop("disabled", true);
             }
         });
     }
 
     function submitDeleteResponse() {
-        //console.log(JSON.stringify(deleteResponses));
         var responseList = JSON.stringify(deleteResponses);
         $.ajax({
             method: 'POST',
@@ -234,9 +240,17 @@
                 responseObject: responseList,
             },
             success: function (data) {
-                console.log(data);
-                //console.log("Show success message/redirect user");
+                var deleteRequestNumber = Number(document.getElementById("deleteReqNumber").innerHTML);
+                var totalRequestNumber = Number(document.getElementById("totalReqs").innerHTML);
+                var responded = JSON.parse(data);
+                responded.forEach(function (element) {
+                    $("#request" + element).remove();
+                });
+                document.getElementById("deleteReqNumber").innerHTML = deleteRequestNumber - responded.length;
+                document.getElementById("totalReqs").innerHTML = totalRequestNumber - responded.length;
                 $("#requestSuccessNotif").fadeIn("slow");
+                deleteResponses = {};
+                $('#deleteResponse').prop("disabled", true);
             }
         });
     }

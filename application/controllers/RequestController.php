@@ -41,91 +41,92 @@ class RequestController extends CI_Controller {
         if (!(isset($_POST['responseObject']))):
             return;
         endif;
+        $responses = [];
         $this->load->model('request');
         $this->load->model('deadlineRequest');
         $responseList = json_decode($this->input->post('responseObject'));
-        foreach ($responseList as $key => $value):
-            if ($value == "Approve") {
-                $approve = $this->deadlineRequest->performDeadlineApproval($key);
+        foreach ($responseList as $reqID => $response):
+            if ($response == "Approve") {
+                $approve = $this->deadlineRequest->performDeadlineApproval($reqID);
                 if ($approve === true) {
-                    echo "request $key has been set to $value \n";
+                    $responses[] = $reqID;
                 }
-            }
-            //echo "Get deliverable id from request $key, change deadline date , then set request $key to $value \n";
-            elseif ($value == "Reject") {
-                $reject = $this->request->rejectRequest($key);
+            } elseif ($response == "Reject") {
+                $reject = $this->request->rejectRequest($reqID);
                 if ($reject === true) {
-                    echo "request $key has been set to $value \n";
+                    $responses[] = $reqID;
                 }
             }
         endforeach;
+        echo json_encode($responses);
     }
 
     public function deleteResponseProcess() {
         if (!(isset($_POST['responseObject']))):
             return;
         endif;
+        $responses = [];
         $this->load->model('request');
         $this->load->model('deleteRequest');
         $responseList = json_decode($this->input->post('responseObject'));
-        foreach ($responseList as $key => $value):
-            if ($value == "Approve") {
-                $approve = $this->deleteRequest->approveDeleteRequest($key);
+        foreach ($responseList as $reqID => $response):
+            if ($response == "Approve") {
+                $approve = $this->deleteRequest->approveDeleteRequest($reqID);
                 if ($approve === true) {
-                    //echo "Get deliverable id from request $key, set to inactive , then set request $key to $value \n";
-                    echo "request $key has been set to $value \n";
+                    $responses[] = $reqID;
                 }
-            } elseif ($value == "Reject") {
-                $reject = $this->request->rejectRequest($key);
+            } elseif ($response == "Reject") {
+                $reject = $this->request->rejectRequest($reqID);
                 if ($reject === true) {
-                    echo "request $key has been set to $value \n";
+                    $responses[] = $reqID;
                 }
             }
         endforeach;
+        echo json_encode($responses);
     }
 
-    public function approveDeliverableDelete() {
-        if (isset($_POST['delID'])) {
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
-            echo "delete this deliverable (yet to be implemented)";
-        }
-    }
+//    public function approveDeliverableDelete() {
+//        if (isset($_POST['delID'])) {
+//            echo "<pre>";
+//            print_r($_POST);
+//            echo "</pre>";
+//            echo "delete this deliverable (yet to be implemented)";
+//        }
+//    }
 
-    public function approveDeadlineRequest() {
-        if (isset($_POST['delID'])) {
-            $this->load->model('request');
-            $this->load->model('deadlineRequest');
-            $approve = $this->deadlineRequest->approveDeadlineRequest(
-                    $this->input->post('reqID'), $this->input->post('delID'), $this->input->post('reqDeadline'));
-            if ($approve === true) {
-                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
-                $this->session->set_userdata('deadlineRequestApproval', 'success');
-                self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
-                redirect('manage-requests');
-            } else {
-                echo "something went wrong";
-            }
-        } else {
-            echo "nothing was posted, redirect away";
-        }
-    }
+//    public function approveDeadlineRequest() {
+//        if (isset($_POST['delID'])) {
+//            $this->load->model('request');
+//            $this->load->model('deadlineRequest');
+//            $approve = $this->deadlineRequest->approveDeadlineRequest(
+//                    $this->input->post('reqID'), $this->input->post('delID'), $this->input->post('reqDeadline'));
+//            if ($approve === true) {
+//                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
+//                $this->session->set_userdata('deadlineRequestApproval', 'success');
+//                self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
+//                redirect('manage-requests');
+//            } else {
+//                echo "something went wrong";
+//            }
+//        } else {
+//            echo "nothing was posted, redirect away";
+//        }
+//    }
 
-    public function rejectRequest() {
-        if (isset($_POST['reqID'])) {
-            $this->load->model('request');
-            $reject = $this->request->rejectRequest($this->input->post('reqID'));
-            if ($reject === true) {
-                $this->session->set_userdata('requestRejection', 'success');
-                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
-                self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
-                redirect('manage-requests');
-            }
-        } else {
-            echo "nothing was posted, redirect away";
-        }
-    }
+//    public function rejectRequest() {
+//        if (isset($_POST['reqID'])) {
+//            $this->load->model('request');
+//            $reject = $this->request->rejectRequest($this->input->post('reqID'));
+//            if ($reject === true) {
+//                $this->session->set_userdata('requestRejection', 'success');
+//                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
+//                self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
+//                redirect('manage-requests');
+//            }
+//        } else {
+//            echo "nothing was posted, redirect away";
+//        }
+//    }
 
     public function setRequestToSeen() {
         if (isset($_POST['hasBeenSeen']) && isset($_SESSION['userName'])) {
