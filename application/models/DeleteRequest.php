@@ -64,6 +64,21 @@ class DeleteRequest extends Request {
         return $requestList;
     }
 
+    public function approveDeleteRequest($reqID) {
+        $query = "SELECT `deliverable_ID` FROM `fyp_Request` WHERE request_ID = ? ";
+        $result = $this->db->query($query, $reqID);
+        $requestRow = $result->row();
+        //$newQuery = "UPDATE fyp_Deliverable SET `isInactive` = '1' WHERE deliverable_ID = ? ";
+        $delete = $this->db->query("UPDATE fyp_Deliverable SET `isInactive` = '1' WHERE deliverable_ID = ? ", $requestRow->deliverable_ID);
+        $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = ? ", $reqID);
+        $logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = ? ", $reqID);
+        if ($updateStatus === true && $delete === true && $logDateOfApproval === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAllDeleteRequestsOfDeliverable($delID) {
         $requestList = array();
         $query = "SELECT * FROM fyp_Request 

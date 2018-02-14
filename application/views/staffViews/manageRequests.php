@@ -22,6 +22,13 @@
         </div>
     <?php } ?>
 
+    <div class="row" id="requestSuccessNotif" style="display: none;">
+        <div class="alert alert-success alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Successfully processed request responses!</strong>
+        </div>
+    </div>
+
     <h1 class="text-center">Manage requests</h1>
 
     <ul class="nav nav-tabs">
@@ -94,7 +101,7 @@
 
             </div>
 
-            <button id="deadlineResponse" type="submit" class="btn btn-success">Save Changes</button>
+            <button id="deadlineResponse" type="submit" class="btn btn-success" disabled>Save Changes</button>
         </div> 
 
         <div id="Dash2" class="tab-pane fade in">
@@ -147,7 +154,7 @@
                     </div>
                 <?php } ?>
             </div>
-            <button id="deleteResponse" type="submit" class="btn btn-success">Save Changes</button>
+            <button id="deleteResponse" type="submit" class="btn btn-success" disabled>Save Changes</button>
         </div>   
 
         <div id="Dash3" class="tab-pane fade in">
@@ -211,8 +218,8 @@
             },
             success: function (data) {
                 console.log(data);
-                console.log("Show success message/redirect user");
-                //alert("show some sort of success message");
+                //console.log("Show success message/redirect user");
+                $("#requestSuccessNotif").fadeIn("slow");
             }
         });
     }
@@ -228,19 +235,21 @@
             },
             success: function (data) {
                 console.log(data);
-                console.log("Show success message/redirect user");
-                //alert("show some sort of success message");
+                //console.log("Show success message/redirect user");
+                $("#requestSuccessNotif").fadeIn("slow");
             }
         });
     }
 
     function addToDeadlineResponse(event) {
+        $('#deadlineResponse').prop("disabled", false);
         var $element = $(event.target);
         var response = $element.val();
         var request = $element.closest('tr[data-request]').data('request');
         deadlineResponses[request] = response;
     }
     function addToDeleteResponse(event) {
+        $('#deleteResponse').prop("disabled", false);
         var $element = $(event.target);
         var response = $element.val();
         var request = $element.closest('tr[data-request]').data('request');

@@ -41,13 +41,23 @@ class RequestController extends CI_Controller {
         if (!(isset($_POST['responseObject']))):
             return;
         endif;
+        $this->load->model('request');
+        $this->load->model('deadlineRequest');
         $responseList = json_decode($this->input->post('responseObject'));
         foreach ($responseList as $key => $value):
-            if ($value == "Approve"):
-                echo "Get deliverable id from request $key, change deadline date , then set request $key to $value \n";
-            elseif ($value == "Reject"):
-                echo "Set request $key to $value \n";
-            endif;
+            if ($value == "Approve") {
+                $approve = $this->deadlineRequest->performDeadlineApproval($key);
+                if ($approve === true) {
+                    echo "request $key has been set to $value \n";
+                }
+            }
+            //echo "Get deliverable id from request $key, change deadline date , then set request $key to $value \n";
+            elseif ($value == "Reject") {
+                $reject = $this->request->rejectRequest($key);
+                if ($reject === true) {
+                    echo "request $key has been set to $value \n";
+                }
+            }
         endforeach;
     }
 
@@ -55,13 +65,22 @@ class RequestController extends CI_Controller {
         if (!(isset($_POST['responseObject']))):
             return;
         endif;
+        $this->load->model('request');
+        $this->load->model('deleteRequest');
         $responseList = json_decode($this->input->post('responseObject'));
         foreach ($responseList as $key => $value):
-            if ($value == "Approve"):
-                echo "Get deliverable id from request $key, set to inactive , then set request $key to $value \n";
-            elseif ($value == "Reject"):
-                echo "Set request $key to $value \n";
-            endif;
+            if ($value == "Approve") {
+                $approve = $this->deleteRequest->approveDeleteRequest($key);
+                if ($approve === true) {
+                    //echo "Get deliverable id from request $key, set to inactive , then set request $key to $value \n";
+                    echo "request $key has been set to $value \n";
+                }
+            } elseif ($value == "Reject") {
+                $reject = $this->request->rejectRequest($key);
+                if ($reject === true) {
+                    echo "request $key has been set to $value \n";
+                }
+            }
         endforeach;
     }
 

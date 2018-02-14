@@ -79,6 +79,13 @@ class DeadlineRequest extends Request {
         return $this->db->insert('fyp_Request', $data, TRUE);
     }
 
+    public function performDeadlineApproval($reqID){
+        $query = "SELECT `deliverable_ID`, `reqDeadlineDate` FROM `fyp_Request` WHERE `request_ID` = ? ";
+        $result = $this->db->query($query, $reqID);
+        $requestRow = $result->row();
+        return $this->approveDeadlineRequest($reqID, $requestRow->deliverable_ID, $requestRow->reqDeadlineDate);
+    }
+    
     public function approveDeadlineRequest($reqID, $delID, $newDeadline) {
         $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = '$reqID'");
         $changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = '$newDeadline' WHERE `fyp_Deliverable`.`deliverable_ID` = '$delID'");
