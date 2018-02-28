@@ -79,9 +79,9 @@ class Deliverable extends CI_Model {
     
     public function insertDeliverable($deadlineDate) {
         $delData = array(
-            'student_ID' => $this->session->secondaryID,
-            'deliverableName' => $this->input->post('delName'),
-            'deadlineDate' => $deadlineDate,
+            'student_ID' => htmlentities($this->session->secondaryID),
+            'deliverableName' => htmlentities($this->input->post('delName')),
+            'deadlineDate' => htmlentities($deadlineDate),
             'thumbnail' => "thumbnail".rand(1,13).".jpg",
         );
         $this->session->set_userdata('deliverableCreation', 'success');
