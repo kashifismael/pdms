@@ -16,7 +16,7 @@
       <li<?= activeCheck("staff-home") ?>><a href="<?= base_url("staff-home")?>">Dashboard</a></li>
       <li<?= activeCheck("latest-submissions") ?>><a href="<?= base_url("latest-submissions")?>">Latest submissions <span class="label label-primary <?= hideIfZero($numberOfEvids)?>"><?= $numberOfEvids ?></span></a></li>
     <!--  <li><a href="#">View Supervisor group</a></li> -->
-      <li<?= activeCheck("manage-requests") ?>><a href="<?= base_url("manage-requests")?>">Manage requests <span class="label label-primary <?= hideIfZero($numberOfReqs)?>"><?= $numberOfReqs ?></span></a></li>
+      <li<?= activeCheck("manage-requests") ?>><a href="<?= base_url("manage-requests")?>">Manage requests <span id="totalReqs" class="label label-primary <?= hideIfZero($numberOfReqs)?>"><?= $numberOfReqs ?></span></a></li>
       <li<?= activeCheck("student-allocation") ?>><a href="<?= base_url("student-allocation")?>">Student Allocation <span class="label label-primary <?= hideIfZero($unAllocatedStudentsNumber)?>"><?= $unAllocatedStudentsNumber ?></span></a></li>
       <li class="dropdown <?= activeCheck("all-supervisors") ?>">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span class="caret"></span></a>

@@ -82,7 +82,7 @@
                                 </td>
                                 <td>
                                     <!--    <form method="post" action="rejectRequestProcess">
-                                            <input type="hidden" name="reqID" value="<?= $request->getRequestNo() ?>">
+                                            <input type="hidden" name="reqID" value="<!?= $request->getRequestNo() ?>">
                                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
                                         </form> -->
                                     <input class="deadlineRadio" type="radio" name="row<?= $request->getRequestNo() ?>" value="Reject">
