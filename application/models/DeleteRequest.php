@@ -39,9 +39,9 @@ class DeleteRequest extends Request {
 
     public function insertDeleteRequest() {
         $data = array(
-            'deliverable_ID' => $this->input->post('deliverableID'),
+            'deliverable_ID' => htmlentities($this->input->post('deliverableID')),
             'requestType_ID' => 1,
-            'reason' => $this->input->post('deleteReason'),
+            'reason' => htmlentities($this->input->post('deleteReason')),
         );
         return $this->db->insert('fyp_Request', $data, TRUE);
     }

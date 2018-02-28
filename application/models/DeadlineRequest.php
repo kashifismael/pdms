@@ -71,10 +71,10 @@ class DeadlineRequest extends Request {
 
     public function insertDeadlineRequest($reqDeadlineDate, $reason) {
         $data = array(
-            'deliverable_ID' => $this->input->post('deliverableID'),
+            'deliverable_ID' => htmlentities($this->input->post('deliverableID')),
             'requestType_ID' => 2,
-            'reqDeadlineDate' => $reqDeadlineDate,
-            'reason' => $reason,
+            'reqDeadlineDate' => htmlentities($reqDeadlineDate),
+            'reason' => htmlentities($reason),
         );
         return $this->db->insert('fyp_Request', $data, TRUE);
     }
@@ -87,9 +87,12 @@ class DeadlineRequest extends Request {
     }
     
     public function approveDeadlineRequest($reqID, $delID, $newDeadline) {
-        $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = '$reqID'");
-        $changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = '$newDeadline' WHERE `fyp_Deliverable`.`deliverable_ID` = '$delID'");
-        $logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        //$updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = ?", $reqID);
+        //$changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = '$newDeadline' WHERE `fyp_Deliverable`.`deliverable_ID` = '$delID'");
+        $changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = ? WHERE `fyp_Deliverable`.`deliverable_ID` = ? ", [$newDeadline, $delID]);
+        //$logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        $logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = ?", $reqID);
         if ($updateStatus === true && $changeDeadline === true && $logDateOfApproval === true) {
             return true;
         } else {

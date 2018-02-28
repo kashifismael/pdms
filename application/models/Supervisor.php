@@ -37,10 +37,10 @@ class Supervisor extends User {
     public function createAccount($username, $userType) {
         $data1 = array(
             'userType_ID' => $userType,
-            'firstName' => $this->input->post('kuFirstName'),
-            'lastName' => $this->input->post('kuLastName'),
-            'emailAddress' => $this->input->post('kuEmail'),
-            'username' => $username,
+            'firstName' => htmlentities($this->input->post('kuFirstName')),
+            'lastName' => htmlentities($this->input->post('kuLastName')),
+            'emailAddress' => htmlentities($this->input->post('kuEmail')),
+            'username' => htmlentities($username),
             'password' => self::encrypt("theSecretKeyInit", $this->input->post('kupwd1')),
         );
         $this->db->insert('fyp_User', $data1, TRUE);

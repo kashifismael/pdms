@@ -44,10 +44,10 @@ class Student extends User {
     public function createAccount($username, $userType) {
         $data1 = array(
             'userType_ID' => $userType,
-            'firstName' => $this->input->post('stFirstName'),
-            'lastName' => $this->input->post('stLastName'),
-            'emailAddress' => $this->input->post('stEmail'),
-            'username' => $username,
+            'firstName' => htmlentities($this->input->post('stFirstName')),
+            'lastName' => htmlentities($this->input->post('stLastName')),
+            'emailAddress' => htmlentities($this->input->post('stEmail')),
+            'username' => htmlentities($username),
             'password' => self::encrypt("theSecretKeyInit", $this->input->post('stpwd1')),
         );
         $this->db->insert('fyp_User', $data1, TRUE);

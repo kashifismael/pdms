@@ -119,10 +119,10 @@ class Evidence extends CI_Model {
 
     public function insertFileRecord($newFileName) {
         $data = array(
-            'deliverable_ID' => $this->input->post('deliverableID'),
+            'deliverable_ID' => htmlentities($this->input->post('deliverableID')),
             'evidStatus_ID' => 1,
-            'evidenceName' => $this->input->post('evidenceName'),
-            'filePath' => $newFileName,
+            'evidenceName' => htmlentities($this->input->post('evidenceName')),
+            'filePath' => htmlentities($newFileName),
             'thumbnail' => "thumbnail".rand(1,13).".jpg",
         );
         return $this->db->insert('fyp_Evidence', $data, TRUE);
