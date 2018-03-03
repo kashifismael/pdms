@@ -34,7 +34,7 @@ class Deliverable extends CI_Model {
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID) 
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID) 
                     WHERE fyp_User.username = ? 
-                    AND fyp_Deliverable.isInactive = 0";
+                    AND fyp_Deliverable.isInactive = 0 ";
         if (isset($_GET['sort']) && $_GET['sort'] == "deadline") {
             $query = $query . "ORDER BY `fyp_Deliverable`.`deadlineDate` ASC";
         } else {
