@@ -42,18 +42,19 @@ class RequestController extends CI_Controller {
             return;
         endif;
         $responses = [];
-        $this->load->model('request');
-        $this->load->model('deadlineRequest');
+        $this->load->model(['request','deadlineRequest']);
         $responseList = json_decode($this->input->post('responseObject'));
         foreach ($responseList as $reqID => $response):
             if ($response == "Approve") {
                 $approve = $this->deadlineRequest->performDeadlineApproval($reqID);
                 if ($approve === true) {
+                    self::sendRequestNotifEmail($reqID);                    
                     $responses[] = $reqID;
                 }
             } elseif ($response == "Reject") {
                 $reject = $this->request->rejectRequest($reqID);
                 if ($reject === true) {
+                    self::sendRequestNotifEmail($reqID);                   
                     $responses[] = $reqID;
                 }
             }
@@ -66,18 +67,19 @@ class RequestController extends CI_Controller {
             return;
         endif;
         $responses = [];
-        $this->load->model('request');
-        $this->load->model('deleteRequest');
+        $this->load->model(['request','deleteRequest']);
         $responseList = json_decode($this->input->post('responseObject'));
         foreach ($responseList as $reqID => $response):
             if ($response == "Approve") {
                 $approve = $this->deleteRequest->approveDeleteRequest($reqID);
                 if ($approve === true) {
+                    self::sendRequestNotifEmail($reqID);
                     $responses[] = $reqID;
                 }
             } elseif ($response == "Reject") {
                 $reject = $this->request->rejectRequest($reqID);
                 if ($reject === true) {
+                    self::sendRequestNotifEmail($reqID);
                     $responses[] = $reqID;
                 }
             }
@@ -85,6 +87,11 @@ class RequestController extends CI_Controller {
         echo json_encode($responses);
     }
 
+    private function sendRequestNotifEmail($reqID){
+        $info = $this->request->getRequestInfoForEmail($reqID);
+        self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
+    }
+    
 //    public function approveDeliverableDelete() {
 //        if (isset($_POST['delID'])) {
 //            echo "<pre>";
@@ -101,9 +108,9 @@ class RequestController extends CI_Controller {
 //            $approve = $this->deadlineRequest->approveDeadlineRequest(
 //                    $this->input->post('reqID'), $this->input->post('delID'), $this->input->post('reqDeadline'));
 //            if ($approve === true) {
-//                $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
+ //               $info = $this->request->getRequestInfoForEmail($this->input->post('reqID'));
 //                $this->session->set_userdata('deadlineRequestApproval', 'success');
-//                self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
+ //               self::sendNotificationEmail($info->emailAddress, $info->firstName, $info->deliverableName, $info->requestTypeDesc, $info->requestStatusDesc);
 //                redirect('manage-requests');
 //            } else {
 //                echo "something went wrong";
@@ -111,7 +118,7 @@ class RequestController extends CI_Controller {
 //        } else {
 //            echo "nothing was posted, redirect away";
 //        }
-//    }
+ //  }
 
 //    public function rejectRequest() {
 //        if (isset($_POST['reqID'])) {

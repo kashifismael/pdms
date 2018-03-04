@@ -195,81 +195,24 @@
     </div>    
 
 
-</div>  
+    <div id="processingModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-<script>
-    var deadlineResponses = {};
-    var deleteResponses = {};
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Processing Requests...</h4>
+                </div>
+                <div class="modal-body">
+                        <div class="loader"></div>
+                </div>
 
-    $('.deadlineRadio').click(addToDeadlineResponse);
-    $('.deleteRadio').click(addToDeleteResponse);
+            </div>
+        </div>
 
-    $('#deadlineResponse').click(submitDeadlineResponse);
-    $('#deleteResponse').click(submitDeleteResponse);
+    </div>  
 
-    function submitDeadlineResponse() {
-        var responseList = JSON.stringify(deadlineResponses);
-        $.ajax({
-            method: 'POST',
-            url: "processDeadlineResponses",
-            data: {
-                responseObject: responseList,
-            },
-            success: function (data) {
-                var deadlineReqNumber = Number(document.getElementById("deadlineReqNumber").innerHTML);
-                var totalRequestNumber = Number(document.getElementById("totalReqs").innerHTML);
-                var responded = JSON.parse(data);
-                responded.forEach(function (element) {
-                    $("#request" + element).remove();
-                });
-                document.getElementById("deadlineReqNumber").innerHTML = deadlineReqNumber - responded.length;
-                document.getElementById("totalReqs").innerHTML = totalRequestNumber - responded.length;
-                $("#requestSuccessNotif").fadeIn("slow");
-                deadlineResponses = {};
-                $('#deadlineResponse').prop("disabled", true);
-            }
-        });
-    }
-
-    function submitDeleteResponse() {
-        var responseList = JSON.stringify(deleteResponses);
-        $.ajax({
-            method: 'POST',
-            url: "processDeleteResponses",
-            data: {
-                responseObject: responseList,
-            },
-            success: function (data) {
-                var deleteRequestNumber = Number(document.getElementById("deleteReqNumber").innerHTML);
-                var totalRequestNumber = Number(document.getElementById("totalReqs").innerHTML);
-                var responded = JSON.parse(data);
-                responded.forEach(function (element) {
-                    $("#request" + element).remove();
-                });
-                document.getElementById("deleteReqNumber").innerHTML = deleteRequestNumber - responded.length;
-                document.getElementById("totalReqs").innerHTML = totalRequestNumber - responded.length;
-                $("#requestSuccessNotif").fadeIn("slow");
-                deleteResponses = {};
-                $('#deleteResponse').prop("disabled", true);
-            }
-        });
-    }
-
-    function addToDeadlineResponse(event) {
-        $('#deadlineResponse').prop("disabled", false);
-        var $element = $(event.target);
-        var response = $element.val();
-        var request = $element.closest('tr[data-request]').data('request');
-        deadlineResponses[request] = response;
-    }
-    function addToDeleteResponse(event) {
-        $('#deleteResponse').prop("disabled", false);
-        var $element = $(event.target);
-        var response = $element.val();
-        var request = $element.closest('tr[data-request]').data('request');
-        deleteResponses[request] = response;
-    }
-</script>
+    <script src="<?= base_url("js/manageRequests.js")?>"></script>
 
 </body>
 </html>
