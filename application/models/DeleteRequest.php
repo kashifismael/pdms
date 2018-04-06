@@ -6,13 +6,14 @@ class DeleteRequest extends Request {
         parent::__construct();
     }
 
-    public function deleteRequestConstructor($reqID, $delID, $studentName, $delName, $reason) {
+    public function deleteRequestConstructor($reqID, $delID, $studentName, $delName, $reason, $stuUsername) {
         $deleteRequest = new DeleteRequest();
         $deleteRequest->setRequestNo($reqID);
         $deleteRequest->setDeliverableNo($delID);
         $deleteRequest->setStudentName($studentName);
         $deleteRequest->setDeliverableName($delName);
         $deleteRequest->setReason($reason);
+        $deleteRequest->setStudentUsername($stuUsername);
         return $deleteRequest;
     }
 
@@ -58,7 +59,8 @@ class DeleteRequest extends Request {
                     fyp_Student.staff_ID = '$staffID'";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
-            $delRequest = self::deleteRequestConstructor($row->request_ID, $row->deliverable_ID, $row->firstName . " " . $row->lastName, $row->deliverableName, $row->reason);
+            $delRequest = self::deleteRequestConstructor($row->request_ID, $row->deliverable_ID, $row->firstName . " " . $row->lastName,
+                    $row->deliverableName, $row->reason, $row->username);
             $requestList[] = $delRequest;
         }
         return $requestList;

@@ -6,6 +6,7 @@ class Request extends CI_Model {
     private $deliverableNo;
     private $deliverableName;
     private $studentName;
+    private $studentUsername;
     private $requestStatus;
     private $requestType;
     private $reason;
@@ -168,6 +169,14 @@ class Request extends CI_Model {
         return $requestList;
     }
 
+    function getStudentUsername() {
+        return $this->studentUsername;
+    }
+
+    function setStudentUsername($studentUsername) {
+        $this->studentUsername = $studentUsername;
+    }
+     
     function getDeliverableName() {
         return $this->deliverableName;
     }

@@ -60,31 +60,23 @@
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deadlineRequests as $request) { ?>
                             <tr data-request="<?= $request->getRequestNo() ?>" id="request<?= $request->getRequestNo() ?>">                    
-                                <td><?= $request->getStudentName() ?></td>
-                                <td><?= $request->getDeliverableName() ?></td>
                                 <td>
-                                    <!-- <!?= $request->getCurrentDeadlineDate() ?> -->
+                                    <a href="<?= base_url("view-student/" . $request->getStudentUsername()) ?>"><?= $request->getStudentName() ?></a> 
+                                </td>
+                                <td>
+                                    <a href="<?= base_url("view-deliverable/" . $request->getDeliverableNo()) ?>"><?= $request->getDeliverableName() ?></a>
+                                </td>
+                                <td>
                                     <?= $request->formattedCurrentDeadline() ?>
                                 </td>
                                 <td>
-                                    <!--   <!?= $request->getRequestedDeadlineDate() ?> -->
                                     <?= $request->formattedRequestedDeadline() ?>
                                 </td>
                                 <td><?= $request->getReason() ?></td>
                                 <td>
-                                    <!--         <form method="post" action="approveDeadlineExtension">
-                                                 <input type="hidden" name="delID" value="<!?= $request->getDeliverableNo() ?>">
-                                                 <input type="hidden" name="reqID" value="<!?= $request->getRequestNo() ?>">
-                                                 <input type="hidden" name="reqDeadline" value="<!?= $request->getRequestedDeadlineDate() ?>">
-                                                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                                             </form> -->
                                     <input class="deadlineRadio" type="radio" name="row<?= $request->getRequestNo() ?>" value="Approve">
                                 </td>
                                 <td>
-                                    <!--    <form method="post" action="rejectRequestProcess">
-                                            <input type="hidden" name="reqID" value="<!?= $request->getRequestNo() ?>">
-                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                                        </form> -->
                                     <input class="deadlineRadio" type="radio" name="row<?= $request->getRequestNo() ?>" value="Reject">
                                 </td>
                             </tr>
@@ -124,22 +116,17 @@
                     <tbody style="overflow-y: scroll;">
                         <?php foreach ($deleteRequests as $delRequest) { ?>
                             <tr data-request="<?= $delRequest->getRequestNo() ?>" id="request<?= $delRequest->getRequestNo() ?>">
-                                <td><?= $delRequest->getStudentName() ?></td>
-                                <td><?= $delRequest->getDeliverableName() ?></td>
+                                <td>
+                                    <a href="<?= base_url("view-student/" . $delRequest->getStudentUsername()) ?>"><?= $delRequest->getStudentName() ?></a>                                
+                                </td>
+                                <td>
+                                    <a href="<?= base_url("view-deliverable/" . $delRequest->getDeliverableNo()) ?>"><?= $delRequest->getDeliverableName() ?></a>
+                                </td>
                                 <td><?= $delRequest->getReason() ?></td>
                                 <td>
-                                    <!--    <form method="post" action="approveDelete">
-                                            <input type="hidden" name="delID" value="<!?= $delRequest->getDeliverableNo() ?>">
-                                            <input type="hidden" name="reqID" value="<!?= $delRequest->getRequestNo() ?>">
-                                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                                        </form> -->
                                     <input class="deleteRadio" type="radio" name="row<?= $delRequest->getRequestNo() ?>" value="Approve">
                                 </td>
                                 <td>
-                                    <!--   <form method="post" action="rejectRequestProcess">
-                                           <input type="hidden" name="reqID" value="<!?= $delRequest->getRequestNo() ?>">
-                                           <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                                       </form> -->
                                     <input class="deleteRadio" type="radio" name="row<?= $delRequest->getRequestNo() ?>" value="Reject">
                                 </td>
                             </tr>
@@ -204,7 +191,7 @@
                     <h4 class="modal-title">Processing Requests...</h4>
                 </div>
                 <div class="modal-body">
-                        <div class="loader"></div>
+                    <div class="loader"></div>
                 </div>
 
             </div>
@@ -212,7 +199,7 @@
 
     </div>  
 
-    <script src="<?= base_url("js/manageRequests.js")?>"></script>
+    <script src="<?= base_url("js/manageRequests.js") ?>"></script>
 
 </body>
 </html>

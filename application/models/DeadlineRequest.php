@@ -9,7 +9,7 @@ class DeadlineRequest extends Request {
         parent::__construct();
     }
 
-    public function deadlineRequestConstructor($reqID, $delID, $currDeadline, $reqDeadline, $studentName, $delName, $reason) {
+    public function deadlineRequestConstructor($reqID, $delID, $currDeadline, $reqDeadline, $studentName, $delName, $reason, $stuUsername) {
         $deadlineRequest = new DeadlineRequest();
         $deadlineRequest->setRequestNo($reqID);
         $deadlineRequest->setDeliverableNo($delID);
@@ -18,6 +18,7 @@ class DeadlineRequest extends Request {
         $deadlineRequest->setStudentName($studentName);
         $deadlineRequest->setDeliverableName($delName);
         $deadlineRequest->setReason($reason);
+        $deadlineRequest->setStudentUsername($stuUsername);
         return $deadlineRequest;
     }
 
@@ -112,7 +113,9 @@ class DeadlineRequest extends Request {
                     fyp_Student.staff_ID = '$staffID'";
         $result = $this->db->query($query);
         foreach ($result->result() as $row) {
-            $deadlineRequest = self::deadlineRequestConstructor($row->request_ID, $row->deliverable_ID, $row->deadlineDate, $row->reqDeadlineDate, $row->firstName . " " . $row->lastName, $row->deliverableName, $row->reason);
+            $deadlineRequest = self::deadlineRequestConstructor($row->request_ID, $row->deliverable_ID, $row->deadlineDate, 
+                    $row->reqDeadlineDate, $row->firstName . " " . $row->lastName, 
+                    $row->deliverableName, $row->reason, $row->username);
             $requestList[] = $deadlineRequest;
         }
         return $requestList;
