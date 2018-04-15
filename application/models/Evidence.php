@@ -41,9 +41,9 @@ class Evidence extends CI_Model {
                     FROM `fyp_Evidence` 
                     INNER JOIN fyp_EvidenceStatus 
                     ON fyp_Evidence.evidStatus_ID = fyp_EvidenceStatus.evidStatus_ID 
-                    WHERE deliverable_ID = '$delNo'"
+                    WHERE deliverable_ID = ? "
                 . "ORDER BY `fyp_Evidence`.`submissionDate` DESC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $delNo);
         foreach ($result->result() as $row) {
             $newEvid = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
             $newEvid->setThumbnail($row->thumbnail);
@@ -61,9 +61,9 @@ class Evidence extends CI_Model {
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID)
                     INNER JOIN fyp_Staff ON fyp_Student.staff_ID = fyp_Staff.staff_ID)
                     INNER JOIN fyp_EvidenceStatus ON fyp_Evidence.evidStatus_ID = fyp_EvidenceStatus.evidStatus_ID)
-                    WHERE fyp_Staff.staff_ID = '$staffID' AND fyp_Evidence.evidStatus_ID = 1
+                    WHERE fyp_Staff.staff_ID = ? AND fyp_Evidence.evidStatus_ID = 1
                     ORDER BY `fyp_Evidence`.`submissionDate` DESC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $staffID);
         foreach ($result->result() as $row) {
             $newEvid = self::evidenceContructorTwo($row->evidence_ID, new DateTime($row->submissionDate), $row->evidenceName, $row->deliverableName, $row->firstName . " " . $row->lastName);
             $evidenceList[] = $newEvid;
@@ -79,9 +79,9 @@ class Evidence extends CI_Model {
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID)
                     INNER JOIN fyp_Staff ON fyp_Student.staff_ID = fyp_Staff.staff_ID)
                     INNER JOIN fyp_EvidenceStatus ON fyp_Evidence.evidStatus_ID = fyp_EvidenceStatus.evidStatus_ID)
-                    WHERE fyp_Staff.staff_ID = '$staffID' 
+                    WHERE fyp_Staff.staff_ID = ? 
                     AND fyp_Evidence.evidStatus_ID = 1";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $staffID);
         return $result->num_rows();
     }
     
@@ -92,8 +92,8 @@ class Evidence extends CI_Model {
                     INNER JOIN fyp_EvidenceStatus ON fyp_EvidenceStatus.evidStatus_ID = fyp_Evidence.evidStatus_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
-                    WHERE evidence_ID = '$evidID'";
-        $result = $this->db->query($query);
+                    WHERE evidence_ID = ? ";
+        $result = $this->db->query($query, $evidID);
         $row = $result->row();
         $evidence = self::evidenceConstructor($row->evidence_ID, $row->evidStatusDesc, new DateTime($row->submissionDate), $row->evidenceName);
         $evidence->setDeliverableNo($row->deliverable_ID);
@@ -108,7 +108,7 @@ class Evidence extends CI_Model {
         if (move_uploaded_file($file_tmp, $fileDestination)) {
             $insert = self::insertFileRecord($newFileName);
             $delID = $this->input->post('deliverableID');
-            $update = $this->db->query("UPDATE fyp_Deliverable SET lastUpdated = NOW() WHERE deliverable_ID = '$delID' ");
+            $update = $this->db->query("UPDATE fyp_Deliverable SET lastUpdated = NOW() WHERE deliverable_ID = ? ", $delID);
         } else {
             echo "file upload didnt work";
         }
@@ -132,8 +132,8 @@ class Evidence extends CI_Model {
         $evidID = $this->input->post('evidID');
         $query = "SELECT filePath 
                     FROM `fyp_Evidence` 
-                    WHERE evidence_ID = '$evidID'";
-        $result = $this->db->query($query);
+                    WHERE evidence_ID = ? ";
+        $result = $this->db->query($query, $evidID);
         $evidenceRow = $result->row();
         $filename = $evidenceRow->filePath;
         $file = base_url('evidenceUploads/' . $filename);
@@ -151,8 +151,8 @@ class Evidence extends CI_Model {
                                 FROM `fyp_Evidence` 
                                 INNER JOIN fyp_Deliverable
                                 ON fyp_Evidence.deliverable_ID = fyp_Deliverable.deliverable_ID
-                                where fyp_Deliverable.student_ID = '$studentID'
-                                and fyp_Evidence.evidence_ID = '$evidID'");
+                                where fyp_Deliverable.student_ID = ?
+                                and fyp_Evidence.evidence_ID = ?", [$studentID, $evidID]);
         return $query;
     }
 

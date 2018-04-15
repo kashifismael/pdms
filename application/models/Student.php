@@ -61,7 +61,7 @@ class Student extends User {
     }
 
     public function putStudentIdIntoSession($userID) {
-        $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID='$userID'");
+        $firstquery = $this->db->query("SELECT * FROM fyp_Student WHERE user_ID= ? ", $userID);
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->student_ID);
     }

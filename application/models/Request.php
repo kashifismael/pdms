@@ -58,9 +58,9 @@ class Request extends CI_Model {
                     INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID
-                    WHERE fyp_Student.staff_ID = $staffID AND
+                    WHERE fyp_Student.staff_ID = ? AND
                     fyp_Request.requestStatus_ID != 1";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $staffID);
         foreach($result->result() as $row){
             $request = self::requestConstructorThree($row->deliverable_ID, "$row->firstName $row->lastName", $row->deliverableName,
                     $row->dateOfRequest, $row->requestTypeDesc, $row->requestStatusDesc);
@@ -70,7 +70,7 @@ class Request extends CI_Model {
     }
     
     public function rejectRequest($reqID) {
-        $query = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '3' WHERE `fyp_Request`.`request_ID` = '$reqID'");
+        $query = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '3' WHERE `fyp_Request`.`request_ID` = ? ", $reqID);
         return $query;
     }
 
@@ -83,8 +83,8 @@ class Request extends CI_Model {
                     INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
-                    WHERE fyp_Request.request_ID = '$reqID'";
-        $result = $this->db->query($query);
+                    WHERE fyp_Request.request_ID = ? ";
+        $result = $this->db->query($query, $reqID);
         return $result->row();
     }
 
@@ -95,8 +95,8 @@ class Request extends CI_Model {
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID
                     WHERE fyp_Request.requestStatus_ID = 1 AND
-                    fyp_Student.staff_ID = '$staffID'";
-        $result = $this->db->query($query);
+                    fyp_Student.staff_ID = ? ";
+        $result = $this->db->query($query, $staffID);
         return $result->num_rows();
     }
 
@@ -114,7 +114,7 @@ class Request extends CI_Model {
 
     public function setUnseenRequestsToSeen($unseenrequests) {
         foreach ($unseenrequests as $request) {
-            $this->db->query("UPDATE `fyp_Request` SET `hasBeenSeen` = '1' WHERE `fyp_Request`.`request_ID` = '$request->request_ID'");
+            $this->db->query("UPDATE `fyp_Request` SET `hasBeenSeen` = '1' WHERE `fyp_Request`.`request_ID` = ? ", $request->request_ID);
         }
     }
 
@@ -140,9 +140,9 @@ class Request extends CI_Model {
                     INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     WHERE fyp_Request.requestStatus_ID = 1 AND
-                    fyp_Student.student_ID = '$studentID'
+                    fyp_Student.student_ID = ? 
                     ORDER BY `fyp_Request`.`dateOfRequest` ASC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $studentID);
         foreach ($result->result() as $row) {
             $request = self::requestConstructor($row->deliverable_ID, $row->deliverableName, $row->requestTypeDesc, $row->dateOfRequest, $row->reason);
             $requestList[] = $request;
@@ -159,9 +159,9 @@ class Request extends CI_Model {
                     INNER JOIN fyp_Deliverable ON fyp_Request.deliverable_ID = fyp_Deliverable.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     WHERE (fyp_Request.requestStatus_ID = 2 OR fyp_Request.requestStatus_ID = 3)
-                    AND fyp_Student.student_ID = '$studentID'
+                    AND fyp_Student.student_ID = ? 
                     ORDER BY `fyp_Request`.`dateOfRequest` ASC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $studentID);
         foreach ($result->result() as $row) {
             $request = self::requestConstructorTwo($row->deliverable_ID, $row->deliverableName, $row->requestTypeDesc, $row->requestStatusDesc);
             $requestList[] = $request;

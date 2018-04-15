@@ -65,8 +65,8 @@ class DeadlineRequest extends Request {
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID
                     WHERE fyp_Request.requestStatus_ID = 1 AND
                     fyp_Request.requestType_ID = 2 AND
-                    fyp_Student.staff_ID = '$staffID'";
-        $result = $this->db->query($query);
+                    fyp_Student.staff_ID = ? ";
+        $result = $this->db->query($query, $staffID);
         return $result->num_rows();
     }
 
@@ -88,11 +88,8 @@ class DeadlineRequest extends Request {
     }
     
     public function approveDeadlineRequest($reqID, $delID, $newDeadline) {
-        //$updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = '$reqID'");
         $updateStatus = $this->db->query("UPDATE `fyp_Request` SET `requestStatus_ID` = '2' WHERE `fyp_Request`.`request_ID` = ?", $reqID);
-        //$changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = '$newDeadline' WHERE `fyp_Deliverable`.`deliverable_ID` = '$delID'");
         $changeDeadline = $this->db->query("UPDATE `fyp_Deliverable` SET `deadlineDate` = ? WHERE `fyp_Deliverable`.`deliverable_ID` = ? ", [$newDeadline, $delID]);
-        //$logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = '$reqID'");
         $logDateOfApproval = $this->db->query("UPDATE `fyp_Request` SET `dateOfApproval` = Now() WHERE `fyp_Request`.`request_ID` = ?", $reqID);
         if ($updateStatus === true && $changeDeadline === true && $logDateOfApproval === true) {
             return true;
@@ -110,8 +107,8 @@ class DeadlineRequest extends Request {
                     INNER JOIN fyp_User ON fyp_Student.user_ID = fyp_User.user_ID
                     WHERE fyp_Request.requestType_ID = 2 AND
                     fyp_Request.requestStatus_ID = 1 AND
-                    fyp_Student.staff_ID = '$staffID'";
-        $result = $this->db->query($query);
+                    fyp_Student.staff_ID = ? ";
+        $result = $this->db->query($query, $staffID);
         foreach ($result->result() as $row) {
             $deadlineRequest = self::deadlineRequestConstructor($row->request_ID, $row->deliverable_ID, $row->deadlineDate, 
                     $row->reqDeadlineDate, $row->firstName . " " . $row->lastName, 
@@ -125,9 +122,9 @@ class DeadlineRequest extends Request {
         $requestList = array();
         $query = "SELECT * FROM fyp_Request 
                     INNER JOIN fyp_RequestStatus ON fyp_Request.requestStatus_ID = fyp_RequestStatus.requestStatus_ID 
-                    WHERE fyp_Request.deliverable_ID = $delID 
+                    WHERE fyp_Request.deliverable_ID = ?
                     and fyp_Request.requestType_ID = 2";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $delID);
         foreach ($result->result() as $row) {
             $deadlineRequest = self::deadlineRequestConstructorTwo($row->reqDeadlineDate, $row->reason, $row->dateOfRequest, $row->requestStatusDesc);
             $requestList[] = $deadlineRequest;

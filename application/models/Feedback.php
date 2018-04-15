@@ -39,10 +39,10 @@ class Feedback extends CI_Model {
                     INNER JOIN fyp_Evidence ON fyp_Evidence.evidence_ID = fyp_Feedback.evidence_ID 
                     INNER JOIN fyp_Deliverable ON fyp_Deliverable.deliverable_ID = fyp_Evidence.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID
-                    WHERE fyp_Student.student_ID = '$studentID'
-                    AND fyp_Feedback.hasBeenSeen = '$seen'
+                    WHERE fyp_Student.student_ID = ?
+                    AND fyp_Feedback.hasBeenSeen = ?
                     ORDER BY `fyp_Feedback`.`feedbackDate` DESC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, [$studentID, $seen]);
         foreach ($result->result() as $row) {
             $feedback = self:: feedbackConstructorTwo($row->feedback_ID, $row->feedbackDate, $row->evidence_ID, $row->evidenceName, $row->deliverableName, $row->thumbnail);
             $feedbackList[] = $feedback;
@@ -56,10 +56,10 @@ class Feedback extends CI_Model {
                     INNER JOIN fyp_Evidence ON fyp_Evidence.evidence_ID = fyp_Feedback.evidence_ID 
                     INNER JOIN fyp_Deliverable ON fyp_Deliverable.deliverable_ID = fyp_Evidence.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Student.student_ID = fyp_Deliverable.student_ID
-                    WHERE fyp_Student.student_ID = '$studentID'
+                    WHERE fyp_Student.student_ID = ?
                     AND fyp_Feedback.hasBeenSeen = 0
                     ORDER BY `fyp_Feedback`.`feedbackDate` DESC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $studentID);
         return $result->num_rows();
     }
 
@@ -69,9 +69,9 @@ class Feedback extends CI_Model {
                     FROM `fyp_Feedback` 
                     INNER JOIN fyp_Evidence ON fyp_Evidence.evidence_ID = fyp_Feedback.evidence_ID 
                     INNER JOIN fyp_Deliverable ON fyp_Deliverable.deliverable_ID = fyp_Evidence.deliverable_ID 
-                    WHERE fyp_Evidence.deliverable_ID = '$delID' 
+                    WHERE fyp_Evidence.deliverable_ID = ? 
                     ORDER BY `fyp_Feedback`.`feedbackDate` DESC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $delID);
         foreach ($result->result() as $row) {
             $newFeedback = self::feedbackConstructor($row->feedback_ID, new DateTime($row->feedbackDate));
             $feedbackList[] = $newFeedback;
@@ -83,9 +83,9 @@ class Feedback extends CI_Model {
         $feedbackList = array();
         $query = "SELECT * 
                     FROM `fyp_Feedback` 
-                    WHERE evidence_ID = '$evidId' 
+                    WHERE evidence_ID = ? 
                     ORDER BY `fyp_Feedback`.`feedbackDate` DESC";
-        $result = $this->db->query($query);
+        $result = $this->db->query($query, $evidId);
         foreach ($result->result() as $row) {
             $newFeedback = self::feedbackConstructor($row->feedback_ID, new DateTime($row->feedbackDate));
             $feedbackList[] = $newFeedback;
@@ -115,12 +115,12 @@ class Feedback extends CI_Model {
     }
 
     public function updateEvidStatus($evidID, $evidStatus) {
-        $query = $this->db->query("UPDATE fyp_Evidence SET evidStatus_ID = '$evidStatus' WHERE fyp_Evidence.evidence_ID = '$evidID'");
+        $query = $this->db->query("UPDATE fyp_Evidence SET evidStatus_ID = ? WHERE fyp_Evidence.evidence_ID = ? ", [$evidStatus, $evidID]);
         return $query;
     }
 
     public function updateDelStatus($delID, $delStatus) {
-        $query = $this->db->query("UPDATE fyp_Deliverable SET delStatus_ID = '$delStatus' , lastUpdated = NOW() WHERE deliverable_ID = '$delID'");
+        $query = $this->db->query("UPDATE fyp_Deliverable SET delStatus_ID = ? , lastUpdated = NOW() WHERE deliverable_ID = ? ", [$delStatus, $delID]);
         return $query;
     }
 
@@ -131,8 +131,8 @@ class Feedback extends CI_Model {
 //        }
         $query = "SELECT * "
                 . "FROM `fyp_Feedback` "
-                . "WHERE feedback_ID = '$feedbackID'";
-        $result = $this->db->query($query);
+                . "WHERE feedback_ID = ? ";
+        $result = $this->db->query($query, $feedbackID);
         $feedbackRow = $result->row();
         $filename = $feedbackRow->filePath;
         $file = base_url('feedbackUploads/' . $filename);
@@ -145,7 +145,7 @@ class Feedback extends CI_Model {
     }
 
     public function setFeedbacktoSeen($feedback){
-        return $this->db->query("UPDATE `fyp_Feedback` SET `hasBeenSeen` = '1' WHERE `fyp_Feedback`.`feedback_ID` = '$feedback'");
+        return $this->db->query("UPDATE `fyp_Feedback` SET `hasBeenSeen` = '1' WHERE `fyp_Feedback`.`feedback_ID` = ? ", $feedback);
         //return $query;
     }
     
@@ -154,8 +154,8 @@ class Feedback extends CI_Model {
                     FROM `fyp_Deliverable`
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
-                    WHERE fyp_Deliverable.deliverable_ID = '$delID'";
-        $result = $this->db->query($query);
+                    WHERE fyp_Deliverable.deliverable_ID = ? ";
+        $result = $this->db->query($query, $delID);
         return $result->row();
     }
 
@@ -165,8 +165,8 @@ class Feedback extends CI_Model {
                     INNER JOIN fyp_Deliverable ON fyp_Evidence.deliverable_ID = fyp_Deliverable.deliverable_ID
                     INNER JOIN fyp_Student ON fyp_Deliverable.student_ID = fyp_Student.student_ID
                     INNER JOIN fyp_User ON fyp_User.user_ID = fyp_Student.user_ID
-                    WHERE fyp_Evidence.evidence_ID = '$evidID'";
-        $result = $this->db->query($query);
+                    WHERE fyp_Evidence.evidence_ID = ? ";
+        $result = $this->db->query($query, $evidID);
         return $result->row();
     }
 

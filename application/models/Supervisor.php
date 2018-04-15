@@ -54,7 +54,7 @@ class Supervisor extends User {
     }
 
     public function putStaffIdIntoSession($userID) {
-        $firstquery = $this->db->query("SELECT * FROM fyp_Staff WHERE user_ID='$userID'");
+        $firstquery = $this->db->query("SELECT * FROM fyp_Staff WHERE user_ID= ? ", $userID);
         $firstRow = $firstquery->row();
         $this->session->set_userdata('secondaryID', $firstRow->staff_ID);
     }
@@ -65,8 +65,8 @@ class Supervisor extends User {
                     FROM `fyp_User` 
                     INNER JOIN fyp_Student 
                     ON fyp_Student.user_ID = fyp_User.user_ID 
-                    where fyp_Student.staff_ID = '$staffID'";
-        $result = $this->db->query($query);
+                    where fyp_Student.staff_ID = ? ";
+        $result = $this->db->query($query, $staffID);
         foreach ($result->result() as $row) {
             $student = Student::studentConstructor($row->student_ID, $row->firstName, $row->lastName, $row->username);
             $supervisorGroup[] = $student;
